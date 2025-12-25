@@ -1,8 +1,11 @@
 ---
 title: "Kubernetes"
-layout: category
+layout: page
 permalink: /categories/kubernetes/
-taxonomy: kubernetes
 ---
 
 Posts about Kubernetes, container orchestration, and cloud-native technologies.
+
+{% for post in site.categories.kubernetes %}
+  - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %-d, %Y" }}
+{% endfor %}

@@ -1,8 +1,11 @@
 ---
 title: "Infrastructure"
-layout: category
+layout: page
 permalink: /categories/infra/
-taxonomy: infra
 ---
 
 Posts about infrastructure, cloud platforms, DevOps, and system architecture.
+
+{% for post in site.categories.infra %}
+  - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %-d, %Y" }}
+{% endfor %}

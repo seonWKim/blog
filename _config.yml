@@ -1,73 +1,52 @@
 # Site Settings
 locale: "en-US"
 title: "Prepare for the Next"
-title_separator: "-"
-subtitle: "Notes on infra, AI systems, and production failures"
-name: "Seon Woo Kim"
-email: seonwoo960000.kim@gmail.com
-description: >-
-  Notes on infra, AI systems, and production failures
+description: "Notes on infra, AI systems, and production failures"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://seonwkim.github.io" # the base hostname & protocol for your site
-repository: "seonWKim/blog"
-github_username: seonwoo960000
+logo: # Optional: "/assets/images/logo.png"
+date_format: "%B %-d, %Y"
+read_time: true
+words_per_minute: 200
 
 # Theme Settings
-remote_theme: "mmistakes/minimal-mistakes@4.27.3"
-minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+remote_theme: "mmistakes/so-simple-theme"
+skin: "/assets/css/skins/default.css" # "/assets/css/skins/light.css", "/assets/css/skins/dark.css"
 
-# SEO Related
-og_image: # Open Graph/Twitter default site image (for social media previews)
-social:
-  type: Person # Person or Organization (defaults to Person)
-  name: "Seon Woo Kim" # If the user or organization name differs from the site's name
-  links:
-    - "https://github.com/seonWKim"
-    - "https://www.linkedin.com/in/seon-woo-kim-53b6481ba/"
+# Google Fonts
+google_fonts:
+  - name: "Source Sans Pro"
+    weights: "400,400i,700,700i"
+  - name: "Lora"
+    weights: "400,400i,700,700i"
 
-# Analytics
-analytics:
-  provider: false # false (default), "google", "google-universal", "google-gtag", "custom"
+# Social and Analytics
+google_analytics: # Your Google Analytics tracking ID
+disqus:
+  shortname: # Your Disqus shortname (if using Disqus for comments)
+twitter:
+  username: # Your Twitter username
 
 # Site Search
-search: true
 search_full_content: true
-search_provider: lunr # lunr (default), algolia, google
 
-# Comments
-comments:
-  provider: "utterances" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
-  utterances:
-    theme: "github-light" # "github-light" (default), "github-dark"
-    issue_term: "pathname" # "pathname" (default)
+# Taxonomy pages
+category_archive_path: "/categories/#"
+tag_archive_path: "/tags/#"
 
 # Site Author
 author:
   name: "Seon Woo Kim"
-  avatar: "/assets/images/profile.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "Prepare for my Next Move"
-  location: "Anywhere Where I can bring my Mac"
+  picture: "/assets/images/profile.png"
   email: "seonwoo960000.kim@gmail.com"
+  twitter: # Your Twitter username
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:seonwoo960000.kim@gmail.com"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
+    - title: "GitHub"
       url: "https://github.com/seonWKim"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
+      icon: "fab fa-github-square"
+    - title: "LinkedIn"
       url: "https://www.linkedin.com/in/seon-woo-kim-53b6481ba/"
-
-# Site Footer
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/seonWKim"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/seon-woo-kim-53b6481ba/"
+      icon: "fab fa-linkedin"
 
 # Reading Files
 include:
@@ -110,6 +89,10 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
+# Liquid
+liquid:
+  error_mode: strict
+
 # Markdown Processing
 kramdown:
   input: GFM
@@ -134,54 +117,28 @@ timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_t
 
 # Plugins
 plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jekyll-include-cache
   - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
 
-# Atom Feed
-atom_feed:
-  path: # blank (default) uses feed.xml
-  hide: false
+# Feed
+feed:
+  path: atom.xml
 
-# Archives
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
-
-# HTML Compression
-compress_html:
-  clippings: all
-  ignore:
-    envs: development
-
-# Defaults
+# Front Matter Defaults
 defaults:
-  # _posts
+  # Posts
   - scope:
-      path: ""
+      path: "_posts"
       type: posts
     values:
-      layout: single
-      author_profile: true
-      read_time: true
+      layout: post
       comments: true
       share: true
-      related: true
-      toc: true
-      toc_sticky: true
-      breadcrumbs: true
-      show_date: true
-  # _pages
+  # Pages
   - scope:
       path: "_pages"
       type: pages
     values:
-      layout: single
-      author_profile: true
-      breadcrumbs: true
+      layout: page

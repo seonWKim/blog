@@ -1,8 +1,11 @@
 ---
 title: "Linux"
-layout: category
+layout: page
 permalink: /categories/linux/
-taxonomy: linux
 ---
 
 Posts about Linux systems, administration, and command-line tools.
+
+{% for post in site.categories.linux %}
+  - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %-d, %Y" }}
+{% endfor %}
