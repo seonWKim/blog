@@ -11,7 +11,7 @@ words_per_minute: 200
 
 # Theme Settings
 remote_theme: "mmistakes/so-simple-theme"
-skin: "/assets/css/skins/default.css" # "/assets/css/skins/light.css", "/assets/css/skins/dark.css"
+skin: "default" # "default", "light", "dark"
 
 # Google Fonts
 google_fonts:
