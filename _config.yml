@@ -2,7 +2,7 @@
 locale: "en-US"
 title: "Prepare for the Next"
 description: "Notes on infra, AI systems, and production failures"
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://seonwkim.github.io" # the base hostname & protocol for your site
 logo: # Optional: "/assets/images/logo.png"
 date_format: "%B %-d, %Y"
@@ -121,6 +121,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-include-cache
 
 # Feed
 feed:
