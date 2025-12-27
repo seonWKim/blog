@@ -1,5 +1,8 @@
 // Custom layout overrides - profile, categories, and tags moved to bottom
 
+// Import IntelliJ theme variables
+@import "intellij-theme";
+
 // Variables for consistent sizing
 $content-max-width: 850px;
 
@@ -22,7 +25,7 @@ $content-max-width: 850px;
 .page-meta-bottom {
   margin-top: 3em;
   padding-top: 2em;
-  border-top: 2px solid #323232; // Use border from intellij theme
+  border-top: 2px solid $intellij-border;
   
   .page-author {
     margin-bottom: 2em;
