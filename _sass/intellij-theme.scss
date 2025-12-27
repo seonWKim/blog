@@ -20,6 +20,7 @@ $intellij-number: #6897BB;        // Numbers (blue)
 $intellij-function: #FFC66D;      // Functions (yellow)
 $intellij-error: #BC3F3C;         // Error color
 $intellij-warning: #BBB529;       // Warning color
+$intellij-scrollbar-hover: #3C3F41; // Scrollbar hover color
 
 // Override the theme's default skin
 body {
@@ -348,7 +349,7 @@ hr {
   border-radius: 6px;
   
   &:hover {
-    background: #3C3F41;
+    background: $intellij-scrollbar-hover;
   }
 }
 
