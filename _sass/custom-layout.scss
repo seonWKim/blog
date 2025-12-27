@@ -3,8 +3,6 @@
 // Variables for consistent sizing
 $sidebar-width: 140px;
 $content-max-width: 850px;
-$profile-avatar-size-desktop: 60px;
-$profile-avatar-size-mobile: 50px;
 
 // Reduce sidebar width significantly
 @media (min-width: 64em) {
@@ -25,17 +23,9 @@ $profile-avatar-size-mobile: 50px;
   }
 }
 
-// Make profile section more compact
+// Profile section without avatar support
 .page-author {
   margin-bottom: 1.5em;
-  
-  @media (min-width: 64em) {
-    .author-avatar {
-      width: $profile-avatar-size-desktop;
-      height: $profile-avatar-size-desktop;
-      margin-bottom: 0.5em;
-    }
-  }
   
   .author-name {
     font-size: 0.9rem;
@@ -130,20 +120,10 @@ $profile-avatar-size-mobile: 50px;
 // On mobile, ensure good experience
 @media (max-width: 63.99em) {
   .page-author {
-    display: flex;
-    align-items: center;
     margin-bottom: 1em;
-    
-    .author-avatar {
-      width: $profile-avatar-size-mobile;
-      height: $profile-avatar-size-mobile;
-      margin-right: 1em;
-      margin-bottom: 0;
-    }
     
     .author-info {
       text-align: left;
-      flex: 1;
     }
     
     .author-name {
