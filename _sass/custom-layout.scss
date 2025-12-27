@@ -11,6 +11,7 @@ $content-max-width: 850px;
   .layout--post .page-wrapper {
     // Single column layout - no sidebar
     display: block;
+    padding: 0; // Reset any default padding
   }
   
   // Both header and content have same width and alignment
@@ -19,6 +20,8 @@ $content-max-width: 850px;
     width: 100%;
     max-width: $content-max-width;
     margin: 0 auto; // Center both title and content
+    padding-left: 0; // Ensure no left padding
+    padding-right: 0; // Ensure no right padding
   }
 }
 
@@ -185,8 +188,19 @@ $content-max-width: 850px;
   }
 }
 
-// On mobile, ensure good experience with bottom metadata
+// On mobile, ensure good experience with bottom metadata and alignment
 @media (max-width: 63.99em) {
+  // Ensure title and content alignment on mobile too
+  .layout--post .page-wrapper {
+    padding: 0; // Reset any default padding
+  }
+  
+  .layout--post .page-header,
+  .layout--post .page-content {
+    padding-left: 0; // Ensure no left padding
+    padding-right: 0; // Ensure no right padding
+  }
+  
   .page-meta-bottom {
     .author-links {
       gap: 0.6em;
