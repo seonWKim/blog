@@ -8,13 +8,9 @@ $content-max-width: 850px;
 
 // Ensure consistent alignment for title and content across all screen sizes
 // Reset only horizontal padding to prevent misalignment from theme defaults
-.layout--post .page-wrapper {
-  padding-inline: 0;
-}
-
+.layout--post .page-wrapper,
 .layout--post .page-header,
 .layout--post .page-content {
-  // Reset horizontal padding to ensure title and content align perfectly
   padding-inline: 0;
 }
 
