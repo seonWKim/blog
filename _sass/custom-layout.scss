@@ -8,13 +8,14 @@ $content-max-width: 850px;
 
 // Ensure consistent alignment for title and content across all screen sizes
 .layout--post .page-wrapper {
-  padding: 0; // Reset any default padding
+  padding: 0; // Reset all padding
 }
 
 .layout--post .page-header,
 .layout--post .page-content {
-  padding-left: 0; // Ensure no left padding
-  padding-right: 0; // Ensure no right padding
+  // Reset only horizontal padding to fix alignment while preserving vertical spacing
+  padding-left: 0;
+  padding-right: 0;
 }
 
 // Remove sidebar layout - content is full width
