@@ -1,15 +1,16 @@
-main:
-  - title: "Infra"
-    url: /categories/infra/
-  - title: "AI"
-    url: /categories/ai/
-  - title: "Kubernetes"
-    url: /categories/kubernetes/
-  - title: "Linux"
-    url: /categories/linux/
-  - title: "Networking"
-    url: /categories/networking/
-  - title: "Postmortems"
-    url: /categories/postmortems/
-  - title: "Notes"
-    url: /categories/notes/
+- title: "Programming"
+  url: /categories/programming/
+- title: "Infra"
+  url: /categories/infra/
+- title: "AI"
+  url: /categories/ai/
+- title: "Kubernetes"
+  url: /categories/kubernetes/
+- title: "Linux"
+  url: /categories/linux/
+- title: "Networking"
+  url: /categories/networking/
+- title: "Postmortems"
+  url: /categories/postmortems/
+- title: "Notes"
+  url: /categories/notes/
