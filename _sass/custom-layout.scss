@@ -6,6 +6,14 @@
 // Variables for consistent sizing
 $content-max-width: 850px;
 
+// Ensure consistent alignment for title and content across all screen sizes
+// Reset only horizontal padding to prevent misalignment from theme defaults
+.layout--post .page-wrapper,
+.layout--post .page-header,
+.layout--post .page-content {
+  padding-inline: 0;
+}
+
 // Remove sidebar layout - content is full width
 @media (min-width: 64em) {
   .layout--post .page-wrapper {
