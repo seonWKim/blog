@@ -1,6 +1,6 @@
 # Site Settings
 locale: "en-US"
-title: "Prepare for the Next"
+title: ""
 description: "Notes on infra, AI systems, and production failures"
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://seonwkim.github.io" # the base hostname & protocol for your site
