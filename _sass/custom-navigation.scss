@@ -1,0 +1,52 @@
+// Custom navigation styles
+// Add spacing between navigation items for better visual separation
+
+// Navigation wrapper
+.navigation-wrapper {
+  margin-bottom: 1em;
+}
+
+// Primary navigation
+#primary-nav {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem; // Easy to adjust - just change this value
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
+  li {
+    margin: 0; // Reset any default margins
+    
+    a {
+      display: inline-block;
+      padding: 0.5em 1em; // Add some internal padding for better click area
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 48em) {
+  #primary-nav {
+    ul {
+      gap: 0.4rem; // Slightly smaller gap on mobile
+    }
+    
+    li a {
+      padding: 0.4em 0.8em; // Slightly smaller padding on mobile
+      font-size: 0.9em;
+    }
+  }
+}
