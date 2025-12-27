@@ -13,11 +13,12 @@ $content-max-width: 850px;
     display: block;
   }
   
-  // Content takes full width (up to max for readability)
+  // Both header and content have same width and alignment
+  .layout--post .page-header,
   .layout--post .page-content {
     width: 100%;
     max-width: $content-max-width;
-    margin: 0 auto; // Center the content
+    margin: 0 auto; // Center both title and content
   }
 }
 
