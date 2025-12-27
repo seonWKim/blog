@@ -7,26 +7,30 @@
 $content-max-width: 850px;
 
 // Ensure consistent alignment for title and content across all screen sizes
-// Reset only horizontal padding to prevent misalignment from theme defaults
+// Reset horizontal padding and margin to prevent misalignment from theme defaults
 .layout--post .page-wrapper,
 .layout--post .page-header,
 .layout--post .page-content {
   padding-inline: 0;
+  margin-inline: 0;
 }
 
 // Remove sidebar layout - content is full width
 @media (min-width: 64em) {
   .layout--post .page-wrapper {
-    // Single column layout - no sidebar
-    display: block;
+    // Keep the grid layout but make header span to align with content
+    display: grid; //  Use grid to control children
+    grid-template-columns: 0 1fr; // Remove first column
+    gap: 0;
   }
   
-  // Both header and content have same width and alignment
+  // Both header and content occupy the same grid column
   .layout--post .page-header,
   .layout--post .page-content {
     width: 100%;
     max-width: $content-max-width;
-    margin: 0 auto; // Center both title and content
+    margin: 0 auto; // Center both within the grid column
+    grid-column: 2; // Both in second column
   }
 }
 
