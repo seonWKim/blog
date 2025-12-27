@@ -1,6 +1,9 @@
 // Custom navigation styles
 // Add spacing between navigation items for better visual separation
 
+// Import IntelliJ theme variables for hover colors
+@import "intellij-theme";
+
 // Navigation wrapper
 .navigation-wrapper {
   margin-bottom: 1em;
@@ -32,8 +35,8 @@
       
       &:hover {
         opacity: 1;
-        background-color: #3C3F41;
-        color: #A9B7C6;
+        background-color: $intellij-scrollbar-hover;
+        color: $intellij-text;
       }
     }
   }
