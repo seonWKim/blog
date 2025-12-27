@@ -14,8 +14,7 @@ $content-max-width: 850px;
 .layout--post .page-header,
 .layout--post .page-content {
   // Reset only horizontal padding to fix alignment while preserving vertical spacing
-  padding-left: 0;
-  padding-right: 0;
+  padding-inline: 0;
 }
 
 // Remove sidebar layout - content is full width
