@@ -1,5 +1,13 @@
 // IntelliJ IDEA inspired theme
 // Based on IntelliJ Darcula color scheme
+// Reference: https://plugins.jetbrains.com/docs/intellij/color-scheme-reference.html
+
+// Color System Organization:
+// - Background colors: Main, lighter (panels/sidebar), darker (header/footer)
+// - Text colors: Main content, bright (headings), comments (muted)
+// - Interactive colors: Links, hover states, accents
+// - Syntax highlighting: Keywords, strings, numbers, functions
+// - UI states: Selection, borders, errors, warnings
 
 // IntelliJ Darcula color palette
 $intellij-bg: #2B2B2B;           // Main background
@@ -355,12 +363,6 @@ hr {
 
 // Focus states
 *:focus {
-  outline: 2px solid $intellij-accent;
-  outline-offset: 2px;
-}
-
-a:focus,
-button:focus {
   outline: 2px solid $intellij-accent;
   outline-offset: 2px;
 }
