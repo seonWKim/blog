@@ -1,21 +1,27 @@
 // Custom layout overrides to minimize profile section and maximize content area
 
+// Variables for consistent sizing
+$sidebar-width: 140px;
+$content-max-width: 850px;
+$profile-avatar-size-desktop: 60px;
+$profile-avatar-size-mobile: 50px;
+
 // Reduce sidebar width significantly
 @media (min-width: 64em) {
   .layout--post .page-wrapper {
     // Use narrower sidebar - was 175px, now 140px
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: $sidebar-width 1fr;
     grid-column-gap: 2.5em; // Slightly reduce gap
   }
   
   .layout--post .page-sidebar {
-    width: 140px;
+    width: $sidebar-width;
   }
   
   // Content takes more space
   .layout--post .page-content {
     width: 100%;
-    max-width: 850px; // Optimal reading width
+    max-width: $content-max-width; // Optimal reading width
   }
 }
 
@@ -23,10 +29,12 @@
 .page-author {
   margin-bottom: 1.5em;
   
-  .author-avatar {
-    width: 60px !important; // Reduce from 100px on desktop
-    height: 60px !important;
-    margin-bottom: 0.5em;
+  @media (min-width: 64em) {
+    .author-avatar {
+      width: $profile-avatar-size-desktop;
+      height: $profile-avatar-size-desktop;
+      margin-bottom: 0.5em;
+    }
   }
   
   .author-name {
@@ -127,8 +135,8 @@
     margin-bottom: 1em;
     
     .author-avatar {
-      width: 50px !important;
-      height: 50px !important;
+      width: $profile-avatar-size-mobile;
+      height: $profile-avatar-size-mobile;
       margin-right: 1em;
       margin-bottom: 0;
     }
