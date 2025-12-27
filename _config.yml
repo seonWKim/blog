@@ -37,7 +37,7 @@ tag_archive_path: "/tags/#"
 # Site Author
 author:
   name: "Seon Woo Kim"
-  picture: "/assets/images/profile.png"
+  picture: # Profile image removed for professional appearance
   email: "seonwoo960000.kim@gmail.com"
   twitter: # Your Twitter username
   links:
