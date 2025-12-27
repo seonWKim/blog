@@ -1,29 +1,93 @@
-// Custom layout overrides to minimize profile section and maximize content area
+// Custom layout overrides - profile, categories, and tags moved to bottom
 
 // Variables for consistent sizing
-$sidebar-width: 140px;
 $content-max-width: 850px;
 
-// Reduce sidebar width significantly
+// Remove sidebar layout - content is full width
 @media (min-width: 64em) {
   .layout--post .page-wrapper {
-    // Use narrower sidebar - was 175px, now 140px
-    grid-template-columns: $sidebar-width 1fr;
-    grid-column-gap: 2.5em; // Slightly reduce gap
+    // Single column layout - no sidebar
+    display: block;
   }
   
-  .layout--post .page-sidebar {
-    width: $sidebar-width;
-  }
-  
-  // Content takes more space
+  // Content takes full width (up to max for readability)
   .layout--post .page-content {
     width: 100%;
-    max-width: $content-max-width; // Optimal reading width
+    max-width: $content-max-width;
+    margin: 0 auto; // Center the content
   }
 }
 
-// Profile section without avatar support
+// Profile section at bottom of content
+.page-meta-bottom {
+  margin-top: 3em;
+  padding-top: 2em;
+  border-top: 2px solid #323232; // Use border from intellij theme
+  
+  .page-author {
+    margin-bottom: 2em;
+    text-align: left;
+    
+    .author-info {
+      text-align: left;
+    }
+    
+    .author-name {
+      font-size: 1rem;
+      margin-bottom: 0.5em;
+    }
+  }
+  
+  .author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em;
+    margin-bottom: 1.5em;
+    
+    .author-link {
+      display: inline-block;
+      
+      a {
+        font-size: 1.3rem;
+      }
+    }
+  }
+  
+  // Taxonomy sections at bottom
+  .page-taxonomies-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+  }
+  
+  .page-taxonomies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
+    padding-left: 0;
+    
+    .page-taxonomy {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      
+      a {
+        padding: 0.3em 0.8em;
+        border-radius: 3px;
+        display: inline-block;
+      }
+    }
+  }
+  
+  .read-time, .page-date {
+    display: inline-block;
+    margin-right: 1em;
+    font-size: 0.9rem;
+  }
+}
+
+// Keep existing styles for any remaining sidebar usage (like on other layouts)
 .page-author {
   margin-bottom: 1.5em;
   
@@ -117,45 +181,23 @@ $content-max-width: 850px;
   }
 }
 
-// On mobile, ensure good experience
+// On mobile, ensure good experience with bottom metadata
 @media (max-width: 63.99em) {
-  .page-author {
-    margin-bottom: 1em;
-    
-    .author-info {
-      text-align: left;
+  .page-meta-bottom {
+    .author-links {
+      gap: 0.6em;
+      
+      .author-link a {
+        font-size: 1.2rem;
+      }
     }
     
-    .author-name {
-      margin-bottom: 0.2em;
-    }
-  }
-  
-  .author-links {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 0.5em;
-    
-    .author-link {
-      display: inline-block;
-      margin-right: 0.5em;
-      margin-bottom: 0;
-    }
-  }
-  
-  .page-sidebar {
-    .read-time, .page-date {
-      display: inline-block;
-      margin-right: 1em;
-    }
-  }
-  
-  .page-taxonomies {
-    display: flex;
-    flex-wrap: wrap;
-    
-    .page-taxonomy {
-      margin-right: 0.5em;
+    .page-taxonomies {
+      gap: 0.4em;
+      
+      .page-taxonomy {
+        font-size: 0.85rem;
+      }
     }
   }
 }
