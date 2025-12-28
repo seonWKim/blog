@@ -9,10 +9,9 @@ As a software engineer, I often forget the importance of getting used to the har
 As I'm diving into the hardware world, I found myself unfamiliar with hardware-related terms, so I would like to
 start by defining these unfamiliar hardware terms. For today, I would like to start with NUMA architecture.
 
-## NUMA(Non-Uniform Memory Access)
+## NUMA (Non-Uniform Memory Access)
 
-NUMA, NUMA, NUMA.. I've heard of this term so many times. It's a computer memory architecture where memory access time
-depends on the memory's location relative to the processor.
+NUMA is a computer memory architecture where memory access time depends on the memory's location relative to the processor.
 
 In NUMA, CPUs have their own local memory. But they can also access other CPUs' local memories. So the access time
 depends on the distance between memory and CPU, hence called non-uniform memory access. This was introduced to solve
@@ -24,15 +23,14 @@ systems to scale by having each CPU have its own memory.
 For software engineers like us, we love and need to think from the perspective of software performance. When we run our
 software on NUMA systems, we have to consider CPU memory locality because allowing the CPU to access its local memory
 is 2-10x faster than remote memory access. By writing your system NUMA-aware, it's now possible to enhance the system
-performance. If you're developing an I/O-bound application, maybe we can skip NUMA, but if you are developing performance-critical software such as databases or servers, NUMA seems to be essential knowledge.
+performance. If you're developing an I/O-bound application, NUMA considerations may be less critical, but for performance-critical software such as databases or servers, NUMA is essential knowledge.
 
-Best practices suggested by my best professor (ai):
+Key considerations for NUMA-aware programming:
 
 - Pin threads to specific NUMA nodes for consistent performance
-- Use NUMA-aware allocators e.g. `tcmalloc`, `jemalloc` 😮😮
+- Use NUMA-aware allocators like `tcmalloc` or `jemalloc`
 - Apply NUMA topology in thread pool design
-- For databases: configure buffer pools per NUMA node -> seems interesting. Let's do some research on databases in the
-  future
+- For databases: configure buffer pools per NUMA node to optimize memory access patterns
 
 ### Wait, CPU = NUMA Node?
 
