@@ -24,6 +24,19 @@ google_fonts:
 google_analytics: # Your Google Analytics tracking ID
 disqus:
   shortname: # Your Disqus shortname (if using Disqus for comments)
+
+# Giscus Comments (GitHub Discussions-based comments)
+giscus:
+  repo: "seonWKim/blog"
+  repo_id: "R_kgDOQukeEQ"
+  category: "General"
+  category_id: "DIC_kwDOQukeEc4C0TMY"
+  mapping: "og:title" # Maps comments to pages using og:title meta tag
+  reactions_enabled: "1" # Enable reactions
+  input_position: "top" # Comment box position (top/bottom)
+  theme: "preferred_color_scheme" # Auto light/dark mode
+  lang: "en"
+
 twitter:
   username: # Your Twitter username
 
