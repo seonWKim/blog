@@ -8,3 +8,7 @@ Gemfile.lock
 
 .reference
 ._research
+
+# Node.js
+node_modules/
+package-lock.json
