@@ -188,6 +188,36 @@ Before publishing, verify:
 - Technical correctness validation
 - Domain-specific knowledge questions
 
+## Automated Style Checking
+
+This repository includes a GitHub Actions workflow (`.github/workflows/style-check.yml`) that automatically checks style guide compliance on pull requests.
+
+### What the workflow checks:
+- **Markdown linting**: Validates markdown structure and formatting using markdownlint
+- **Style patterns**: Detects common style issues like:
+  - Repeated emojis (e.g., 😮😮)
+  - Overly casual phrases (e.g., "seems interesting")
+  - Inconsistent terminology (e.g., "virtual CPU" instead of "vCPU")
+  - IO vs I/O usage
+
+### How it works:
+1. Runs automatically on pull requests that modify markdown files in `_posts/`, `_research/`, or `_pages/`
+2. Only checks files that were changed in the PR
+3. Provides feedback as PR comments and workflow summaries
+4. Suggestions are recommendations, not blockers - review and apply as appropriate
+
+### Running locally:
+```bash
+# Install markdownlint-cli
+npm install -g markdownlint-cli
+
+# Check specific file
+markdownlint _posts/your-post.md
+
+# Check all content
+markdownlint _posts/ _research/ _pages/
+```
+
 ---
 
 **Note**: This guide should evolve with the blog. If you notice patterns that work well or areas needing clarification, update this document to reflect those learnings.
