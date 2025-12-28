@@ -28,6 +28,10 @@ layout: default
           {% include disqus-comments.html %}
         {% endif %}
 
+        {% if page.comments and site.giscus.repo %}
+          {% include giscus-comments.html %}
+        {% endif %}
+
         {% include page-pagination.html %}
 
         {%- comment -%}

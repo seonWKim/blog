@@ -24,6 +24,21 @@ google_fonts:
 google_analytics: # Your Google Analytics tracking ID
 disqus:
   shortname: # Your Disqus shortname (if using Disqus for comments)
+
+# Giscus Comments (GitHub Discussions-based comments)
+# To enable: Visit https://giscus.app and configure your repository
+# Then fill in the values below
+giscus:
+  repo: "seonWKim/blog"
+  repo_id: # Get from https://giscus.app
+  category: # Get from https://giscus.app (e.g., "General" or "Announcements")
+  category_id: # Get from https://giscus.app
+  mapping: "pathname" # Maps comments to pages
+  reactions_enabled: "1" # Enable reactions
+  input_position: "bottom" # Comment box position
+  theme: "preferred_color_scheme" # Auto light/dark mode
+  lang: "en"
+
 twitter:
   username: # Your Twitter username
 
