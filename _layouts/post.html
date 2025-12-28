@@ -93,8 +93,10 @@ layout: default
 
 <!-- JavaScript for Reading Progress and Back to Top -->
 <script>
-  // Reading Progress Bar
-  window.addEventListener('scroll', function() {
+  // Reading Progress Bar with requestAnimationFrame for better performance
+  let ticking = false;
+  
+  function updateReadingProgress() {
     const progressBar = document.getElementById('reading-progress');
     const article = document.querySelector('.e-content');
     
@@ -111,17 +113,32 @@ layout: default
       
       progressBar.style.width = progress + '%';
     }
+    
+    ticking = false;
+  }
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateReadingProgress);
+      ticking = true;
+    }
   });
   
   // Back to Top Button
   const backToTopButton = document.getElementById('back-to-top');
+  let buttonVisible = false;
   
   if (backToTopButton) {
     window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('visible');
-      } else {
-        backToTopButton.classList.remove('visible');
+      const shouldShow = window.pageYOffset > 300;
+      
+      if (shouldShow !== buttonVisible) {
+        buttonVisible = shouldShow;
+        if (shouldShow) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
       }
     });
     

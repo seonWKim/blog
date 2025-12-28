@@ -4,6 +4,14 @@
 @import "intellij-theme";
 
 // ============================================================================
+// Social Media Brand Colors
+// ============================================================================
+$facebook-blue: #1877F2;
+$twitter-blue: #1DA1F2;
+$linkedin-blue: #0A66C2;
+$reddit-orange: #FF4500;
+
+// ============================================================================
 // Reading Progress Indicator
 // ============================================================================
 .reading-progress {
@@ -329,45 +337,45 @@
     
     // Facebook
     &[href*="facebook"] {
-      background: #1877F2;
+      background: $facebook-blue;
       color: white;
       
       &:hover {
-        background: darken(#1877F2, 10%);
-        border-color: #1877F2;
+        background: darken($facebook-blue, 10%);
+        border-color: $facebook-blue;
       }
     }
     
     // Twitter
     &[href*="twitter"] {
-      background: #1DA1F2;
+      background: $twitter-blue;
       color: white;
       
       &:hover {
-        background: darken(#1DA1F2, 10%);
-        border-color: #1DA1F2;
+        background: darken($twitter-blue, 10%);
+        border-color: $twitter-blue;
       }
     }
     
     // LinkedIn
     &[href*="linkedin"] {
-      background: #0A66C2;
+      background: $linkedin-blue;
       color: white;
       
       &:hover {
-        background: darken(#0A66C2, 10%);
-        border-color: #0A66C2;
+        background: darken($linkedin-blue, 10%);
+        border-color: $linkedin-blue;
       }
     }
     
     // Reddit
     &[href*="reddit"] {
-      background: #FF4500;
+      background: $reddit-orange;
       color: white;
       
       &:hover {
-        background: darken(#FF4500, 10%);
-        border-color: #FF4500;
+        background: darken($reddit-orange, 10%);
+        border-color: $reddit-orange;
       }
     }
   }
@@ -501,18 +509,6 @@
         transform: translateY(-2px);
       }
     }
-  }
-  
-  // Add styling for taxonomy titles
-  .page-taxonomies-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: $intellij-text-bright;
-    margin-top: 1.5em;
-    margin-bottom: 1em;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
   }
 }
 
