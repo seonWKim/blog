@@ -2,17 +2,55 @@
 layout: default
 ---
 
+<!-- Reading Progress Indicator -->
+<div class="reading-progress" id="reading-progress"></div>
+
 <main id="main" class="main-content" aria-label="Content">
   <article class="h-entry">
     {% include page-image.html %}
     <div class="page-wrapper">
-      <header class="page-header">
+      <header class="page-header post-header-enhanced">
         {% assign title = page.title | markdownify | strip_html %}
         {% if page.link %}
           <h1 id="page-title" class="page-title p-name"><a href="{{ page.link }}">{{ title }} <span class="link-arrow">&rarr;</span></a></h1>
         {% else %}
           <h1 id="page-title" class="page-title p-name">{{ title }}</h1>
         {% endif %}
+        
+        <!-- Enhanced Post Metadata -->
+        <div class="post-meta-top">
+          {% if page.date %}
+          <div class="meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: site.date_format | default: "%B %-d, %Y" }}</time>
+          </div>
+          {% endif %}
+          
+          {% if site.read_time %}
+          <div class="meta-item">
+            <span class="reading-time-badge">
+              <i class="fas fa-clock"></i>
+              {% assign words = content | number_of_words %}
+              {% assign wpm = site.words_per_minute | default: 200 %}
+              {% assign time = words | divided_by: wpm %}
+              {% if time == 0 %}{% assign time = 1 %}{% endif %}
+              ~{{ time }} min read
+            </span>
+          </div>
+          {% endif %}
+          
+          {% if page.author %}
+          <div class="meta-item">
+            <i class="fas fa-user"></i>
+            <span>{{ page.author }}</span>
+          </div>
+          {% elsif site.author.name %}
+          <div class="meta-item">
+            <i class="fas fa-user"></i>
+            <span>{{ site.author.name }}</span>
+          </div>
+          {% endif %}
+        </div>
       </header>
 
       <div class="page-content">
@@ -46,4 +84,52 @@ layout: default
       </div>
     </div>
   </article>
+  
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </main>
+
+<!-- JavaScript for Reading Progress and Back to Top -->
+<script>
+  // Reading Progress Bar
+  window.addEventListener('scroll', function() {
+    const progressBar = document.getElementById('reading-progress');
+    const article = document.querySelector('.e-content');
+    
+    if (progressBar && article) {
+      const windowHeight = window.innerHeight;
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Calculate reading progress
+      const progress = Math.min(100, Math.max(0, 
+        ((scrollTop - articleTop + windowHeight) / articleHeight) * 100
+      ));
+      
+      progressBar.style.width = progress + '%';
+    }
+  });
+  
+  // Back to Top Button
+  const backToTopButton = document.getElementById('back-to-top');
+  
+  if (backToTopButton) {
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>
