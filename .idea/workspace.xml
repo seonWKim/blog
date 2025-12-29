@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="2025-12-29-physical-virtual-foundations-queues.md initial draft">
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
+      <change beforePath="$PROJECT_DIR$/_posts/2025-12-28-physical-virtual-foundations-NUMA.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2025-12-28-physical-virtual-foundations-NUMA.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_posts/2025-12-29-physical-virtual-foundations-queues.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2025-12-29-physical-virtual-foundations-queues.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +90,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="3183000" />
+      <workItem from="1766972787729" duration="3645000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -139,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766974797841</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1766976777044</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1766976777044</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,8 +158,8 @@
     <MESSAGE value="Add deep_dive_prompt.md" />
     <MESSAGE value="Update custom-layout.scss" />
     <MESSAGE value="Update README.md" />
-    <MESSAGE value="Nit" />
     <MESSAGE value="2025-12-29-physical-virtual-foundations-queues.md initial draft" />
-    <option name="LAST_COMMIT_MESSAGE" value="2025-12-29-physical-virtual-foundations-queues.md initial draft" />
+    <MESSAGE value="Nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
   </component>
 </project>

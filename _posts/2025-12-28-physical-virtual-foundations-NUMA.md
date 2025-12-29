@@ -1,6 +1,6 @@
 ---
 title: "Physical Virtual Foundations - NUMA"
-date: 2025-12-28 00:00:01 -0500
+date: 2025-12-27 00:00:01 -0500
 categories: infra
 tags: [infra, NUMA, core, socket]
 ---

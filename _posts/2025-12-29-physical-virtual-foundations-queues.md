@@ -1,6 +1,6 @@
 ---
 title: "Physical Virtual Foundations - Queues in VM"
-date: 2025-12-29 00:00:01 -0500
+date: 2025-12-28 00:00:01 -0500
 categories: infra
 tags: [ infra, NUMA, core, socket ]
 ---
