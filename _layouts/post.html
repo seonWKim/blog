@@ -51,16 +51,23 @@ layout: default
           </div>
           {% endif %}
         </div>
+        
+        <!-- Tags Under Title -->
+        {% if page.tags %}
+        <div class="post-tags-header">
+          {% for tag in page.tags %}
+            <a href="{{ tag | slugify | prepend: site.tag_archive_path | relative_url }}" class="tag-badge">
+              <i class="fas fa-tag"></i> {{ tag }}
+            </a>
+          {% endfor %}
+        </div>
+        {% endif %}
       </header>
 
       <div class="page-content">
         <div class="e-content">
           {{ content }}
         </div>
-
-        {% if page.share %}
-          {% include social-share.html %}
-        {% endif %}
 
         {% if site.disqus.shortname %}
           {% include disqus-comments.html %}
@@ -71,16 +78,6 @@ layout: default
         {% endif %}
 
         {% include page-pagination.html %}
-
-        {%- comment -%}
-        Author profile, categories, and tags section positioned at bottom of content
-        for improved content focus and reduced sidebar distraction
-        {%- endcomment -%}
-        <div class="page-meta-bottom">
-          {% include page-author.html %}
-          {% include page-categories.html %}
-          {% include page-tags.html %}
-        </div>
       </div>
     </div>
   </article>
