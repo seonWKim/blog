@@ -2,7 +2,7 @@
 title: "Physical Virtual Foundations - Queues in VM"
 date: 2025-12-28 00:00:01 -0500
 categories: infra
-tags: [ infra, NUMA, core, socket ]
+tags: [ infra, VM ]
 ---
 
 Virtualization maximizes hardware utilization by adding an extra abstraction layer. Whenever we add another layer, it
