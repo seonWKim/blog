@@ -7,5 +7,5 @@ permalink: /categories/ai/
 Posts about artificial intelligence, machine learning, and related technologies.
 
 {% for post in site.categories.ai %}
-  - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %-d, %Y" }}
+  - [{{ post.title }}]({{ post.url | relative_url }}) - {{ post.date | date: "%B %-d, %Y" }}
 {% endfor %}
