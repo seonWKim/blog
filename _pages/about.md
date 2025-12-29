@@ -23,6 +23,14 @@ I'm actively learning and expanding my skills into areas beyond my current exper
 
 This blog serves as my learning journal where I document these explorations and share insights as I broaden my technical knowledge.
 
+### Open Source Contributions
+
+I believe in giving back to the developer community through open source contributions. I actively contribute to projects that align with my interests and help improve tools that developers use daily.
+
+### Side Projects
+
+I work on side projects to experiment with new technologies and explore ideas outside of my day-to-day work. These projects allow me to apply what I'm learning in practical ways and share my experiences with others.
+
 ### Beyond Code
 
 When I'm not coding, I enjoy documenting my learnings and sharing them with the developer community. I write about technical challenges, system design patterns, and lessons learned from building software.
