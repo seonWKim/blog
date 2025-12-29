@@ -4,24 +4,28 @@ layout: page
 permalink: /about/
 ---
 
-## Hi, I'm Seon Woo Kim 👋
+## Hi, I'm Seon Woo Kim
 
-I'm a software engineer passionate about building reliable, scalable systems. My work focuses on infrastructure, distributed systems, and AI applications in production environments.
+I'm a software engineer with professional experience building user-facing business applications in the fintech industry. I focus on delivering reliable, scalable solutions that directly impact customers and business operations.
 
 ### What I Do
 
-I specialize in:
-- **Infrastructure & DevOps**: Designing and optimizing cloud-native systems, with hands-on experience in Kubernetes, container orchestration, and performance tuning
-- **System Architecture**: Building distributed systems with focus on reliability, scalability, and observability
-- **AI Systems**: Developing and deploying AI/ML applications in production, bridging the gap between research and real-world systems
+My primary work involves:
+- **Business Application Development**: Building production systems for fintech applications, focusing on user experience, reliability, and business logic
+- **Software Engineering**: Writing clean, maintainable code and designing systems that solve real business problems
 
-### Current Focus
+### Expanding My Expertise
 
-I'm currently diving deep into the fundamentals of physical and virtual systems—exploring topics like NUMA architecture, CPU scheduling, and memory management to build more performant applications. I believe understanding the hardware layer is crucial for writing efficient software.
+I'm actively learning and expanding my skills into areas beyond my current experience:
+- **Infrastructure & DevOps**: Exploring cloud-native systems, Kubernetes, container orchestration, and performance tuning
+- **AI/ML Systems**: Learning about AI applications and their integration into production environments
+- **System Fundamentals**: Studying hardware and low-level systems topics like NUMA architecture, CPU scheduling, and memory management
+
+This blog serves as my learning journal where I document these explorations and share insights as I broaden my technical knowledge.
 
 ### Beyond Code
 
-When I'm not coding, I enjoy documenting my learnings and sharing insights with the developer community. I write about production failures, system design patterns, and infrastructure challenges I encounter while building software.
+When I'm not coding, I enjoy documenting my learnings and sharing them with the developer community. I write about technical challenges, system design patterns, and lessons learned from building software.
 
 ### Get in Touch
 
@@ -32,4 +36,4 @@ When I'm not coding, I enjoy documenting my learnings and sharing insights with 
 
 ---
 
-*This blog contains my notes on infrastructure, AI systems, and lessons learned from production failures. All opinions are my own.*
+*This blog contains my notes and learnings on software engineering, infrastructure, AI systems, and lessons from building production applications. All opinions are my own.*
