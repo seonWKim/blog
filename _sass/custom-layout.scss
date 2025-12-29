@@ -10,20 +10,32 @@ $content-max-width: 1024px;
 // Reset only horizontal padding to prevent misalignment from theme defaults
 .layout--post .page-wrapper,
 .layout--post .page-header,
-.layout--post .page-content {
+.layout--post .page-content,
+.layout--home .page-wrapper,
+.layout--home .page-header,
+.layout--home .page-content,
+.layout--page .page-wrapper,
+.layout--page .page-header,
+.layout--page .page-content {
   padding-inline: 0;
 }
 
-// Remove sidebar layout - content is full width
+// Remove sidebar layout - content is full width for all layouts
 @media (min-width: 64em) {
-  .layout--post .page-wrapper {
+  .layout--post .page-wrapper,
+  .layout--home .page-wrapper,
+  .layout--page .page-wrapper {
     // Single column layout - no sidebar
     display: block;
   }
   
-  // Both header and content have same width and alignment
+  // Both header and content have same width and alignment for all layouts
   .layout--post .page-header,
-  .layout--post .page-content {
+  .layout--post .page-content,
+  .layout--home .page-header,
+  .layout--home .page-content,
+  .layout--page .page-header,
+  .layout--page .page-content {
     width: 100%;
     max-width: $content-max-width;
     margin: 0 auto; // Center both title and content
