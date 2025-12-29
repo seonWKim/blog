@@ -10,6 +10,7 @@ permalink: /tags/
   {% assign posts = tag[1] %}
   
 ## {{ tag_name }}
+{: #{{ tag_name | slugify }}}
 
 {% for post in posts %}
   - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %-d, %Y" }}
