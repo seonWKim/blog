@@ -30,14 +30,14 @@ $home-content-max-width: 768px;
     display: block;
   }
   
-  // Both header and content have same width and alignment for all layouts
+  // Both header and content have same width and alignment, centered
   .layout--post .page-header,
   .layout--post .page-content,
   .layout--page .page-header,
   .layout--page .page-content {
     width: 100%;
     max-width: $content-max-width;
-    margin: 0 auto; // Center both title and content
+    margin: 0 auto;
   }
   
   // Home layout uses a narrower max-width
@@ -45,7 +45,7 @@ $home-content-max-width: 768px;
   .layout--home .page-content {
     width: 100%;
     max-width: $home-content-max-width;
-    margin: 0 auto; // Center both title and content
+    margin: 0 auto;
   }
 }
 
