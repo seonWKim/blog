@@ -5,6 +5,7 @@
 
 // Variables for consistent sizing
 $content-max-width: 1024px;
+$home-content-max-width: 768px;
 
 // Ensure consistent alignment for title and content across all screen sizes
 // Reset only horizontal padding to prevent misalignment from theme defaults
@@ -32,12 +33,18 @@ $content-max-width: 1024px;
   // Both header and content have same width and alignment for all layouts
   .layout--post .page-header,
   .layout--post .page-content,
-  .layout--home .page-header,
-  .layout--home .page-content,
   .layout--page .page-header,
   .layout--page .page-content {
     width: 100%;
     max-width: $content-max-width;
+    margin: 0 auto; // Center both title and content
+  }
+  
+  // Home layout uses a narrower max-width
+  .layout--home .page-header,
+  .layout--home .page-content {
+    width: 100%;
+    max-width: $home-content-max-width;
     margin: 0 auto; // Center both title and content
   }
 }
