@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
-      <change beforePath="$PROJECT_DIR$/_posts/2025-12-28-physical-virtual-foundations-NUMA.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2025-12-28-physical-virtual-foundations-NUMA.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_posts/2025-12-29-physical-virtual-foundations-queues.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2025-12-29-physical-virtual-foundations-queues.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_posts/2025-12-30-league-of-legends-servers.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="3645000" />
+      <workItem from="1766972787729" duration="17327000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -148,7 +147,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766976777044</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1766977248601</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1766977248601</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1766992692644</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1766992692644</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
