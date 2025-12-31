@@ -1,64 +1,112 @@
-# Deterministic Data Recovery
+---
+title: "Determinism in League of Legends Game Servers"
+date: 2025-12-30 00:00:01 -0500
+categories: programming
+tags: [ determinism, game-servers, event-sourcing, testing ]
+---
 
-- Project Chronobreak
-    - Allows esports officials to rewind a live game to a specific point in time
-    - make the LoL game server deterministic so we could re-play a recorded game and restore the server to the exact
-      state it was in at an earlier time
-- SNR(Server Network Recordings)
-    - game servers that record each game
-        - complete record of all the inputs, match settings and configurations used to play the game
-    - can start from any time again when there's a bug
+As an application developer, I've always been curious about the technologies that power large-scale systems outside my
+domain. When I stumbled upon Riot Games' technical blog about their "Project Chronobreak" - a system that allows esports
+officials to rewind live games to any point in time - I was immediately hooked. The concept of **determinism** stood out
+to me, especially since I've been contributing to Turso, an open-source database that uses deterministic simulation
+testing to catch bugs. I wanted to understand how game servers apply this principle at scale.
 
-# Implementation
+## What is Determinism?
 
-- What is determinism
-    - when given a fixed set of inputs, it produces the same outputs
-- `Divergence` is when software fails to behave in a deterministic fashion
-- Because computer software is designed to be free of divergences, software divergences are the product of unexpected
-  inputs
-- Validating determinism
-    - If divergence occurs, it causes the game to progressively diverge and eventually break down into chaos
-    - the goal of determinism validation is to find the root cause of the divergence
-    - Don't have to make everything deterministic. It would be too complicated
-- Classifying the inputs
-    - Controlled inputs: inputs that never change between executions of the same game version
-        - scripts, hardware platform, OS
-    - Uncontrolled outputs: inputs into the LoL server that was either noisy, random or generated from player inputs
-        - frame time, client network traffic, random number generators etc
-- Recording inputs
-    - record network inputs each frame in the order in which they're received by the server
-    - Critical simplification they made up front was that SNRs would record and play back the state of the game a single
-      frame at a time -> led to numerous conventions and simplifications that allowed them to deliver gameplay server
-      determinism in a reasonable amount of time
-- Taking control of inputs
-    - unify the game clocks as they had more than 6 individual clock implementations
-    -
+Determinism is a property where **given the same inputs, a system produces the same outputs every time**. In the context
+of League of Legends servers, this means that if you replay the exact same sequence of player inputs, network packets,
+and game settings, you get the exact same game state at any point in time.
 
-# Links
+The opposite of determinism is **divergence** - when software fails to behave consistently. Because most computer
+software is designed to be free of divergences, software divergences are typically the product of unexpected or
+uncontrolled inputs.
 
-- https://technology.riotgames.com/news/determinism-league-legends-introduction
-- https://technology.riotgames.com/news/determinism-league-legends-implementation
+### Why should software engineers care?
 
-# 얘기해보고 싶은 것
+For most application developers, determinism isn't something we think about daily. But when you need to:
 
-- 내가 이걸 왜 읽었을까? app 개발자로서 게임 서버들은 어떤 기술을 사용하는지 알고 싶었음
-- determinism 이란 개념이 흥미로웠음
-    - turso라는 오픈소스 데이터베이스에 기여중인데 deterministic simulation testing을 활용해 버그를 잡고 있었음
-- determinism 이란 ?
-    - same input -> same output
-    - divergence. 상태가 determinism으로부터 벗어나는 것
-- LoL 서버는 determinism으로 뭘 하는가?
-    - replay, testing, find bugs etc
-- LoL 서버가 determinism을 구현하기 위해 고민한 플로우가 인상 깊음
-    - divergence를 유발하는 원인? inputs(not software because softwares are mostly deterministic)
-    - input classification - controlled and uncontrolled
-    - make deterministic everywhere ?? No -> only essential parts
-    - simplified rule -> LoL servers will record and play back the state of the game a single frame at a time
-        - Linux의 everything is a file과 비슷하다고 느낌. 잘 규정된 단순한 규칙 위에 만들어진 소프트웨어가 얼마나 단순해질 수 있는지
-- determinism을 활용하는 방법이 functional programming과 event sourcing과 비슷하다고 느껴짐
-    - functional programming : same input, same output, ease of testing
-    - event sourcing : replaying, snapshotting etc
-- final thoughts
-    - 게임 서버를 구현하는데 있어 determinism이란 개념이 적용된게 흥미로웟음
-    - app 개발할 때 엄격한 상태 관리, replay 등의 요구사항이 존재할 때 determinism을 적용해볼 수 있을 것 같음. 다만 그 방법이 determinism이라 부를지는 모르겠음. 아마 event
-      sourcing이 되지 않을까 싶음(혹은 모르지)
+- **Replay and debug production issues** - reproduce exact conditions that led to a bug
+- **Test complex distributed systems** - verify behavior under specific scenarios
+- **Provide audit trails** - guarantee that replaying events produces identical state
+- **Recover from failures** - restore to a known-good state
+
+Then determinism becomes essential. League of Legends uses determinism for all of these: replaying matches, testing new
+features, finding bugs, and most impressively, rewinding live esports matches when technical issues occur.
+
+## How Riot Games Built Deterministic Game Servers
+
+What impressed me most about Riot's implementation wasn't just that they achieved determinism, but **how they thought
+through the problem**. Their approach offers valuable lessons for any software engineer dealing with state management.
+
+### Step 1: Identify the Source of Divergence
+
+Riot's team realized that divergence doesn't come from software itself (software is mostly deterministic), but from *
+*inputs**. The challenge was figuring out which inputs mattered.
+
+They classified inputs into two categories:
+
+**Controlled inputs** - inputs that never change between executions:
+
+- Game scripts and logic
+- Hardware platform specifications
+- Operating system behavior
+- etc
+
+**Uncontrolled inputs** - inputs that are noisy, random, or player-generated:
+
+- Frame timing variations
+- Client network traffic
+- Random number generators
+- Player actions
+- etc
+
+The insight here is: you don't need to make your entire system deterministic, just control the inputs that
+matter
+
+### Step 2: Simplify with a Core Rule
+
+Rather than trying to make everything deterministic, Riot established one critical design decision:
+
+> **SNRs (Server Network Recordings) would record and play back the state of the game a single frame at a time.**
+
+This reminds me of Unix's "everything is a file" philosophy - a simple, well-defined rule that dramatically simplifies
+system design. By establishing the frame as the fundamental unit:
+
+- Network inputs are recorded in order of receipt each frame
+- Game state is deterministic within frame boundaries
+- Replay can jump to any frame and restore exact state
+
+### Step 3: Implementation
+
+With the rule established, implementation focused on controlling those uncontrolled inputs: unified game clocks,
+recorded network inputs in order of receipt, and deterministic random number generation. The result is a frame-based
+architecture where each frame captures inputs, computes game state, and records everything for replay.
+
+## Connections to Familiar Patterns
+
+As I learned about determinism in game servers, I noticed striking similarities to patterns we use in application
+development. The frame-based approach resembles **functional programming** (same input, same output; pure functions are
+deterministic) and **event sourcing** (replaying events to rebuild state, just like SNRs replay frames). The parallels
+are clear: deterministic code is easier to test, avoiding side effects prevents divergence, and maintaining complete
+event history enables both replay and audit trails. Essentially, Riot built event sourcing with frames as the event
+boundary - each frame is an immutable record of inputs and resulting state.
+
+## Final Thoughts
+
+What started as curiosity about game server technology turned into a deeper appreciation for determinism as a design
+principle. While I initially thought this was specific to gaming, the core concepts apply broadly to application state
+management when you need strict guarantees about state transitions, distributed systems testing like the deterministic
+simulation testing Turso uses, debugging production issues by replaying events to reproduce bugs, and compliance
+scenarios where you need to prove operations are reproducible.
+
+The key insight from Riot's implementation is that you don't need to make everything deterministic - you need to
+identify and control the inputs that affect state. Whether you call it determinism, event sourcing, or something else,
+the pattern of recording inputs and replaying state is a powerful tool for building reliable systems. Next time you're
+designing a system that needs strong consistency guarantees or replay capabilities, consider: what are your "frames,"
+and what inputs do you need to control?
+
+---
+
+## References
+
+- [Determinism in League of Legends: Introduction](https://technology.riotgames.com/news/determinism-league-legends-introduction)
