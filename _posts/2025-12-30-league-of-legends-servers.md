@@ -39,7 +39,7 @@ through the problem**. Their approach offers lessons for any software engineer d
 ### Step 1: Identify the Source of Divergence
 
 Riot's team realized that divergence doesn't come from software itself (software is mostly deterministic), but from
-**inputs**. The challenge was figuring out which inputs mattered.
+inputs. The challenge was figuring out which inputs mattered.
 
 They classified inputs into two categories:
 
