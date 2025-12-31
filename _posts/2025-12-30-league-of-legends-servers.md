@@ -65,7 +65,9 @@ matter
 
 Rather than trying to make everything deterministic, Riot established one critical design decision:
 
-> **SNRs (Server Network Recordings) would record and play back the state of the game a single frame at a time.**
+> **A critical simplification that we made up-front was that SNRs would record and play back the state of the game a
+single frame at a time. This led to numerous conventions and simplifications that allowed us to deliver gameplay server
+determinism in a reasonable amount of time.**
 
 This reminds me of Unix's "everything is a file" philosophy - a simple, well-defined rule that dramatically simplifies
 system design. By establishing the frame as the fundamental unit:
