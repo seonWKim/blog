@@ -4,7 +4,8 @@ This document defines the tone, structure, and style conventions for blog posts 
 reference for maintaining consistency while allowing room for evolution as new posts are added.
 
 **Last Updated:** 2025-12-31
-**Base Analysis:** Posts analyzed include NUMA (2025-12-28), Queues in VM (2025-12-29)
+**Base Analysis:** Posts analyzed include NUMA (2025-12-28), Queues in VM (2025-12-29), League of Legends Determinism (
+2025-12-30)
 
 ---
 
@@ -83,24 +84,32 @@ tags: [ tag1, tag2, tag3 ]              # 3-6 relevant tags
 
 **Tags:** Specific technical terms covered in the post
 
-### 2. Opening Paragraph (1-3 sentences)
+### 2. Opening Paragraph (1-2 sentences, concise)
 
-**Purpose:** Set personal context and motivation
+**Purpose:** Quickly establish personal context and topic
 
 **Pattern:**
 
-1. State the broader context or challenge
-2. Share personal discovery or learning journey
-3. Preview what the post will cover
+- Jump directly to what sparked the interest
+- Include personal connection if relevant
+- Keep it tight - no need to over-explain
 
-**Example:**
+**Examples:**
 
 ```
 As a software engineer, I often forget the importance of getting used to the hardware
 systems that software runs on. As I'm diving into the hardware world, I found myself
-unfamiliar with hardware-related terms, so I would like to start by defining these
-unfamiliar hardware terms. For today, I would like to start with NUMA architecture.
+unfamiliar with hardware-related terms, so I would like to start with NUMA architecture.
 ```
+
+```
+I recently learned about Riot's "Project Chronobreak" - a system that rewinds live League
+of Legends games to any point in time. The concept of determinism caught my attention,
+especially since I've been contributing to Turso, a database that uses deterministic
+simulation testing to catch bugs.
+```
+
+**Key principle:** Get to the point quickly. Avoid verbose setup - readers appreciate conciseness.
 
 ### 3. Main Topic Definition (## Heading)
 
@@ -122,6 +131,28 @@ unfamiliar hardware terms. For today, I would like to start with NUMA architectu
 - Break down complex concepts into digestible chunks
 - Use question-based subheadings when appropriate
 - Progress from simple to complex
+
+**Step-by-Step Architecture Pattern:**
+
+For complex implementations or system designs, use numbered steps:
+
+```
+### Step 1: Identify the Source of Divergence
+[Explanation of first step]
+
+### Step 2: Simplify with a Core Rule
+[Explanation of second step]
+
+### Step 3: Implementation
+[Explanation of final step]
+```
+
+**Benefits:**
+
+- Provides clear progression through complex topics
+- Makes implementation strategies easier to follow
+- Helps readers understand the thought process
+- Works well for architecture decisions and system design
 
 ### 6. Examples & Visuals
 
@@ -150,11 +181,39 @@ Server
 │   │   └── Thread 1
 ```
 
-### 7. Final Thoughts (Optional but Recommended)
+### 7. Connections to Familiar Patterns (Optional)
 
-- Synthesize key learnings
-- Connect concepts to real-world scenarios
+**Purpose:** Bridge new concepts to patterns readers already know
+
+For posts exploring unfamiliar domains, explicitly connect to familiar software patterns:
+
+```
+## Connections to Familiar Patterns
+
+As I learned about determinism in game servers, I noticed similarities to
+patterns we use in application development...
+```
+
+**Examples of cross-domain connections:**
+
+- Game server frames ↔ Event sourcing
+- Hardware locality ↔ Cache optimization
+- Unix philosophy ↔ System design principles
+- Functional programming concepts ↔ System architecture
+
+**Benefits:**
+
+- Makes unfamiliar concepts feel accessible
+- Leverages existing knowledge
+- Shows broader applicability of patterns
+- Encourages cross-domain thinking
+
+### 8. Final Thoughts (Optional but Recommended)
+
+- Synthesize key learnings with narrative arc ("What started as curiosity...")
+- Connect concepts to real-world scenarios and broader applications
 - Pose thought-provoking questions or implications
+- Generalize lessons beyond the specific domain
 
 ---
 
@@ -298,7 +357,8 @@ This style guide should evolve as the blog grows. When adding new posts that int
 Track significant updates here:
 
 - **2025-12-31:** Initial style guide created based on NUMA and Queues posts
-- _(Future updates will be logged here)_
+- **2025-12-31:** Updated opening paragraph guidelines to emphasize conciseness (1-2 sentences) based on Determinism
+  post. Removed extended opening examples in favor of direct, punchy introductions.
 
 ---
 

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Draft">
-      <change beforePath="$PROJECT_DIR$/_posts/2025-12-30-league-of-legends-servers.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2025-12-30-league-of-legends-servers.md" afterDir="false" />
-    </list>
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +87,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="19574000" />
+      <workItem from="1766972787729" duration="20085000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -179,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767145045353</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add">
+      <option name="closed" value="true" />
+      <created>1767148193055</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1767148193055</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +198,7 @@
     <MESSAGE value="2025-12-29-physical-virtual-foundations-queues.md initial draft" />
     <MESSAGE value="Nit" />
     <MESSAGE value="Draft" />
-    <option name="LAST_COMMIT_MESSAGE" value="Draft" />
+    <MESSAGE value="Add" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add" />
   </component>
 </project>

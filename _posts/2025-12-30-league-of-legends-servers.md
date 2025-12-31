@@ -5,11 +5,7 @@ categories: programming
 tags: [ determinism, game-servers, event-sourcing, testing ]
 ---
 
-As an application developer, I've always been curious about the technologies that power large-scale systems outside my
-domain. When I stumbled upon Riot Games' technical blog about their "Project Chronobreak" - a system that allows esports
-officials to rewind live games to any point in time - I was immediately hooked. The concept of **determinism** stood out
-to me, especially since I've been contributing to Turso, an open-source database that uses deterministic simulation
-testing to catch bugs. I wanted to understand how game servers apply this principle at scale.
+I recently learned about Riot's "Project Chronobreak" - a system that rewinds live League of Legends games to any point in time. The concept of **determinism** caught my attention, especially since I've been contributing to Turso, a database that uses deterministic simulation testing to catch bugs.
 
 ## What is Determinism?
 
@@ -84,7 +80,7 @@ architecture where each frame captures inputs, computes game state, and records 
 
 ## Connections to Familiar Patterns
 
-As I learned about determinism in game servers, I noticed striking similarities to patterns we use in application
+As I learned about determinism in game servers, I noticed similarities to patterns we use in application
 development. The frame-based approach resembles **functional programming** (same input, same output; pure functions are
 deterministic) and **event sourcing** (replaying events to rebuild state, just like SNRs replay frames). The parallels
 are clear: deterministic code is easier to test, avoiding side effects prevents divergence, and maintaining complete
