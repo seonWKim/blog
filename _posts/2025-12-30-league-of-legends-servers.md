@@ -5,7 +5,9 @@ categories: programming
 tags: [ determinism, game-servers, event-sourcing, testing ]
 ---
 
-I recently learned about Riot's "Project Chronobreak" - a system that rewinds live League of Legends games to any point in time. The concept of **determinism** caught my attention, especially since I've been contributing to Turso, a database that uses deterministic simulation testing to catch bugs.
+I recently learned about Riot's "Project Chronobreak" - a system that rewinds live League of Legends games to any point
+in time. The concept of **determinism** caught my attention, especially since I've been contributing to Turso, a
+database that uses deterministic simulation testing to catch bugs.
 
 ## What is Determinism?
 
@@ -32,7 +34,7 @@ features, finding bugs, and most impressively, rewinding live esports matches wh
 ## How Riot Games Built Deterministic Game Servers
 
 What impressed me most about Riot's implementation wasn't just that they achieved determinism, but **how they thought
-through the problem**. Their approach offers valuable lessons for any software engineer dealing with state management.
+through the problem**. Their approach offers lessons for any software engineer dealing with state management.
 
 ### Step 1: Identify the Source of Divergence
 
@@ -80,24 +82,32 @@ architecture where each frame captures inputs, computes game state, and records 
 
 ## Connections to Familiar Patterns
 
-As I learned about determinism in game servers, I noticed similarities to patterns we use in application
-development. The frame-based approach resembles **functional programming** (same input, same output; pure functions are
-deterministic) and **event sourcing** (replaying events to rebuild state, just like SNRs replay frames). The parallels
-are clear: deterministic code is easier to test, avoiding side effects prevents divergence, and maintaining complete
-event history enables both replay and audit trails. Essentially, Riot built event sourcing with frames as the event
-boundary - each frame is an immutable record of inputs and resulting state.
+As I learned about determinism in game servers, I noticed similarities to patterns we use in application development:
+
+- **Functional programming:** Same input, same output. Pure functions are deterministic.
+- **Event sourcing:** Replaying events to rebuild state, just like SNRs replay frames.
+
+The parallels are clear:
+
+- Deterministic code is easier to test
+- Avoiding side effects prevents divergence
+- Maintaining complete event history enables both replay and audit trails
+
+Essentially, Riot built event sourcing with frames as the event boundary - each frame is an immutable record of inputs
+and resulting state.
 
 ## Final Thoughts
 
-What started as curiosity about game server technology turned into a deeper appreciation for determinism as a design
-principle. While I initially thought this was specific to gaming, the core concepts apply broadly to application state
-management when you need strict guarantees about state transitions, distributed systems testing like the deterministic
-simulation testing Turso uses, debugging production issues by replaying events to reproduce bugs, and compliance
-scenarios where you need to prove operations are reproducible.
+What started as curiosity about game server technology turned into an appreciation for determinism as a design
+principle. While I initially thought this was specific to gaming, the core concepts apply broadly:
+
+- Application state management when you need strict guarantees about state transitions
+- Debugging production issues by replaying events to reproduce bugs
+- Compliance scenarios where you need to prove operations are reproducible
 
 The key insight from Riot's implementation is that you don't need to make everything deterministic - you need to
 identify and control the inputs that affect state. Whether you call it determinism, event sourcing, or something else,
-the pattern of recording inputs and replaying state is a powerful tool for building reliable systems. Next time you're
+the pattern of recording inputs and replaying state is a useful tool for building reliable systems. Next time you're
 designing a system that needs strong consistency guarantees or replay capabilities, consider: what are your "frames,"
 and what inputs do you need to control?
 
