@@ -59,6 +59,30 @@ Use questions as section headers to engage readers:
 - "Why should software engineers care?"
 - "How does this affect performance?"
 
+### Avoid Overloaded Adjectives
+
+Write directly without excessive descriptors. Overloaded adjectives sound artificial and AI-generated.
+
+**Avoid:**
+```
+This powerful insight is incredibly valuable for building highly robust systems.
+The deeply fascinating concept offers remarkable benefits.
+A comprehensive understanding of this critical topic is absolutely essential.
+```
+
+**Better:**
+```
+This insight helps build robust systems.
+The concept is useful.
+Understanding this topic matters.
+```
+
+**Guidelines:**
+- Skip intensifiers: "very", "highly", "deeply", "incredibly", "remarkably", "absolutely"
+- Avoid stacking adjectives: "powerful new innovative approach" → "new approach"
+- Use concrete details instead of vague praise: "2x faster" beats "significantly improved"
+- Trust the technical content to speak for itself
+
 ---
 
 ## Post Structure
@@ -332,6 +356,7 @@ Before publishing, verify:
 - [ ] Tone is conversational and first-person
 - [ ] Structure flows logically from simple to complex
 - [ ] Final thoughts tie concepts together (if applicable)
+- [ ] No overloaded adjectives or AI-sounding intensifiers
 
 ---
 
@@ -357,8 +382,8 @@ This style guide should evolve as the blog grows. When adding new posts that int
 Track significant updates here:
 
 - **2025-12-31:** Initial style guide created based on NUMA and Queues posts
-- **2025-12-31:** Updated opening paragraph guidelines to emphasize conciseness (1-2 sentences) based on Determinism
-  post. Removed extended opening examples in favor of direct, punchy introductions.
+- **2025-12-31:** Updated opening paragraph guidelines to emphasize conciseness (1-2 sentences) based on Determinism post. Removed extended opening examples in favor of direct, punchy introductions.
+- **2025-12-31:** Added "Avoid Overloaded Adjectives" section to Voice & Tone. Discourages excessive descriptors and intensifiers that sound AI-generated. Emphasizes direct, natural writing with concrete details over vague praise.
 
 ---
 

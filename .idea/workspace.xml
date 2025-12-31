@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +87,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="20085000" />
+      <workItem from="1766972787729" duration="20611000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -185,7 +185,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767148193055</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add Makefile review-style-guide command">
+      <option name="closed" value="true" />
+      <created>1767148713131</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1767148713131</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1767149168684</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1767149168684</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,9 +212,10 @@
     <MESSAGE value="Update custom-layout.scss" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="2025-12-29-physical-virtual-foundations-queues.md initial draft" />
-    <MESSAGE value="Nit" />
     <MESSAGE value="Draft" />
     <MESSAGE value="Add" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add" />
+    <MESSAGE value="Add Makefile review-style-guide command" />
+    <MESSAGE value="Nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
   </component>
 </project>
