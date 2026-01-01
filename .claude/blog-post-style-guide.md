@@ -3,7 +3,7 @@
 This document defines the tone, structure, and style conventions for blog posts in this repository. It serves as a
 reference for maintaining consistency while allowing room for evolution as new posts are added.
 
-**Last Updated:** 2025-12-31
+**Last Updated:** 2026-01-01
 **Base Analysis:** Posts analyzed include NUMA (2025-12-28), Queues in VM (2025-12-29), League of Legends Determinism (
 2025-12-30)
 
@@ -247,6 +247,9 @@ patterns we use in application development...
 
 - Define technical terms on first use
 - Provide concrete numbers and measurements (2-10x faster, 100ns latency)
+  - **Important:** Concrete numbers must cite official documentation or authoritative sources
+  - If you cannot provide a reference, use qualitative descriptions instead ("significantly faster", "low latency")
+  - Example: "100ns latency (per Intel Xeon documentation)" vs. just "100ns latency"
 - Use real-world examples from actual systems
 - Balance theory with practice
 
@@ -357,6 +360,7 @@ Before publishing, verify:
 - [ ] Structure flows logically from simple to complex
 - [ ] Final thoughts tie concepts together (if applicable)
 - [ ] No overloaded adjectives or AI-sounding intensifiers
+- [ ] Concrete numbers cite official documentation or use qualitative descriptions instead
 
 ---
 
@@ -384,6 +388,7 @@ Track significant updates here:
 - **2025-12-31:** Initial style guide created based on NUMA and Queues posts
 - **2025-12-31:** Updated opening paragraph guidelines to emphasize conciseness (1-2 sentences) based on Determinism post. Removed extended opening examples in favor of direct, punchy introductions.
 - **2025-12-31:** Added "Avoid Overloaded Adjectives" section to Voice & Tone. Discourages excessive descriptors and intensifiers that sound AI-generated. Emphasizes direct, natural writing with concrete details over vague praise.
+- **2026-01-01:** Added requirement for concrete numbers to cite official documentation or authoritative sources. If references cannot be provided, qualitative descriptions should be used instead. Updated Technical Accuracy section and checklist accordingly.
 
 ---
 
