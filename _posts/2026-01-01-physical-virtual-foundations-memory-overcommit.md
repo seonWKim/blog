@@ -43,6 +43,69 @@ time - you're looking at metrics that can't show the problem.
 The hypervisor inflates a fake driver inside the guest that allocates memory, letting it reclaim physical RAM for other
 VMs. The guest sees less free memory but doesn't know why.
 
+**How Ballooning Works:**
+
+```
+Initial State - Host with 16GB Physical RAM
+┌─────────────────────────────────────────────────────────┐
+│                    HOST (16GB Total)                     │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│   VM1 (8GB)  │   VM2 (8GB)  │   VM3 (8GB)  │  Free 4GB  │
+│   Using 6GB  │   Using 6GB  │   Using 4GB  │            │
+└──────────────┴──────────────┴──────────────┴────────────┘
+  Total used: 16GB physical RAM (full!)
+
+
+Host needs memory - triggers ballooning in VM1 & VM2
+┌─────────────────────────────────────────────────────────┐
+│                         HOST                             │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│     VM1      │     VM2      │     VM3      │            │
+│  ┌────────┐  │  ┌────────┐  │              │            │
+│  │Balloon │  │  │Balloon │  │  Apps: 4GB   │            │
+│  │  2GB   │  │  │  2GB   │  │              │            │
+│  ├────────┤  │  ├────────┤  │              │            │
+│  │Apps:4GB│  │  │Apps:4GB│  │              │            │
+│  └────────┘  │  └────────┘  │              │            │
+└──────────────┴──────────────┴──────────────┴────────────┘
+                                              ↑ 4GB reclaimed
+
+
+Guest Perspective (VM1):
+┌─────────────────────────────────┐
+│  VM1 sees: 8GB allocated        │
+│                                 │
+│  Before ballooning:             │
+│    Used: 6GB                    │
+│    Free: 2GB                    │
+│                                 │
+│  After ballooning:              │
+│    Used: 8GB (Apps: 6GB)        │
+│           (Balloon: 2GB) ← ?!   │
+│    Free: 0GB                    │
+│                                 │
+│  Guest thinks: "I'm out of      │
+│  memory, better reclaim cache"  │
+│  Guest doesn't know: Balloon    │
+│  gave memory back to host       │
+└─────────────────────────────────┘
+
+
+Host reallocates reclaimed memory to VM3
+┌─────────────────────────────────────────────────────────┐
+│                         HOST                             │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│     VM1      │     VM2      │     VM3      │  Free 0GB  │
+│  ┌────────┐  │  ┌────────┐  │              │            │
+│  │Balloon │  │  │Balloon │  │  Apps: 8GB   │            │
+│  │  2GB   │  │  │  2GB   │  │  (needs more │            │
+│  ├────────┤  │  ├────────┤  │   memory)    │            │
+│  │Apps:4GB│  │  │Apps:4GB│  │              │            │
+│  └────────┘  │  └────────┘  │              │            │
+└──────────────┴──────────────┴──────────────┴────────────┘
+  Physical RAM: Still 16GB, now supporting 24GB allocated
+```
+
 Critical limitation: If your application's working set grows faster than the balloon can reclaim memory, overcommit is
 incompatible with your SLO. No tuning fixes this architectural mismatch.
 
