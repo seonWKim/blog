@@ -142,14 +142,21 @@ This is why synchronized batch jobs are deadly - 20 VMs all expand working sets 
 - Host `vmstat si/so` shows swap activity
 - Each owner says "my VM is fine" while host thrashes
 
-### Common Failure: Java Heap + Ballooning
+### Common Failure: Java Heap + Overcommit
 
-VM with 16GB runs JVM with `-Xmx12g`, host at 1.5:1 overcommit, JVM does full GC.
+Host with 64GB physical RAM runs 6 VMs, each allocated 16GB (96GB total = 1.5:1 overcommit). One VM runs JVM with
+`-Xmx12g`.
 
-- GC pauses spike (milliseconds → seconds)
-- JVM logs show "normal" heap
-- Host is ballooning during GC
-- Database reports high cache hit ratios while hypervisor swapped pages to disk
+Normal state: JVM working set is ~4GB (young gen + active old gen), other VMs using ~10GB each. Total working set ~54GB
+fits in 64GB physical.
+
+During full GC: JVM touches all 12GB of heap pages, spiking this VM's working set to 12GB+.
+
+- Total working set now exceeds 64GB physical RAM
+- Host swaps pages from this VM (or balloons other VMs) to free physical RAM
+- GC pauses spike from milliseconds to seconds due to page faults
+- JVM logs show "normal" GC activity - no indication of swapping
+- Guest metrics show nothing wrong while host is swapping
 
 ### Metrics That Actually Matter
 
@@ -176,7 +183,7 @@ failures.
 
 ## Final Thoughts
 
-The lesson isn't "never use overcommit." It's understanding where abstractions break. The guest lives in one reality (
-allocated memory), the host in another (physical memory), with no protocol for truth-telling. For software engineers
-moving into infrastructure, memory overcommit shows why you need the full stack - guest metrics are necessary but
-insufficient for the most confusing production issues.
+We are not saying "never use overcommit." It about understanding where abstractions break. The guest lives in one
+reality (allocated memory), the host in another (physical memory), with no protocol for truth-telling. For software
+engineers working with VMs memory overcommit shows why you need the full stack - guest metrics are necessary
+but insufficient for the most confusing production issues.
