@@ -128,6 +128,7 @@ A VM using 4GB of 16GB allocation isn't "wasting resources" - it's enabling dens
 physical RAM.
 
 **Overcommit works when**: Total working set of all VMs < Physical RAM
+
 **Overcommit fails when**: Total working set of all VMs > Physical RAM
 
 This is why synchronized batch jobs are deadly - 20 VMs all expand working sets simultaneously.
