@@ -232,16 +232,12 @@ Guest metrics are necessary but insufficient for debugging.
 ## What This Means for Us
 
 Understanding the mechanisms and metrics is useful, but what changes in how we build and operate systems?
-
-**You cannot trust allocation**. Your 16GB VM might have 16GB, 12GB, or 8GB physical RAM backing it. The hypervisor
+- **You cannot trust allocation**. Your 16GB VM might have 16GB, 12GB, or 8GB physical RAM backing it. The hypervisor
 won't tell you.
-
-**SLOs might be impossible**. Hypervisor-injected page faults break p99 latency promises regardless of code tuning.
-
-**Working set measurement is your job**. If you can't articulate actual working set vs allocation, infra will
+- **SLOs might be impossible**. Hypervisor-injected page faults break p99 latency promises regardless of code tuning.
+- **Working set measurement is your job**. If you can't articulate actual working set vs allocation, infra will
 over-allocate, enabling overcommit and creating problems.
-
-**Design for degradation**. Guest OOM won't fire when host is swapping your pages - you'll get massive slowdowns, not
+- **Design for degradation**. Guest OOM won't fire when host is swapping your pages - you'll get massive slowdowns, not
 failures.
 
 ## Final Thoughts
