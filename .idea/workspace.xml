@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add my profile image under about.md">
-      <change beforePath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +97,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="37344000" />
+      <workItem from="1766972787729" duration="39162000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -308,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767326447365</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1767327015670</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1767327015670</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +331,6 @@
     <MESSAGE value="Add Makefile review-style-guide command" />
     <MESSAGE value="Update blog post styles" />
     <MESSAGE value="Nit Makefile" />
-    <MESSAGE value="Nit" />
     <MESSAGE value="Update blog post style guide" />
     <MESSAGE value="Add memory over commit post" />
     <MESSAGE value="Add a diagram that depicts ballooning" />
@@ -333,6 +339,7 @@
     <MESSAGE value="Add favicon" />
     <MESSAGE value="Add bii-global-outlook-2026.pdf (for future work)" />
     <MESSAGE value="Add my profile image under about.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add my profile image under about.md" />
+    <MESSAGE value="Nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
   </component>
 </project>
