@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
-      <change afterPath="$PROJECT_DIR$/_research/economics/bii-global-outlook-2026.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_research/economics/bii-global-outlook-2026.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add my profile image under about.md">
       <change beforePath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +39,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/gimseon-u/Desktop/Projects/blog/assets/css",
+    "last_opened_file_path": "/Users/gimseon-u/Desktop/Projects/blog/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,6 +55,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/css" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/_research/economics" />
@@ -101,7 +98,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="36566000" />
+      <workItem from="1766972787729" duration="37344000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -279,7 +276,39 @@
       <option name="project" value="LOCAL" />
       <updated>1767325372429</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Clarify how full GC touches the entire heap and can affect cause ballooning across neighbors in the same host">
+      <option name="closed" value="true" />
+      <created>1767326205991</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1767326205991</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Add favicon">
+      <option name="closed" value="true" />
+      <created>1767326334489</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1767326334489</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Add bii-global-outlook-2026.pdf (for future work)">
+      <option name="closed" value="true" />
+      <created>1767326420174</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1767326420174</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Add my profile image under about.md">
+      <option name="closed" value="true" />
+      <created>1767326447365</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1767326447365</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +329,10 @@
     <MESSAGE value="Add memory over commit post" />
     <MESSAGE value="Add a diagram that depicts ballooning" />
     <MESSAGE value="nit" />
-    <option name="LAST_COMMIT_MESSAGE" value="nit" />
+    <MESSAGE value="Clarify how full GC touches the entire heap and can affect cause ballooning across neighbors in the same host" />
+    <MESSAGE value="Add favicon" />
+    <MESSAGE value="Add bii-global-outlook-2026.pdf (for future work)" />
+    <MESSAGE value="Add my profile image under about.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add my profile image under about.md" />
   </component>
 </project>

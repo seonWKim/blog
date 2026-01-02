@@ -178,9 +178,54 @@ Both failures share the same root cause: guest metrics can't see host behavior. 
 
 Three metrics to detect overcommit problems:
 
-1. **Host swap in/out (si/so)** - leading indicator before cliff
-2. **Host memory usage %** - how close to edge
-3. **Balloon inflation across VMs** - host in panic mode
+**1. Host swap in/out (si/so) - leading indicator before cliff**
+
+On Linux hosts, use `vmstat 5` to monitor swap activity:
+
+```
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu------
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0      0 24576   2048  8192     0    0    20    10  150  300  5  2 93  0  0  ← healthy
+ 2  1 403256  4096   1024  2048   124  256    50   150  400  800 20 10 60 10  0  ← pressure
+ 4  3 856432  2048    512  1024   892 1456   180   420  850 1600 30 20 30 20  0  ← thrashing
+```
+
+Watch for the pattern:
+- **Healthy**: si/so consistently at 0
+- **Memory pressure**: sustained non-zero si/so values
+- **Thrashing**: si/so increasing across samples, free memory near 0, wait time (wa) climbing
+
+**2. Host memory overcommit ratio - how close to edge**
+
+VMware ESXi example from esxtop:
+
+```
+           PMEM  %    /MB   VMKMEM   COSMEM  OVHD     /MB   COWSZ  SHRD   SHDCMN  BALLOON  SWAP  COMPR  COMPRESS
+ESXi host: 64GB  92%  59136  2048     57088   2048    4096  128    8192   512     4096     2048  1024   128
+```
+
+Watch the PMEM % (physical memory usage) and BALLOON/SWAP columns:
+- **Safe**: Low memory %, zero or minimal balloon/swap activity
+- **Approaching limits**: High memory % with increasing balloon/swap values
+- **Critical**: Memory % near capacity, active ballooning/swapping across multiple VMs
+
+**3. Balloon inflation across VMs - host in panic mode**
+
+VMware vCenter performance graph showing VM balloon usage (metric: `mem.vmmemctl.average`):
+
+```
+VM1 (16GB allocated):  2048 MB ballooned
+VM2 (16GB allocated):  4096 MB ballooned
+VM3 (8GB allocated):   5120 MB ballooned
+```
+
+Watch for these patterns:
+- **Normal**: 0 MB ballooned across all VMs
+- **Memory pressure**: Sustained ballooning across multiple VMs
+- **Crisis**: Ballooning values increasing over time, especially if approaching significant percentage of VM allocation
+
+When you see balloon values > 0 persisting across multiple VMs, the host is in memory pressure and actively reclaiming
+memory from guests.
 
 Guest metrics are necessary but insufficient for debugging.
 
