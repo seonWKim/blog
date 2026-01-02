@@ -36,7 +36,10 @@ With memory overcommit:
 The guest thinks it has 16GB. The host knows only 12GB exists physically. This information asymmetry wastes debugging
 time - you're looking at metrics that can't show the problem.
 
-## Key Mechanisms
+## How Hypervisors Hide the Truth
+
+To understand why debugging is so difficult, we need to see how hypervisors manage overcommit. They use two main
+techniques to reclaim memory when physical RAM runs low - and both are invisible to the guest.
 
 ### Ballooning
 
@@ -109,6 +112,9 @@ Host reallocates reclaimed memory to VM3
 Critical limitation: If your application's working set grows faster than the balloon can reclaim memory, overcommit is
 incompatible with your SLO. No tuning fixes this architectural mismatch.
 
+When ballooning can't reclaim memory fast enough, the hypervisor falls back to swapping - which is where things get
+worse.
+
 ### Swapping vs Thrashing
 
 **Swapping**: Moving pages between RAM and disk. Occasional swapping causes minor slowdown.
@@ -118,6 +124,10 @@ enter a death spiral - every page swapped in requires swapping another page out 
 degradation, but a cliff.
 
 ## Why Should Software Engineers Care?
+
+Now that we know how overcommit hides itself, the question is: when does it break? The answer isn't about allocated
+memory - it's about working sets. This mental model explains why some VMs coexist peacefully while others destroy each
+other's performance.
 
 ### Working Sets Matter More Than Allocation
 
@@ -131,7 +141,7 @@ physical RAM.
 
 **Overcommit fails when**: Total working set of all VMs > Physical RAM
 
-This is why synchronized batch jobs are deadly - 20 VMs all expand working sets simultaneously.
+This explains two common production failures that look mysterious until you understand working sets.
 
 ### Common Failure: Synchronized Workloads
 
@@ -142,21 +152,27 @@ This is why synchronized batch jobs are deadly - 20 VMs all expand working sets 
 - Host `vmstat si/so` shows swap activity
 - Each owner says "my VM is fine" while host thrashes
 
+The batch job example shows synchronized spikes. But even a single VM can cause problems if its working set fluctuates
+dramatically.
+
 ### Common Failure: Java Heap + Overcommit
 
 Host with 64GB physical RAM runs 6 VMs, each allocated 16GB (96GB total = 1.5:1 overcommit). One VM runs JVM with
 `-Xmx12g`.
 
-Normal state: JVM working set is ~4GB (young gen + active old gen), other VMs using ~10GB each. Total working set ~54GB
-fits in 64GB physical.
+Normal state: JVM working set is ~4GB (young gen + active old gen objects being actively used), other VMs using ~10GB each.
+Total working set ~54GB fits in 64GB physical.
 
-During full GC: JVM touches all 12GB of heap pages, spiking this VM's working set to 12GB+.
+During full GC: JVM must scan and compact the entire heap, reading and writing to pages across all 12GB. These memory accesses
+bring pages into the working set, spiking this VM's working set from 4GB to 12GB+.
 
 - Total working set now exceeds 64GB physical RAM
 - Host swaps pages from this VM (or balloons other VMs) to free physical RAM
 - GC pauses spike from milliseconds to seconds due to page faults
 - JVM logs show "normal" GC activity - no indication of swapping
 - Guest metrics show nothing wrong while host is swapping
+
+Both failures share the same root cause: guest metrics can't see host behavior. So what should you monitor instead?
 
 ### Metrics That Actually Matter
 
@@ -169,6 +185,8 @@ Three metrics to detect overcommit problems:
 Guest metrics are necessary but insufficient for debugging.
 
 ## What This Means for Us
+
+Understanding the mechanisms and metrics is useful, but what changes in how we build and operate systems?
 
 **You cannot trust allocation**. Your 16GB VM might have 16GB, 12GB, or 8GB physical RAM backing it. The hypervisor
 won't tell you.
@@ -183,7 +201,14 @@ failures.
 
 ## Final Thoughts
 
-We are not saying "never use overcommit." It about understanding where abstractions break. The guest lives in one
-reality (allocated memory), the host in another (physical memory), with no protocol for truth-telling. For software
-engineers working with VMs memory overcommit shows why you need the full stack - guest metrics are necessary
-but insufficient for the most confusing production issues.
+The lesson isn't "never use overcommit" - it's recognizing when the abstraction breaks down. Overcommit works when
+working sets stay predictable and stay below physical RAM. It fails catastrophically when working sets spike
+synchronously or fluctuate unpredictably.
+
+The fundamental problem is the missing feedback loop. The guest lives in one reality (allocated memory), the host in
+another (physical memory), with no protocol for truth-telling. Ballooning and swapping happen silently. Your application
+slows down without failing, metrics show nothing wrong, and you spend days debugging phantom issues.
+
+For software engineers moving into infrastructure work, memory overcommit demonstrates why you need visibility across
+abstraction boundaries. Guest metrics are necessary but insufficient. Host metrics reveal the truth. Understanding both
+is the difference between days of confusion and minutes of diagnosis.
