@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit Makefile" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
+      <change afterPath="$PROJECT_DIR$/_research/economics/bii-global-outlook-2026.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_research/economics/bii-global-outlook-2026.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" beforeDir="false" afterPath="$PROJECT_DIR$/_posts/2026-01-01-physical-virtual-foundations-memory-overcommit.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,29 +35,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/gimseon-u/Desktop/Projects/blog/assets/css",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.first.attach.projects": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/css" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/_research/economics" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/_research/physical-virtual-foundations" />
     </key>
   </component>
@@ -87,7 +101,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="21266000" />
+      <workItem from="1766972787729" duration="36566000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -217,7 +231,55 @@
       <option name="project" value="LOCAL" />
       <updated>1767149554005</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1767152115254</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1767152115254</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Update blog post style guide">
+      <option name="closed" value="true" />
+      <created>1767246672035</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1767246672035</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add memory over commit post">
+      <option name="closed" value="true" />
+      <created>1767256447518</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1767256447518</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add a diagram that depicts ballooning">
+      <option name="closed" value="true" />
+      <created>1767324921081</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1767324921081</updated>
+    </task>
+    <task id="LOCAL-00021" summary="nit">
+      <option name="closed" value="true" />
+      <created>1767324974166</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1767324974166</updated>
+    </task>
+    <task id="LOCAL-00022" summary="nit">
+      <option name="closed" value="true" />
+      <created>1767325372429</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1767325372429</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,9 +293,13 @@
     <MESSAGE value="Draft" />
     <MESSAGE value="Add" />
     <MESSAGE value="Add Makefile review-style-guide command" />
-    <MESSAGE value="Nit" />
     <MESSAGE value="Update blog post styles" />
     <MESSAGE value="Nit Makefile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nit Makefile" />
+    <MESSAGE value="Nit" />
+    <MESSAGE value="Update blog post style guide" />
+    <MESSAGE value="Add memory over commit post" />
+    <MESSAGE value="Add a diagram that depicts ballooning" />
+    <MESSAGE value="nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="nit" />
   </component>
 </project>

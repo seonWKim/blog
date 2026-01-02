@@ -4,6 +4,8 @@ layout: page
 permalink: /about/
 ---
 
+<img src="{{ '/assets/logo.png' | relative_url }}" alt="Profile" style="float: right; max-width: 200px; margin-left: 2em; margin-bottom: 1em; border-radius: 10px;">
+
 ## Hi, I'm Seon Woo Kim
 
 I'm a software engineer with professional experience building user-facing business applications in the fintech industry. I focus on delivering reliable, scalable solutions that directly impact customers and business operations.
