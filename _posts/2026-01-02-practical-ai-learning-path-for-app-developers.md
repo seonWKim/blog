@@ -205,6 +205,6 @@ What matters most isn't how much theory you know, but whether you can ship AI fe
 
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [Anthropic Claude Documentation](https://docs.anthropic.com/)
-- [LangChain Documentation](https://python.langchain.com/)
+- [LangChain Documentation](https://python.langchain.com/docs/)
 - [Hugging Face Course](https://huggingface.co/learn/nlp-course)
 - [Fast.ai Practical Deep Learning](https://course.fast.ai/)
