@@ -4,15 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add favicon configuration under _config.yml" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
+      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/post.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="copilot/improve-seo-and-blog-directions" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN"
+    }
+  ],
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOQukeEc67QELU",
+        "number": 25
+      },
+      "lastSeen": 1767432347262
+    }
+  ]
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/seonwkim/blog",
+    "accountId": "2062c678-b892-4e85-85db-605d80af850a"
+  }
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -34,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "copilot/improve-seo-and-blog-directions",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/gimseon-u/Desktop/Projects/blog/assets",
     "node.js.detected.package.eslint": "true",
@@ -95,7 +129,7 @@
       <updated>1766823448189</updated>
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
-      <workItem from="1766972787729" duration="39314000" />
+      <workItem from="1766972787729" duration="48806000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -337,7 +371,71 @@
       <option name="project" value="LOCAL" />
       <updated>1767328383491</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1767328668801</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1767328668801</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add IBLT related info">
+      <option name="closed" value="true" />
+      <created>1767413891832</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1767413891832</updated>
+    </task>
+    <task id="LOCAL-00033" summary="temp">
+      <option name="closed" value="true" />
+      <created>1767414839685</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1767414839685</updated>
+    </task>
+    <task id="LOCAL-00034" summary="tmpe">
+      <option name="closed" value="true" />
+      <created>1767416850736</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1767416850736</updated>
+    </task>
+    <task id="LOCAL-00035" summary="tmpe">
+      <option name="closed" value="true" />
+      <created>1767417117144</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1767417117144</updated>
+    </task>
+    <task id="LOCAL-00036" summary="tmpe">
+      <option name="closed" value="true" />
+      <created>1767418643401</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1767418643401</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add physical-virtual-foundations-CPU post">
+      <option name="closed" value="true" />
+      <created>1767419556475</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1767419556475</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Nit">
+      <option name="closed" value="true" />
+      <created>1767432603382</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1767432603382</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,10 +459,14 @@
     <MESSAGE value="Add favicon" />
     <MESSAGE value="Add bii-global-outlook-2026.pdf (for future work)" />
     <MESSAGE value="Add my profile image under about.md" />
-    <MESSAGE value="Nit" />
     <MESSAGE value="Add 03-physical-virtual-foundations-CPU.md for CPU research" />
     <MESSAGE value="Nit favicon.ico" />
     <MESSAGE value="Add favicon configuration under _config.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add favicon configuration under _config.yml" />
+    <MESSAGE value="Add IBLT related info" />
+    <MESSAGE value="temp" />
+    <MESSAGE value="tmpe" />
+    <MESSAGE value="Add physical-virtual-foundations-CPU post" />
+    <MESSAGE value="Nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
   </component>
 </project>

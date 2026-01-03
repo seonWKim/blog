@@ -1,0 +1,172 @@
+/* Social Sharing and CTA Styles */
+
+/* Social Share Section - Compact Version */
+.social-share {
+  margin: 2rem 0 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #007bff;
+
+  h3 {
+    margin: 0 0 0.75rem 0;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .share-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+
+    i {
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+
+    &.twitter {
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    &.linkedin {
+      background-color: #0077b5;
+      color: white;
+    }
+
+    &.hackernews {
+      background-color: #ff6600;
+      color: white;
+    }
+
+    &.reddit {
+      background-color: #ff4500;
+      color: white;
+    }
+  }
+}
+
+/* Feedback CTA Section - Compact Version */
+.feedback-cta {
+  margin: 2rem 0 1.5rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+
+  h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  p {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+
+    i {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    &.primary {
+      background-color: white;
+      color: #667eea;
+    }
+
+    &.secondary {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .social-share {
+    padding: 1rem;
+
+    .share-buttons {
+      flex-direction: column;
+    }
+
+    .share-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .feedback-cta {
+    padding: 1.25rem 1rem;
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cta-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .social-share {
+    background: #2c3e50;
+    border-left-color: #3498db;
+
+    h3 {
+      color: #ecf0f1;
+    }
+  }
+
+  .feedback-cta {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  }
+}

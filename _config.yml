@@ -39,6 +39,14 @@ giscus:
 
 twitter:
   username: # Your Twitter username
+  card: summary_large_image
+
+# Social sharing defaults
+social:
+  name: Seon Woo Kim
+  links:
+    - https://github.com/seonWKim
+    - https://www.linkedin.com/in/seon-woo-kim-53b6481ba/
 
 # Site Search
 search_full_content: true
@@ -66,6 +74,7 @@ include:
   - .htaccess
   - _pages
   - favicon.ico
+  - robots.txt
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
