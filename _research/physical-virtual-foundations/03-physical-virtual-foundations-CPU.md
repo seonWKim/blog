@@ -695,32 +695,224 @@ perfect limits.
 1. If your VM has 4 vCPUs and the hypervisor has 8 pCPUs, what happens when all VMs on the host try to use their vCPUs
    simultaneously? What breaks first—throughput or latency?
 
+**Your answer**: latency breaks first because all the vCPUs will be queued and thereby increasing the latency. After
+that, throughput will decrease
+
+**Feedback**: ✅ Correct! Latency breaks first because vCPUs spend time waiting in the hypervisor run queue before
+getting scheduled on pCPUs. This queuing time adds directly to request latency (visible as steal time). Throughput can
+remain relatively stable initially because work still gets done, just slower. As contention worsens, throughput
+eventually drops too as more time is spent context switching and managing queues rather than doing actual work.
+
 2. A container with `cpu: 1000m` limit sometimes completes requests faster than a container with `cpu: 500m` limit, even
    though the first one should be throttled more. How is this possible?
+
+**Your answer**: I think the question is wrong. `cpu: 1000m` means it can get more CPU time. Why do you think the first
+one should be throttled more?
+
+**Feedback**: ✅ You're absolutely right to question this! The question appears to have a typo or is misleading. A
+container with a 1000m limit gets MORE quota (100ms per 100ms period) compared to 500m (50ms per 100ms period), so it
+would be throttled LESS, not more. The question should probably read "even though the first one has a HIGHER limit" or
+reverse the scenario. The key insight would be: both containers can be throttled despite different limits due to the
+tumbling window mechanism - timing of when work arrives matters more than the limit size.
 
 3. If you see 70% CPU usage inside a VM but the application is slow, what are three different layers where the problem
    could be hiding?
 
+**Your answer**: hypervisor queues(vCPU to pCPU), kernel scheduling queues, physical layer core contentions
+
+**Feedback**: ✅ Excellent! All three are valid layers. To be more specific:
+
+1. **Hypervisor layer**: vCPUs waiting in hypervisor run queues for pCPU time (visible as steal time)
+2. **Container layer** (if in container): CPU throttling from cgroup limits - frozen even when quota is available
+3. **Physical layer**: Hyperthreading contention (siblings fighting for shared ALU/FPU) or NUMA remote memory access (
+   1.5-2x latency penalty)
+
+Also valid: kernel run queue depth, cache coherency protocol delays, context switching overhead. The key insight is
+that "70% CPU usage" only shows one layer while bottlenecks exist in layers that aren't visible from inside the VM.
+
 4. A Kubernetes pod has `requests.cpu: 100m` and `limits.cpu: 1000m`. Under what conditions does this configuration make
    your cluster less stable than having `requests: 500m, limits: 500m`?
+
+**Your answer**: when there are sudden spikes on loads, the first scenario can cause cpu overcommit thereby making the
+cluster less stable, while the second scenario, the container has a room for 500m and the limit is 500m thereby not
+causing the cpu overcommit
+
+**Feedback**: ✅ Correct! The key problem is that **Kubernetes schedules based on requests, not limits**. With
+`requests: 100m, limits: 1000m`:
+
+- Scheduler sees "this pod only needs 100m" and packs 20 pods onto a 2-core (2000m) node
+- When all 20 pods burst to their 1000m limits simultaneously → 20,000m demand on a 2000m node (10x overcommit)
+- Massive throttling, health checks fail, cascading failures
+
+With `requests: 500m, limits: 500m`:
+
+- Scheduler only puts 4 pods on the node (4 × 500m = 2000m)
+- Even if all burst to limits, total demand = actual capacity
+- More stable, but less efficient bin-packing
+
+The first config lies to the scheduler about actual resource needs, creating a time bomb that goes off under load.
 
 5. Why might 2 vCPUs pinned to 2 pCPUs on the same NUMA node outperform 8 vCPUs with no pinning? What assumptions about
    the workload must be true?
 
+**Your answer**: when pinned, threads doesn't have to access remote memories thereby removing latency created by jumping
+into other socket's memory. But this is only true when the workloads are evenly distributed across pinned CPUs
+
+**Feedback**: ✅ Good! NUMA locality is a major factor. More specifically:
+
+- **With 2 pinned vCPUs**: All memory allocated from local NUMA node, 100% fast access (~80-100ns), stable cache
+  locality
+- **With 8 unpinned vCPUs**: vCPUs likely span multiple NUMA nodes, 50%+ remote memory access (140-180ns), vCPUs migrate
+  between pCPUs causing cache thrashing
+
+**Workload assumptions that must be true**:
+
+1. **Workload doesn't need >2 CPUs of parallelism** - Can fully utilize 2 CPUs without being CPU-bound
+2. **Memory-intensive** - Benefits significantly from NUMA locality (database queries, caching layers)
+3. **Low cache miss tolerance** - Sensitive to cache eviction from vCPU migration
+4. **Consistent load** - Doesn't have bursty spikes that would benefit from 8 vCPUs during peaks
+
+If workload is CPU-bound and needs high parallelism, 8 vCPUs would win despite NUMA penalties.
+
 6. If you disable hyperthreading, you cut your CPU count from 128 to 64. Under what circumstances does this increase
    total cluster throughput?
+
+**Your answer**: when the workloads creates a LOT of CPU contention, disabling hyperthreading will increase the
+throughput by removing the contention
+
+**Feedback**: ✅ Correct! More specifically, disabling HT increases throughput when:
+
+1. **Sibling threads conflict heavily** - Both siblings doing AVX vector math (fight for FPU), memory-intensive ops (
+   fight for cache), or same instruction types
+2. **Cache-sensitive workloads** - 64 cores with full L1/L2 cache each > 128 threads sharing and thrashing caches
+3. **Predictable performance matters** - HT causes 0.7-1.5x variance; disabling it gives consistent 1.0x performance
+4. **CPU-bound workloads** - Compute-heavy tasks (ML training, video encoding, scientific computing) where execution
+   unit sharing hurts more than the extra thread helps
+
+Counter-intuitively, fewer logical CPUs can do more work when siblings stop fighting over shared resources. The 128→64
+cut looks bad on paper but can improve actual work completed per second.
 
 7. What happens to CPU cache coherency traffic when a multi-threaded application's threads migrate across NUMA nodes?
    Which layer sees this cost, and which metrics measure it?
 
+**Your answer**: physical layer sees the cost, context switch, remote memory access related metrics?
+
+**Feedback**: ✅ Partially correct, but let me be more specific:
+
+**What happens**: When threads migrate across NUMA nodes and modify shared data:
+
+1. Cache lines must be invalidated and transferred between sockets via QPI/UPI interconnect
+2. Each socket's cache coherency protocol (MESI/MESIF) generates cross-socket traffic
+3. Write to shared cache line on Socket 0 → invalidates copies on Socket 1 → forces remote fetch on next access
+4. Bandwidth consumed by coherency traffic reduces available bandwidth for actual data transfers
+
+**Which layer sees it**: **Physical hardware layer** - the cache coherency protocol operates at the socket/memory
+controller level
+
+**Metrics to measure it**:
+
+- `numastat` - shows `numa_foreign` (remote accesses) and `numa_miss` (allocation misses)
+- `perf stat -e LLC-load-misses,LLC-store-misses` - Last Level Cache misses indicate cross-socket traffic
+- Memory bandwidth counters (via PCM or perf): shows QPI/UPI utilization
+- Application sees: increased latency, reduced throughput (but can't directly see cache coherency traffic)
+
 8. A VM shows 5% steal time. Is this bad? What's the first thing you'd check to determine if this is causing
    user-visible impact?
+
+**Your answer**: it depends. I would see whether it impacts the user requests handling latency first
+
+**Feedback**: ✅ Perfect approach! 5% steal time isn't inherently "bad" - it's about user impact.
+
+**What to check first**: **Correlate steal time with P99/P999 latency**, not P50/average:
+
+- Graph steal time alongside request latency over time
+- Look for latency spikes when steal time increases
+- Check if P99 latency degrades (P50 might look fine because steal time adds variance, not constant slowness)
+- For batch workloads: check job completion time trends
+
+**5% steal time might be acceptable if**:
+
+- Latency SLO still met (P99 < target)
+- Cost-sensitive workload where cheaper instances justify minor performance hit
+- Throughput-oriented workload where occasional queuing doesn't matter
+
+**5% becomes a problem when**:
+
+- Latency-sensitive workload (real-time APIs, trading systems)
+- P99 latency breaches SLO during steal time spikes
+- Unpredictable variance causes cascading failures (timeouts, retries)
+
+The number alone doesn't tell you if it's bad - the correlation with business impact does.
 
 9. Why does adding more worker threads to a CPU-bound application sometimes make it slower, even when CPU usage is only
    60%?
 
+**Your answer**: context switching I guess
+
+**Feedback**: ✅ Correct! Context switching is a major factor. More details:
+
+**Why performance degrades**:
+
+1. **Context switching overhead** - Kernel spends CPU time switching between threads instead of doing work (shows as
+   high `%sys`)
+2. **Cache thrashing** - Each context switch evicts previous thread's data from L1/L2 cache, next thread has cache
+   misses and must fetch from RAM (100x slower)
+3. **False sharing** - Multiple threads writing to different variables in the same cache line cause cache line ping-pong
+   between cores
+4. **Run queue depth** - Too many threads → high run queue (`vmstat r`) → threads wait longer for CPU time
+
+**Why CPU shows only 60%**:
+
+- The 60% is measuring "CPU executing instructions"
+- Doesn't include time spent waiting for cache misses, memory stalls, or lock contention
+- Actual productivity (useful work) might be 30% while 30% is overhead from context switching and cache misses
+
+**Example**: 100 threads on 8 CPUs
+
+- Each thread runs for ~5ms, then waits ~60ms for next turn
+- Every switch: evict cache, reload cache (~1000 cycles lost)
+- 8 threads would keep all CPUs at 100% useful work with no switching overhead
+
 10. Your container is throttled 30% of periods but CPU usage shows only 40% of limit. How can it be throttled if it's
     not hitting the limit?
+
+**Your answer**: ??
+
+**Feedback**: This is the **tumbling window trap** - one of the most counterintuitive CPU behaviors!
+
+**The problem**: CPU limits use **fixed 100ms periods** (tumbling windows). Quota doesn't carry over between periods.
+
+**Example with 500m (50ms quota per 100ms period)**:
+
+   ```
+   Period 1 [0-100ms]:
+     0-60ms:  Burst of work uses 50ms quota (THROTTLED at 50ms)
+     60-100ms: FROZEN (10ms quota wasted)
+
+   Period 2 [100-200ms]:
+     0-90ms:  Idle (50ms quota wasted)
+     90-100ms: Burst uses 10ms
+
+   Period 3 [200-300ms]:
+     0-40ms:  Burst uses 40ms
+     40-100ms: Idle (10ms quota wasted)
+   ```
+
+**Result**:
+
+- Used: 50ms + 10ms + 40ms = 100ms over 300ms = **33% average usage**
+- Limit: 500m = 50% average
+- Throttled: Period 1 = **33% of periods throttled**
+- **Usage well below limit, but still throttled!**
+
+**Why this happens**:
+
+- Bursty workloads exhaust quota early in a period → frozen for remainder
+- Idle periods waste quota (can't save it for later)
+- Average usage low, but timing causes throttling
+
+**The fix**: Either remove limits, or set limit much higher (4x normal usage) to accommodate bursts within a single
+period.
 
 ---
 

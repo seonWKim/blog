@@ -4,49 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
-      <change beforePath="$PROJECT_DIR$/_layouts/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/post.html" afterDir="false" />
-    </list>
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add physical-virtual-foundations-CPU post" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="copilot/improve-seo-and-blog-directions" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
-    {
-      "state": "OPEN"
-    }
-  ],
-  "lastFilter": {
-    "state": "OPEN"
-  }
-}]]></component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
-    {
-      "id": {
-        "id": "PR_kwDOQukeEc67QELU",
-        "number": 25
-      },
-      "lastSeen": 1767432347262
-    }
-  ]
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/seonwkim/blog",
-    "accountId": "2062c678-b892-4e85-85db-605d80af850a"
-  }
-}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -68,7 +34,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "copilot/improve-seo-and-blog-directions",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/gimseon-u/Desktop/Projects/blog/assets",
     "node.js.detected.package.eslint": "true",
@@ -427,15 +393,7 @@
       <option name="project" value="LOCAL" />
       <updated>1767419556475</updated>
     </task>
-    <task id="LOCAL-00038" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1767432603382</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1767432603382</updated>
-    </task>
-    <option name="localTasksCounter" value="39" />
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,11 +420,11 @@
     <MESSAGE value="Add 03-physical-virtual-foundations-CPU.md for CPU research" />
     <MESSAGE value="Nit favicon.ico" />
     <MESSAGE value="Add favicon configuration under _config.yml" />
+    <MESSAGE value="Nit" />
     <MESSAGE value="Add IBLT related info" />
     <MESSAGE value="temp" />
     <MESSAGE value="tmpe" />
     <MESSAGE value="Add physical-virtual-foundations-CPU post" />
-    <MESSAGE value="Nit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add physical-virtual-foundations-CPU post" />
   </component>
 </project>
