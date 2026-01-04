@@ -37,6 +37,15 @@ This will:
 
 ## Workflow Steps
 
+### Step 0: Setup & Context Gathering
+
+**ALWAYS start with:**
+1. **Create todos using TodoWrite** - Track all workflow steps, mark in_progress/completed as you work
+2. **Read 2-3 recent posts** from `_posts/` to match current voice and patterns
+3. **Check for series** - If topic matches existing series (grep titles), use series format
+4. **Sequential numbering** - For research files: `ls _research/<category>/ | sort -n | tail -1` to get next number
+5. **Validate research path** (Mode 2) - Ensure file exists before proceeding
+
 ### Step 1: Research Phase (Mode 1 only)
 
 **If starting from topic:**
@@ -46,14 +55,27 @@ This will:
 4. Organize under appropriate subdirectory (infra, programming, systems, etc.)
 5. Save as `_research/<category>/<number>-<topic-slug>.md`
 
+**Quality gate - Research must have:**
+- All 8 sections from deep_dive_prompt (Mental Model, Failure Modes, Tradeoffs, Socratic Questions, Lifecycle, Experiments, Red Flags, Operator Truths)
+- At least 5 concrete failure modes
+- 10 Socratic questions (unanswered)
+- Real examples, not hypotheticals
+
 **If from existing research:**
 1. Read the provided research document path
-2. Validate it exists and has content
+2. Validate it exists and has content (if not, show available files in `_research/`)
 3. Skip to drafting phase
 
 ### Step 2: Draft Generation
 
-Transform research into blog post following these requirements:
+**CRITICAL: Transform, don't copy!**
+- Blog = 30-40% of research length (800-1500 words max)
+- NEVER copy entire research sections verbatim
+- Extract 2-3 key insights, not everything
+- Add first-person narrative that research lacks ("As I explored...", "I was surprised to find...")
+- Pick 1-2 failure modes → inline examples with real commands
+- Socratic questions → DO NOT include directly, use to shape narrative flow
+- Operator truths → Final Thoughts section
 
 **Content Transformation:**
 - **Extract key insights** from research that match blog philosophy (personal learning, operational focus)
@@ -61,7 +83,6 @@ Transform research into blog post following these requirements:
 - **Add personal voice** - first-person, conversational, "I found myself learning..."
 - **Focus on "why it matters"** - connect theory to practice for software engineers
 - **Include concrete examples** - real commands, outputs, scenarios
-- **Keep it concise** - blog posts are typically 800-1500 words, research can be much longer
 
 **Structure Requirements:**
 1. **Front matter** - Generate based on topic and user-provided options:
@@ -92,7 +113,7 @@ Transform research into blog post following these requirements:
    - Real command outputs (not hypotheticals)
    - ASCII diagrams for architecture
    - Code blocks with language specifiers
-   - Concrete numbers with citations OR qualitative descriptions
+   - **Citations required**: All concrete numbers (latency, throughput, %, multipliers) MUST cite source (Intel docs, AWS specs, etc.) OR use qualitative ("significantly faster" instead of "2x")
 
 5. **Final Thoughts (optional but recommended)**:
    - Synthesize learnings
@@ -106,6 +127,14 @@ Transform research into blog post following these requirements:
 - No AI-sounding intensifiers
 - Trust technical content to speak for itself
 - Use concrete details over vague praise
+
+**Quality gate - Draft must have:**
+- Word count 800-1500 (concise, not research republished)
+- Opening 1-2 sentences max
+- "Why should software engineers care?" section exists
+- At least one concrete example or command output
+- No future dates in front matter
+- First-person voice throughout ("I", "we", "As I learned...")
 
 ### Step 3: Style Review
 
@@ -132,6 +161,12 @@ Review the draft against `.claude/blog-post-style-guide.md`:
 3. Revised sections for critical problems
 4. Overall assessment: "Ready to publish" or "Needs revision"
 
+**If issues found:**
+- Auto-fix minor issues: AI intensifiers, missing citations (convert to qualitative), formatting
+- For critical issues (missing sections, wrong voice): Show before/after, apply fixes
+- Re-run style review after fixes (max 2 iterations)
+- Only ask user for major structural decisions
+
 ### Step 4: File Creation
 
 **Filename format:** `YYYY-MM-DD-topic-slug.md`
@@ -141,10 +176,14 @@ Review the draft against `.claude/blog-post-style-guide.md`:
 
 **Location:** `_posts/`
 
+**Before saving:**
+- Check if file exists → Ask: "Overwrite, save as new (-v2), or cancel?"
+- Validate filename format and date
+
 **Final output:**
 1. Save the reviewed and polished draft to `_posts/<filename>`
-2. Show user the file path
-3. Provide summary of what was created
+2. Show summary: file path, word count, series (if applicable)
+3. Ask next step: "Preview locally? Commit to git? Review file? Done?"
 
 ## User Interaction
 
@@ -161,30 +200,15 @@ Review the draft against `.claude/blog-post-style-guide.md`:
 - "Style review complete - found X issues"
 - "Blog post created: `_posts/YYYY-MM-DD-topic.md`"
 
-## Important Notes
+## Critical Rules
 
-### Research Quality
-- Use the deep_dive_prompt structure faithfully
-- Focus on operational intuition and failure modes
-- Include concrete examples and realistic scenarios
-- Don't skip the Socratic questions section
-
-### Draft Quality
-- Blog posts are NOT research documents republished
-- Transform and distill - don't just copy sections
-- Match the voice of existing posts in `_posts/` directory
-- Keep it focused and concise
-
-### Style Consistency
-- Read 2-3 recent posts from `_posts/` before drafting
-- Match established patterns and voice
-- Refer to `.claude/blog-post-style-guide.md` as source of truth
-- When in doubt, simpler and more direct is better
-
-### File Management
-- Never overwrite existing files without confirmation
-- Use sequential numbering for research docs in same category
-- Maintain consistent directory structure
+1. **Transform, don't republish** - Blog is 30-40% of research length with personal narrative added
+2. **Quality gates** - Validate research completeness, draft word count, voice consistency
+3. **Voice matching** - Read recent posts before drafting, match established patterns
+4. **Citations** - All numbers cite sources OR use qualitative descriptions
+5. **Auto-fix** - Apply minor fixes automatically, iterate max 2 times
+6. **Error handling** - Validate paths, check file existence, ask before overwriting
+7. **Todo tracking** - Use TodoWrite from start, mark completed immediately after each step
 
 ## Example Interactions
 
