@@ -44,15 +44,36 @@
 
 3. **Economic cycle patterns:** Study historical economic cycles through economic history
 
+## Investor Skill Progression
+
+**Development Stages:**
+- **Beginner:** Check (체크) - Verify basic facts and data
+- **Elementary:** Understand (이해) - Comprehend business fundamentals
+- **Intermediate:** Judge (판단) - Make informed decisions
+- **Advanced:** Analyze (분석) - Conduct deep analytical work
+
 ## Pre-Investment Checklist
 
 **Five Critical Questions:**
 
 1. **Business model:** How does this company make money?
+   - Check IR filings (10-K business section)
+
 2. **Profitability:** Is this company generating strong profits?
+   - **Growth:** Review income statement → Revenue growth ≥ 10%?
+   - **Profitability:** Financial ratios → Return on Invested Capital (ROIC = After-tax operating income / invested capital) ≥ 20%?
+
 3. **Risk assessment:** What are the potential risks?
+   - Read 10-K risk factors section
+   - **Debt ratio:** Check if below industry average AND < 200%
+   - **Interest coverage ratio:** Check if above industry average AND ≥ 2
+
 4. **Price action:** Do I understand why the chart shows this price trend?
+   - Write explanation in your own words
+   - Review earnings calls → Check sharp questions analysts asked the CEO
+
 5. **Valuation:** Is the current stock price undervalued?
+   - Tool: Use multiples-based valuation (멀티플)
    - Tool: Use non-GAAP P/E ratio (available on Yahoo Finance)
 
 ---
