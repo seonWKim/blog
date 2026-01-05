@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Nit">
-      <change afterPath="$PROJECT_DIR$/_research/economics/valley_ai/til.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_research/economics/valley_ai/basics.md" beforeDir="false" afterPath="$PROJECT_DIR$/_research/economics/valley_ai/basics.md" afterDir="false" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="Add workflow.md">
+      <change beforePath="$PROJECT_DIR$/_research/economics/valley_ai/til.md" beforeDir="false" afterPath="$PROJECT_DIR$/_research/economics/valley_ai/til.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +86,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="6645000" />
+      <workItem from="1767527128583" duration="8320000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -417,15 +416,29 @@
       <option name="project" value="LOCAL" />
       <updated>1767580789795</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Add Makefile for efficient synchronization">
+      <option name="closed" value="true" />
+      <created>1767581541792</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1767581541792</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add workflow.md">
+      <option name="closed" value="true" />
+      <created>1767581600497</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1767581600497</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update README.md" />
-    <MESSAGE value="2025-12-29-physical-virtual-foundations-queues.md initial draft" />
     <MESSAGE value="Draft" />
     <MESSAGE value="Add" />
     <MESSAGE value="Add Makefile review-style-guide command" />
@@ -449,6 +462,8 @@
     <MESSAGE value="Add SKILL.md" />
     <MESSAGE value="Add TODO.md for economics" />
     <MESSAGE value="Nit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nit" />
+    <MESSAGE value="Add Makefile for efficient synchronization" />
+    <MESSAGE value="Add workflow.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add workflow.md" />
   </component>
 </project>

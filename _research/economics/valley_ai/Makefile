@@ -7,16 +7,12 @@ sync: sync-basics sync-workflow
 # Update basics.md with learnings from til.md
 sync-basics:
 	@echo "Syncing til.md → basics.md..."
-	@claude -p "Read til.md and basics.md. Integrate new learnings from til.md into basics.md. Keep basics.md as a comprehensive knowledge foundation. Preserve existing structure and only add/update relevant sections. After updating, clear til.md." \
-		--file til.md \
-		--file basics.md
+	@claude "Read til.md and basics.md in the current directory. Integrate new learnings from til.md into basics.md. Keep basics.md as a comprehensive knowledge foundation. Preserve existing structure and only add/update relevant sections. After updating basics.md, clear the contents of til.md (make it empty)."
 
 # Update workflow.md with learnings from til.md
 sync-workflow:
 	@echo "Syncing til.md → workflow.md..."
-	@claude -p "Read til.md and workflow.md. Update the workflow checklist if til.md contains new decision criteria, tools, or process steps. Keep workflow.md concise and actionable. Reference basics.md for detailed concepts." \
-		--file til.md \
-		--file workflow.md
+	@claude "Read til.md and workflow.md in the current directory. Update the workflow checklist if til.md contains new decision criteria, tools, or process steps. Keep workflow.md concise and actionable. Reference basics.md for detailed concepts."
 
 # Help
 help:
