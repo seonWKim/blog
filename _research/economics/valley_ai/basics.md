@@ -1,28 +1,65 @@
-- 개인이 투자하는 방법 
-  - 지수추종 
-  - 가치투자 
-  - 자산배분 
-  - 트레이딩 
-- 장기 투자자가 이기리면  
-  - 확률적 우위가 높은 곳에 베팅하라 
-  - 반복 시행 횟수를 높일 수 있도록 자금을 마련하라 
-  - 규칙 기반의 절제 
-=> 반복 시행 횟수가 높아지면 우리가 목표했던 확률에 수렴함 
+# Investment Strategy Fundamentals
 
-- 분산 투자 
-  - 상관 계수가 유사한 자산에 투자하는건 분산 투자가 아님 
-  - 상관 계수가 다른 자산에 투자하면 리스크를 낮출 수 있음 
-  - 기대수릭률, 변동성, 상관계수 등을 알면 리스크 성향에 따른 최적의 배분을 찾을 수 있음 -> 팩터 모델이 필요한데... 이 데이터가 비싸다고 함 
-    - 시장의 상황도 포착할 수 있어야 함 e.g. 채권과 주식의 상관관계가 양의 상관관계 -> 음의 상관관계 -> 양의 상관관계로 변화함 
-- 자산 배분을 잘 하기 위해서라면 
-  - 매크로 변수에 대한 이해(성장, 인플레이션, 금리)
-  - 매크로 변수에 따라 자산군이 어떻게 반응하는지 공부 
-  - 과거 경제사를 통한 경기 사이클 공부 
+## Individual Investment Methods
 
-- 투자 전 체크리스트 
-  - 이 종목은 어떻게 돈을 벌고 있는가? (비즈니스 모델)
-  - 이 종목은 돈을 잘 벌고 있는가? (수익성)
-  - 이 종목은 위험하지 않은가? (리스크) 
-  - 차트의 가격 추이가 왜 그런지 이해되는가? (가격)
-  - 지금 주가는 싼 편인가? (가치) 
-    - use non-GaaP PER(yahoo finance)
+**Strategy Types:**
+- Index tracking/passive investing <= me 
+- Value investing <= me 
+- Asset allocation <= me 
+- Active trading <= no!! 
+
+## Long-Term Investor Success Framework
+
+**Core Principles:**
+1. **Probabilistic advantage**: Bet where statistical odds favor success
+2. **Capital management**: Maintain sufficient funds to enable repeated trials
+3. **Rule-based discipline**: Follow systematic rules to control behavior
+
+**Key Insight:** As the number of repeated trials increases, outcomes converge toward expected probability (Law of Large Numbers)
+
+## Portfolio Diversification
+
+**Diversification Fundamentals:**
+- Investing in assets with similar correlation coefficients is NOT true diversification
+- Investing in assets with different correlation coefficients reduces risk
+- Optimal allocation based on risk tolerance requires:
+  - Expected return rates
+  - Volatility metrics
+  - Correlation coefficients
+  - Factor models (note: this data is expensive)
+
+**Market Dynamics:**
+- Must capture changing market conditions
+- Example: Stock-bond correlation can shift from positive → negative → positive over time
+
+## Asset Allocation Mastery
+
+**Required Knowledge:**
+1. **Macro variables understanding:**
+   - Economic growth
+   - Inflation
+   - Interest rates
+
+2. **Asset class behavior:** Study how different asset classes respond to macro variable changes
+
+3. **Economic cycle patterns:** Study historical economic cycles through economic history
+
+## Pre-Investment Checklist
+
+**Five Critical Questions:**
+
+1. **Business model:** How does this company make money?
+2. **Profitability:** Is this company generating strong profits?
+3. **Risk assessment:** What are the potential risks?
+4. **Price action:** Do I understand why the chart shows this price trend?
+5. **Valuation:** Is the current stock price undervalued?
+   - Tool: Use non-GAAP P/E ratio (available on Yahoo Finance)
+
+---
+
+## Metadata
+
+- **Document Type:** Investment decision framework
+- **Target Use:** AI-driven investment workflow automation
+- **Key Concepts:** diversification, asset allocation, risk management, value investing
+- **Data Requirements:** correlation coefficients, volatility metrics, macro indicators
