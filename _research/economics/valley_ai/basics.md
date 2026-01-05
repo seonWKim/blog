@@ -52,6 +52,16 @@
 - **Intermediate:** Judge (판단) - Make informed decisions
 - **Advanced:** Analyze (분석) - Conduct deep analytical work
 
+**Beginner → Intermediate Progression:**
+- Read extensive company analysis articles
+- Compare buy/sell opinions on the same stocks from multiple sources:
+  - SeekingAlpha
+  - Naver Pay investment information
+  - ValleyAi analysis competitions
+- Research and learn unfamiliar terminology frequently
+- Practice evaluating analysis articles
+- Conduct post-evaluation of your evaluations (consider automation for this process)
+
 ## Pre-Investment Checklist
 
 **Five Critical Questions:**
