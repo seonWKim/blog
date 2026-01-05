@@ -11,8 +11,8 @@ sync-basics:
 
 # Update workflow.md with learnings from til.md
 sync-workflow:
-	@echo "Syncing til.md → workflow.md..."
-	@claude "Read til.md and workflow.md in the current directory. Update the workflow checklist if til.md contains new decision criteria, tools, or process steps. Keep workflow.md concise and actionable. Reference basics.md for detailed concepts."
+	@echo "Syncing basics.md → workflow.md..."
+	@claude "Read basics.md and workflow.md in the current directory. Update the workflow checklist if til.md contains new decision criteria, tools, or process steps. Keep workflow.md concise and actionable. Reference basics.md for detailed concepts."
 
 # Help
 help:

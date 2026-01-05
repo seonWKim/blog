@@ -61,6 +61,8 @@
 - Research and learn unfamiliar terminology frequently
 - Practice evaluating analysis articles
 - Conduct post-evaluation of your evaluations (consider automation for this process)
+- **Progression milestone:** Through repetition, economic principles become internalized
+- **Critical awareness develops:** Begin recognizing when articles lack strong evidence and logic
 
 ## Pre-Investment Checklist
 
@@ -85,6 +87,33 @@
 5. **Valuation:** Is the current stock price undervalued?
    - Tool: Use multiples-based valuation (멀티플)
    - Tool: Use non-GAAP P/E ratio (available on Yahoo Finance)
+
+## Investment Decision Framework
+
+**Three-Stage Process:**
+
+1. **Hypothesis (가설):** Develop investment insights and identify opportunities
+
+2. **Analysis (분석):** Calculate appropriate stock valuation
+
+   **A. Relative Valuation (상대적 가치 평가):**
+   - Compare target stock against similar companies
+   - **Comparable company identification:** Find companies with similar:
+     - Business model
+     - Growth potential
+     - Financial structure
+   - **PER comparison analysis:**
+     - Higher growth potential justifies higher PER
+     - For cyclical companies: Adjust earnings per share considering multi-year cycle fluctuations
+     - Adjust for one-time gains/losses
+   - Requires qualitative research on industry and individual stocks
+
+   **B. Intrinsic Valuation (내재 가치 평가):**
+   - DDM (Dividend Discount Model)
+   - RIM (Residual Income Model)
+   - DCF (Discounted Cash Flow)
+
+3. **Execution (실행):** Implement the investment decision
 
 ---
 
