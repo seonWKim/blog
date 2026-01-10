@@ -3,10 +3,11 @@
 ## Individual Investment Methods
 
 **Strategy Types:**
-- Index tracking/passive investing <= me 
-- Value investing <= me 
-- Asset allocation <= me 
-- Active trading <= no!! 
+- Index tracking/passive investing <= me
+- Value investing <= me
+- Asset allocation <= me
+- Active trading <= no!!
+- Swing trading (based on value with tactical timing) <= consideration 
 
 ## Long-Term Investor Success Framework
 
@@ -114,6 +115,38 @@
    - DCF (Discounted Cash Flow)
 
 3. **Execution (실행):** Implement the investment decision
+
+## Systematic Trading Approach (Learning from Successful Investors)
+
+**Top-Down Strategy Flow:**
+
+### Step 1: Market-Level Valuation (S&P Index Assessment)
+Determine appropriate S&P 500 fair value using multiple approaches:
+- **Index DCF:** Discounted cash flow analysis at index level
+- **Macro view:** Economic outlook and cycle positioning
+- **Technical analysis:** Channel lines + RSI (Relative Strength Index)
+
+### Step 2: Asset Allocation Decision
+- **If S&P fair value > current price:** Increase equity allocation
+- **If S&P fair value < current price:** Increase cash allocation
+
+### Step 3: Individual Stock Selection
+Once equity allocation is determined, select specific stocks:
+- Conduct company analysis with assumptions
+- Perform valuation modeling
+- Calculate and adjust target prices
+
+### Step 4: Swing Trading Execution
+**Entry criteria:**
+- Strong fundamental logic/thesis
+- Temporary price decline due to short-term negative catalyst
+- Current price below calculated target price
+
+**Exit criteria:**
+- Sell immediately upon reaching target price
+- No emotional attachment to positions
+
+**Key principle:** Buy stocks with solid fundamentals experiencing temporary weakness, exit at predetermined targets
 
 ---
 
