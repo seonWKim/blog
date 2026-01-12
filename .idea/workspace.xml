@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/2026-01-12_investment_checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/2026-01-12/2026-01-12_investment_checklist.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/history/REPORT_2026-01-12.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/history/REPORT_2026-01-12_v2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/investment_checklist.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +63,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/investment/checklist" />
       <recent name="$PROJECT_DIR$/investment/2026-01-12" />
       <recent name="$PROJECT_DIR$/_posts_pre" />
       <recent name="$PROJECT_DIR$/assets" />
@@ -88,47 +91,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="28973000" />
-    </task>
-    <task id="LOCAL-00004" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1766838617926</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1766838617926</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1766940226801</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1766940226801</updated>
-    </task>
-    <task id="LOCAL-00006" summary="2025-12-29-physical-virtual-foundations-queues.md initial draft">
-      <option name="closed" value="true" />
-      <created>1766974797841</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1766974797841</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1766976777044</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1766976777044</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1766977248601</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1766977248601</updated>
+      <workItem from="1767527128583" duration="34031000" />
     </task>
     <task id="LOCAL-00009" summary="Nit">
       <option name="closed" value="true" />
@@ -482,14 +445,53 @@
       <option name="project" value="LOCAL" />
       <updated>1768227157056</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="enhance checklist">
+      <option name="closed" value="true" />
+      <created>1768227835540</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1768227835540</updated>
+    </task>
+    <task id="LOCAL-00054" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768228014421</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1768228014421</updated>
+    </task>
+    <task id="LOCAL-00055" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768228233712</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1768228233712</updated>
+    </task>
+    <task id="LOCAL-00056" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768229269826</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1768229269826</updated>
+    </task>
+    <task id="LOCAL-00057" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768229292516</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1768229292517</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Nit Makefile" />
     <MESSAGE value="Update blog post style guide" />
     <MESSAGE value="Add memory over commit post" />
     <MESSAGE value="Add a diagram that depicts ballooning" />
@@ -513,6 +515,7 @@
     <MESSAGE value="lesson 12 completed" />
     <MESSAGE value="2026년도 투자 원칙 추가" />
     <MESSAGE value="REPORT_2026-01-12 추가" />
+    <MESSAGE value="enhance checklist" />
     <MESSAGE value="nit" />
     <option name="LAST_COMMIT_MESSAGE" value="nit" />
   </component>
