@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="2026년도 투자 원칙 추가">
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/2026/2026-01-12_investment_checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/2026-01-12/2026-01-12_investment_checklist.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/2026-01-12_investment_checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/2026-01-12/2026-01-12_investment_checklist.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,23 +88,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="27956000" />
-    </task>
-    <task id="LOCAL-00002" summary="Update custom-layout.scss">
-      <option name="closed" value="true" />
-      <created>1766826117452</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1766826117452</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Update README.md">
-      <option name="closed" value="true" />
-      <created>1766826558280</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1766826558280</updated>
+      <workItem from="1767527128583" duration="28973000" />
     </task>
     <task id="LOCAL-00004" summary="Nit">
       <option name="closed" value="true" />
@@ -482,14 +466,29 @@
       <option name="project" value="LOCAL" />
       <updated>1768225887876</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="REPORT_2026-01-12 추가">
+      <option name="closed" value="true" />
+      <created>1768227008879</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1768227008879</updated>
+    </task>
+    <task id="LOCAL-00052" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768227157056</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1768227157056</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update blog post styles" />
     <MESSAGE value="Nit Makefile" />
     <MESSAGE value="Update blog post style guide" />
     <MESSAGE value="Add memory over commit post" />
@@ -512,8 +511,9 @@
     <MESSAGE value="temp" />
     <MESSAGE value="lesson 11 completed" />
     <MESSAGE value="lesson 12 completed" />
-    <MESSAGE value="nit" />
     <MESSAGE value="2026년도 투자 원칙 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026년도 투자 원칙 추가" />
+    <MESSAGE value="REPORT_2026-01-12 추가" />
+    <MESSAGE value="nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="nit" />
   </component>
 </project>
