@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="lesson 12 completed">
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
       <change afterPath="$PROJECT_DIR$/_research/economics/2025-National-Security-Strategy.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_research/economics/valley_ai/basics.md" beforeDir="false" afterPath="$PROJECT_DIR$/_research/economics/valley_ai/basics.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +87,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="22553000" />
+      <workItem from="1767527128583" duration="26934000" />
     </task>
     <task id="LOCAL-00001" summary="Add deep_dive_prompt.md">
       <option name="closed" value="true" />
@@ -474,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767585089126</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768045578142</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1768045578143</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +494,6 @@
     <MESSAGE value="Update blog post style guide" />
     <MESSAGE value="Add memory over commit post" />
     <MESSAGE value="Add a diagram that depicts ballooning" />
-    <MESSAGE value="nit" />
     <MESSAGE value="Clarify how full GC touches the entire heap and can affect cause ballooning across neighbors in the same host" />
     <MESSAGE value="Add favicon" />
     <MESSAGE value="Add bii-global-outlook-2026.pdf (for future work)" />
@@ -506,6 +512,7 @@
     <MESSAGE value="temp" />
     <MESSAGE value="lesson 11 completed" />
     <MESSAGE value="lesson 12 completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="lesson 12 completed" />
+    <MESSAGE value="nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="nit" />
   </component>
 </project>
