@@ -64,31 +64,29 @@ macro-report: setup
 	@echo "$(YELLOW)Full Prompt:$(NC)"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@cat <<'EOF'
-	Please execute the MACRO_RESEARCH_SCRIPT.md located in macro/.
-
-	Research the latest macroeconomic data (last 14-30 days) and generate a comprehensive
-	report file at macro/reports/REPORT_$(TODAY).md.
-
-	The report must be written entirely in Korean (한국어).
-
-	Include:
-	- 통화정책 및 금리 (Monetary Policy & Interest Rates)
-	- 인플레이션 및 경제 성장 (Inflation & Economic Growth)
-	- 통화 및 원자재 (Currency & Commodities)
-	- 지정학 및 정책 리스크 (Geopolitical & Policy Risks)
-	- 섹터별 거시경제 인사이트 (Sector-Specific Macro Insights for AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR)
-	- 시장 심리 및 포지셔닝 (Market Sentiment & Positioning)
-	- 거시경제 트리거 및 경고 (Macro Triggers & Alerts)
-	- 거시경제 기반 포트폴리오 권고사항 (Macro-Based Portfolio Recommendations)
-
-	Use WebSearch and WebFetch tools to gather latest data from:
-	- Federal Reserve, BLS, BEA, EIA
-	- Bloomberg, Reuters, WSJ, FT
-	- Trading Economics, FRED
-
-	Cite all sources with dates.
-	EOF
+	@echo "Please execute the MACRO_RESEARCH_SCRIPT.md located in macro/."
+	@echo ""
+	@echo "Research the latest macroeconomic data (last 14-30 days) and generate a comprehensive"
+	@echo "report file at macro/reports/REPORT_$(TODAY).md."
+	@echo ""
+	@echo "The report must be written entirely in Korean (한국어)."
+	@echo ""
+	@echo "Include:"
+	@echo "- 통화정책 및 금리 (Monetary Policy & Interest Rates)"
+	@echo "- 인플레이션 및 경제 성장 (Inflation & Economic Growth)"
+	@echo "- 통화 및 원자재 (Currency & Commodities)"
+	@echo "- 지정학 및 정책 리스크 (Geopolitical & Policy Risks)"
+	@echo "- 섹터별 거시경제 인사이트 (Sector-Specific Macro Insights for AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR)"
+	@echo "- 시장 심리 및 포지셔닝 (Market Sentiment & Positioning)"
+	@echo "- 거시경제 트리거 및 경고 (Macro Triggers & Alerts)"
+	@echo "- 거시경제 기반 포트폴리오 권고사항 (Macro-Based Portfolio Recommendations)"
+	@echo ""
+	@echo "Use WebSearch and WebFetch tools to gather latest data from:"
+	@echo "- Federal Reserve, BLS, BEA, EIA"
+	@echo "- Bloomberg, Reuters, WSJ, FT"
+	@echo "- Trading Economics, FRED"
+	@echo ""
+	@echo "Cite all sources with dates."
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
@@ -113,48 +111,46 @@ checklist: setup
 	@echo "$(YELLOW)Full Prompt:$(NC)"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@cat <<'EOF'
-	Please execute the investment portfolio checklist analysis.
-
-	Instructions:
-	1. Read checklist/investment_checklist.md
-	2. Review previous reports in checklist/history/REPORT_*.md
-	3. Research latest news and data for all holdings (AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR)
-	4. Analyze each stock's:
-	   - Logic status (STRONGER/INTACT/WEAKENING/BROKEN)
-	   - Valuation (Undervalued/Fair/Overvalued/EXPENSIVE)
-	   - Expected Return (12-month probability-weighted)
-	   - Portfolio recommendations
-
-	Follow the comprehensive framework in investment_checklist.md:
-	- Section 0.0: Market-Level Assessment (S&P 500 valuation)
-	- Section 0.1: Macro Regime Check (Fed, rates, ISM, VIX)
-	- Section 0.2: Historical Review (compare with previous reports)
-	- Section 1: Individual Stock Logic Status
-	- Section 2: Logic + Valuation Check
-	- Section 3-4: Action Guidelines and DCA Adjustments
-	- Section 5: Position Sizing (Kelly Criterion)
-	- Section 7: New Investment Ideas Discovery
-
-	Use WebSearch extensively for:
-	- Latest company news, earnings, guidance
-	- Analyst ratings and price targets
-	- Sector-specific news (utilities, semiconductors, data centers)
-	- Macro indicators (CPI, PMI, jobs data)
-
-	Generate a comprehensive report in Korean and save to:
-	checklist/history/REPORT_$(TODAY).md
-
-	The report must include:
-	- Executive summary
-	- Market-level valuation assessment
-	- Macro regime analysis
-	- Stock-by-stock analysis table
-	- Portfolio adjustment recommendations
-	- DCA allocation table
-	- Risk assessment
-	- Sources with dates
-	EOF
+	@echo "Please execute the investment portfolio checklist analysis."
+	@echo ""
+	@echo "Instructions:"
+	@echo "1. Read checklist/investment_checklist.md"
+	@echo "2. Review previous reports in checklist/history/REPORT_*.md"
+	@echo "3. Research latest news and data for all holdings (AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR)"
+	@echo "4. Analyze each stock's:"
+	@echo "   - Logic status (STRONGER/INTACT/WEAKENING/BROKEN)"
+	@echo "   - Valuation (Undervalued/Fair/Overvalued/EXPENSIVE)"
+	@echo "   - Expected Return (12-month probability-weighted)"
+	@echo "   - Portfolio recommendations"
+	@echo ""
+	@echo "Follow the comprehensive framework in investment_checklist.md:"
+	@echo "- Section 0.0: Market-Level Assessment (S&P 500 valuation)"
+	@echo "- Section 0.1: Macro Regime Check (Fed, rates, ISM, VIX)"
+	@echo "- Section 0.2: Historical Review (compare with previous reports)"
+	@echo "- Section 1: Individual Stock Logic Status"
+	@echo "- Section 2: Logic + Valuation Check"
+	@echo "- Section 3-4: Action Guidelines and DCA Adjustments"
+	@echo "- Section 5: Position Sizing (Kelly Criterion)"
+	@echo "- Section 7: New Investment Ideas Discovery"
+	@echo ""
+	@echo "Use WebSearch extensively for:"
+	@echo "- Latest company news, earnings, guidance"
+	@echo "- Analyst ratings and price targets"
+	@echo "- Sector-specific news (utilities, semiconductors, data centers)"
+	@echo "- Macro indicators (CPI, PMI, jobs data)"
+	@echo ""
+	@echo "Generate a comprehensive report in Korean and save to:"
+	@echo "checklist/history/REPORT_$(TODAY).md"
+	@echo ""
+	@echo "The report must include:"
+	@echo "- Executive summary"
+	@echo "- Market-level valuation assessment"
+	@echo "- Macro regime analysis"
+	@echo "- Stock-by-stock analysis table"
+	@echo "- Portfolio adjustment recommendations"
+	@echo "- DCA allocation table"
+	@echo "- Risk assessment"
+	@echo "- Sources with dates"
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
@@ -183,57 +179,55 @@ final-report:
 	@echo "$(YELLOW)Full Prompt:$(NC)"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
-	@cat <<'EOF'
-	Please generate a comprehensive final investment report by synthesizing the macro and checklist reports.
-
-	Instructions:
-	1. Read the macro economic report: $(MACRO_REPORT)
-	2. Read the portfolio checklist report: $(CHECKLIST_REPORT)
-	3. Synthesize both reports into a single executive summary
-
-	The final report should include:
-
-	## 1. Executive Summary (경영진 요약)
-	- Overall market conditions and macro regime
-	- Portfolio health status (number of stocks: STRONGER/INTACT/WEAKENING/BROKEN)
-	- Key actions required this week
-	- Major risks and opportunities
-
-	## 2. Macro-Driven Insights (거시경제 인사이트)
-	- Key macro trends affecting the portfolio (Fed policy, inflation, rates)
-	- Sector-level impacts (utilities, semiconductors, data centers, gold)
-	- Currency and commodity impacts
-	- Geopolitical risks
-
-	## 3. Portfolio Status (포트폴리오 현황)
-	- Stock-by-stock summary table with:
-	  * Logic Status
-	  * Valuation
-	  * Expected Return
-	  * DCA Allocation
-	  * Action (BUY/HOLD/PAUSE/EXIT)
-	- Current vs target allocation
-
-	## 4. Action Plan (실행 계획)
-	- DCA adjustments for next period
-	- Specific buy/sell/hold decisions with rationale
-	- Position sizing recommendations
-	- New investment ideas to research
-
-	## 5. Risk Assessment (리스크 평가)
-	- Portfolio-level risks
-	- Macro triggers to watch
-	- Stop-loss or exit conditions
-
-	## 6. Sources & Data Quality
-	- List all key data sources with dates
-	- Note any data gaps or uncertainties
-
-	Generate the report in Korean and save to:
-	checklist/history/FINAL_REPORT_$(TODAY).md
-
-	The report should be actionable, concise, and ready for immediate use in investment decisions.
-	EOF
+	@echo "Please generate a comprehensive final investment report by synthesizing the macro and checklist reports."
+	@echo ""
+	@echo "Instructions:"
+	@echo "1. Read the macro economic report: $(MACRO_REPORT)"
+	@echo "2. Read the portfolio checklist report: $(CHECKLIST_REPORT)"
+	@echo "3. Synthesize both reports into a single executive summary"
+	@echo ""
+	@echo "The final report should include:"
+	@echo ""
+	@echo "## 1. Executive Summary (경영진 요약)"
+	@echo "- Overall market conditions and macro regime"
+	@echo "- Portfolio health status (number of stocks: STRONGER/INTACT/WEAKENING/BROKEN)"
+	@echo "- Key actions required this week"
+	@echo "- Major risks and opportunities"
+	@echo ""
+	@echo "## 2. Macro-Driven Insights (거시경제 인사이트)"
+	@echo "- Key macro trends affecting the portfolio (Fed policy, inflation, rates)"
+	@echo "- Sector-level impacts (utilities, semiconductors, data centers, gold)"
+	@echo "- Currency and commodity impacts"
+	@echo "- Geopolitical risks"
+	@echo ""
+	@echo "## 3. Portfolio Status (포트폴리오 현황)"
+	@echo "- Stock-by-stock summary table with:"
+	@echo "  * Logic Status"
+	@echo "  * Valuation"
+	@echo "  * Expected Return"
+	@echo "  * DCA Allocation"
+	@echo "  * Action (BUY/HOLD/PAUSE/EXIT)"
+	@echo "- Current vs target allocation"
+	@echo ""
+	@echo "## 4. Action Plan (실행 계획)"
+	@echo "- DCA adjustments for next period"
+	@echo "- Specific buy/sell/hold decisions with rationale"
+	@echo "- Position sizing recommendations"
+	@echo "- New investment ideas to research"
+	@echo ""
+	@echo "## 5. Risk Assessment (리스크 평가)"
+	@echo "- Portfolio-level risks"
+	@echo "- Macro triggers to watch"
+	@echo "- Stop-loss or exit conditions"
+	@echo ""
+	@echo "## 6. Sources & Data Quality"
+	@echo "- List all key data sources with dates"
+	@echo "- Note any data gaps or uncertainties"
+	@echo ""
+	@echo "Generate the report in Korean and save to:"
+	@echo "checklist/history/FINAL_REPORT_$(TODAY).md"
+	@echo ""
+	@echo "The report should be actionable, concise, and ready for immediate use in investment decisions."
 	@echo ""
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
