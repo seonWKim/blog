@@ -9,6 +9,8 @@
 
 # Variables
 TODAY := $(shell date +%Y-%m-%d)
+PORTFOLIO_FILE := PORTFOLIO.csv
+STOCKS := $(shell tail -n +2 $(PORTFOLIO_FILE) | cut -d',' -f1 | tr '\n' ',' | sed 's/,$$//')
 MACRO_SCRIPT := macro/MACRO_RESEARCH_SCRIPT.md
 MACRO_REPORTS_DIR := macro/reports
 MACRO_REPORT := $(MACRO_REPORTS_DIR)/REPORT_$(TODAY).md
@@ -54,6 +56,8 @@ macro-report: setup
 	@echo "$(GREEN)Generating Macro Economic Report for $(TODAY)$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
+	@echo "$(YELLOW)Portfolio stocks: $(STOCKS)$(NC)"
+	@echo ""
 	@claude "Please execute the MACRO_RESEARCH_SCRIPT.md located in macro/. \
 	\
 	Research the latest macroeconomic data (last 14-30 days) and generate a comprehensive report file at macro/reports/REPORT_$(TODAY).md. \
@@ -65,7 +69,7 @@ macro-report: setup
 	- 인플레이션 및 경제 성장 (Inflation & Economic Growth) \
 	- 통화 및 원자재 (Currency & Commodities) \
 	- 지정학 및 정책 리스크 (Geopolitical & Policy Risks) \
-	- 섹터별 거시경제 인사이트 (Sector-Specific Macro Insights for AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR) \
+	- 섹터별 거시경제 인사이트 (Sector-Specific Macro Insights for $(STOCKS)) \
 	- 시장 심리 및 포지셔닝 (Market Sentiment & Positioning) \
 	- 거시경제 트리거 및 경고 (Macro Triggers & Alerts) \
 	- 거시경제 기반 포트폴리오 권고사항 (Macro-Based Portfolio Recommendations) \
@@ -85,12 +89,14 @@ checklist: setup
 	@echo "$(GREEN)Running Investment Portfolio Checklist for $(TODAY)$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
+	@echo "$(YELLOW)Portfolio stocks: $(STOCKS)$(NC)"
+	@echo ""
 	@claude "Please execute the investment portfolio checklist analysis. \
 	\
 	Instructions: \
 	1. Read checklist/investment_checklist.md \
 	2. Review previous reports in checklist/history/REPORT_*.md \
-	3. Research latest news and data for all holdings (AEP, DUK, GEV, TER, FORM, DLR, GLD, SMR) \
+	3. Research latest news and data for all holdings ($(STOCKS)) \
 	4. Analyze each stock's: \
 	   - Logic status (STRONGER/INTACT/WEAKENING/BROKEN) \
 	   - Valuation (Undervalued/Fair/Overvalued/EXPENSIVE) \
@@ -204,6 +210,8 @@ all: macro-report checklist final-report
 info:
 	@echo "$(BLUE)Current Configuration:$(NC)"
 	@echo "  Today: $(TODAY)"
+	@echo "  Portfolio File: $(PORTFOLIO_FILE)"
+	@echo "  Stocks: $(STOCKS)"
 	@echo "  Macro Script: $(MACRO_SCRIPT)"
 	@echo "  Macro Reports Dir: $(MACRO_REPORTS_DIR)"
 	@echo "  Checklist File: $(CHECKLIST_FILE)"
@@ -217,6 +225,7 @@ info:
 # Check if required files exist
 check:
 	@echo "$(YELLOW)Checking required files...$(NC)"
+	@test -f $(PORTFOLIO_FILE) && echo "$(GREEN)✓$(NC) $(PORTFOLIO_FILE) (stocks: $(STOCKS))" || echo "$(RED)✗$(NC) $(PORTFOLIO_FILE) not found"
 	@test -f $(MACRO_SCRIPT) && echo "$(GREEN)✓$(NC) $(MACRO_SCRIPT)" || echo "$(RED)✗$(NC) $(MACRO_SCRIPT) not found"
 	@test -f $(CHECKLIST_FILE) && echo "$(GREEN)✓$(NC) $(CHECKLIST_FILE)" || echo "$(RED)✗$(NC) $(CHECKLIST_FILE) not found"
 	@test -d $(CHECKLIST_HISTORY_DIR) && echo "$(GREEN)✓$(NC) $(CHECKLIST_HISTORY_DIR) exists" || echo "$(YELLOW)⚠$(NC) History directory not found"
