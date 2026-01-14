@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="add portfolio csv">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/history/REPORT_2026-01-12.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/history/REPORT_2026-01-12_v2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/2026-01-12/investment_checklist.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/investment/checklist/history/REPORT_2026-01-13.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/checklist/history/REPORT_2026-01-13.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +61,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/investment/checklist/history" />
       <recent name="$PROJECT_DIR$/investment/checklist" />
       <recent name="$PROJECT_DIR$/investment/2026-01-12" />
       <recent name="$PROJECT_DIR$/_posts_pre" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/_research/physical-virtual-foundations" />
     </key>
   </component>
   <component name="RustProjectSettings">
@@ -91,55 +89,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="34031000" />
-    </task>
-    <task id="LOCAL-00009" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1766992692644</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1766992692644</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Draft">
-      <option name="closed" value="true" />
-      <created>1767144878074</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1767144878074</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Draft">
-      <option name="closed" value="true" />
-      <created>1767145045353</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1767145045353</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Add">
-      <option name="closed" value="true" />
-      <created>1767148193055</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1767148193055</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Add Makefile review-style-guide command">
-      <option name="closed" value="true" />
-      <created>1767148713131</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1767148713131</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Nit">
-      <option name="closed" value="true" />
-      <created>1767149168684</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1767149168684</updated>
+      <workItem from="1767527128583" duration="49747000" />
     </task>
     <task id="LOCAL-00015" summary="Update blog post styles">
       <option name="closed" value="true" />
@@ -485,16 +435,61 @@
       <option name="project" value="LOCAL" />
       <updated>1768229292517</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="create Makefile">
+      <option name="closed" value="true" />
+      <created>1768260035389</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1768260035389</updated>
+    </task>
+    <task id="LOCAL-00059" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768260781858</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1768260781859</updated>
+    </task>
+    <task id="LOCAL-00060" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768260958609</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1768260958609</updated>
+    </task>
+    <task id="LOCAL-00061" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768261543700</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1768261543700</updated>
+    </task>
+    <task id="LOCAL-00062" summary="add portfolio">
+      <option name="closed" value="true" />
+      <created>1768304506246</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1768304506246</updated>
+    </task>
+    <task id="LOCAL-00063" summary="add portfolio csv">
+      <option name="closed" value="true" />
+      <created>1768304783798</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1768304783798</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update blog post style guide" />
-    <MESSAGE value="Add memory over commit post" />
-    <MESSAGE value="Add a diagram that depicts ballooning" />
     <MESSAGE value="Clarify how full GC touches the entire heap and can affect cause ballooning across neighbors in the same host" />
     <MESSAGE value="Add favicon" />
     <MESSAGE value="Add bii-global-outlook-2026.pdf (for future work)" />
@@ -516,7 +511,10 @@
     <MESSAGE value="2026년도 투자 원칙 추가" />
     <MESSAGE value="REPORT_2026-01-12 추가" />
     <MESSAGE value="enhance checklist" />
+    <MESSAGE value="create Makefile" />
     <MESSAGE value="nit" />
-    <option name="LAST_COMMIT_MESSAGE" value="nit" />
+    <MESSAGE value="add portfolio" />
+    <MESSAGE value="add portfolio csv" />
+    <option name="LAST_COMMIT_MESSAGE" value="add portfolio csv" />
   </component>
 </project>
