@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="add portfolio csv">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/investment/checklist/history/REPORT_2026-01-13.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/checklist/history/REPORT_2026-01-13.md" afterDir="false" />
+    <list default="true" id="98ca2147-65ea-42b7-81f3-1ff262d828ec" name="Changes" comment="nit">
+      <change beforePath="$PROJECT_DIR$/investment/checklist/investment_checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/investment/checklist/INVESTMENT_CHECKLIST.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,23 +88,7 @@
       <workItem from="1766823449334" duration="18864000" />
       <workItem from="1766939875718" duration="885000" />
       <workItem from="1766972787729" duration="48806000" />
-      <workItem from="1767527128583" duration="49747000" />
-    </task>
-    <task id="LOCAL-00015" summary="Update blog post styles">
-      <option name="closed" value="true" />
-      <created>1767149271910</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1767149271910</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Nit Makefile">
-      <option name="closed" value="true" />
-      <created>1767149554005</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1767149554005</updated>
+      <workItem from="1767527128583" duration="57874000" />
     </task>
     <task id="LOCAL-00017" summary="Nit">
       <option name="closed" value="true" />
@@ -483,7 +466,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768304783798</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768384305290</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1768384305290</updated>
+    </task>
+    <task id="LOCAL-00065" summary="nit">
+      <option name="closed" value="true" />
+      <created>1768388890624</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1768388890624</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,9 +511,9 @@
     <MESSAGE value="REPORT_2026-01-12 추가" />
     <MESSAGE value="enhance checklist" />
     <MESSAGE value="create Makefile" />
-    <MESSAGE value="nit" />
     <MESSAGE value="add portfolio" />
     <MESSAGE value="add portfolio csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="add portfolio csv" />
+    <MESSAGE value="nit" />
+    <option name="LAST_COMMIT_MESSAGE" value="nit" />
   </component>
 </project>

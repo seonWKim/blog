@@ -959,12 +959,175 @@ Calmar Ratio = Annualized Return / Max Drawdown
 
 ---
 
+## 13) 의사결정 품질 및 지속적 학습 ★ NEW
+
+### A. Pre-Decision Checklist (중요 결정 전 필수)
+
+**필수 실행 조건 (하나 이상 충족 시):**
+- 단일 종목 비중 ±5%p 이상 조정
+- 대규모 투입/매도 (포트폴리오의 5% 이상)
+- 신규 종목 진입
+- 논리 상태 2단계 이상 변화 (INTACT → WEAKENING 등)
+- 감정적 동요 느낄 때
+
+**체크리스트 파일:** `/decisions/PRE_DECISION_CHECKLIST.md`
+
+**필수 검증 항목:**
+1. 인지 편향 체크 (앵커링, 확증 편향, FOMO, 손실 회피, 과신, 집단 사고)
+2. 정보 품질 검증 (Tier 1 출처 2개 이상)
+3. 논리 검증 (핵심 논리 명확성, 증거 품질, 수익 전환 구조)
+4. 밸류에이션 검증 (Expected Return 재계산, Margin of Safety)
+5. Pre-Mortem (실패 시나리오 분석)
+6. Exit Plan 수립 (논리 붕괴, 가격 손절, 시간 제한 조건)
+7. 포트폴리오 수준 영향 (집중도, 상관관계, 유동성 리스크)
+8. Second Opinion (Contrarian Agent, 스마트 머니 체크)
+
+**최종 판정 기준:**
+- 7/7 통과 → 실행 승인
+- 6/7 통과 → 조건부 승인
+- ≤5/7 통과 → 결정 보류
+
+### B. Decision Log (모든 결정 기록)
+
+**목적:** 체계적 추적 및 학습 데이터 축적
+
+**기록 파일:**
+- `/decisions/decision_log.jsonl` (기계 판독용)
+- `/decisions/DECISION_LOG.md` (사람 판독용)
+
+**필수 기록 항목:**
+- 기본 정보 (날짜, 종목, 행동, 비중 변화, 금액)
+- 논리/밸류에이션 (logic_status, valuation, Expected Return)
+- 의사결정 품질 (핵심 논리, 증거 품질, Pre-Decision Score, 심리 상태)
+- 시장 환경 (VIX, 포트폴리오 YTD, 종목 최근 성과)
+- Exit Triggers (논리 붕괴 조건, 가격 손절, 시간 제한)
+- 추적 결과 (1개월/6개월 실제 수익률, 판정, 교훈)
+
+**추적 일정:**
+- 결정 즉시: Log 기록
+- 1개월 후: 중간 점검
+- 6개월 후: 최종 결과 및 판정
+- 분기별: 종합 분석 (Quarterly Review)
+
+### C. Quarterly Review (분기별 학습)
+
+**목적:** 패턴 발견 및 프레임워크 개선
+
+**리뷰 파일:** `/learning/QUARTERLY_REVIEW_[Q_YYYY].md`
+
+**필수 분석 항목:**
+
+1. **결정 품질 분석**
+   - Expected Return 정확도 (Calibration Check)
+   - Overconfidence 측정
+   - Pre-Decision Score별 성과
+
+2. **논리 상태 분석**
+   - LOGIC STRONGER 성공률
+   - 논리 붕괴 조기 감지
+   - 실패 사례 심층 분석
+
+3. **밸류에이션 분석**
+   - 밸류에이션별 성과
+   - Logic + Valuation 조합 효과
+   - 시장 수준 밸류에이션 영향
+
+4. **심리적 요인 분석**
+   - 심리 상태별 성과
+   - 인지 편향 발생 패턴
+   - 24시간 대기 규칙 효과
+
+5. **타이밍 분석**
+   - 진입 타이밍 (급등 추격 vs 조정 시 진입)
+   - Exit Trigger 효과
+   - 최적 보유 기간
+
+6. **시장 환경 분석**
+   - VIX 수준별 성과
+   - ISM Manufacturing 영향
+   - 동적 DCA 규칙 효과
+
+7. **프레임워크 개선**
+   - 투자 체크리스트 수정 제안
+   - Pre-Decision Checklist 개선
+   - DCA/Kelly Criterion 조정
+
+8. **교훈 정리**
+   - 가장 성공/실패한 결정 Top 3
+   - DO/DON'T/NEW 목록
+
+**분석 도구:**
+```python
+# decision_log.jsonl 분석 스크립트
+import json
+import pandas as pd
+
+decisions = []
+with open('decision_log.jsonl', 'r') as f:
+    for line in f:
+        decisions.append(json.loads(line))
+
+df = pd.DataFrame(decisions)
+
+# 정확도 분석
+stronger = df[df['logic_status'] == 'STRONGER']
+accuracy = (stronger['was_correct'] == True).mean() * 100
+
+# Expected Return vs Actual
+er_error = (df['actual_return_6mo'] - df['expected_return_pct']).mean()
+
+# 심리 상태별 성과
+by_psych = df.groupby('psychological_state')['actual_return_6mo'].mean()
+```
+
+### D. 프레임워크 진화 (Framework Evolution)
+
+**버전 관리:**
+- 분기마다 investment_checklist.md 버전 업데이트
+- 변경 사항 명시적 기록
+- 이전 버전과 성과 비교
+
+**A/B 테스트:**
+- 새로운 규칙 제안 시 소규모 테스트
+- 3개월 데이터 수집 후 평가
+- 효과적이면 채택, 아니면 폐기
+
+**지속적 개선 사이클:**
+```
+결정 → 기록 → 추적 → 분기 분석 → 패턴 발견 → 프레임워크 수정 → 더 나은 결정
+```
+
+---
+
+## [워크플로우 요약]
+
+### 일상 운영:
+1. **주간 모니터링:** Exit Trigger 발생 여부 확인
+2. **뉴스 알림:** 보유 종목 중요 뉴스 시 즉시 재평가
+3. **정기 리포트:** 2주마다 전체 포트폴리오 점검
+
+### 중요 결정 시:
+1. **Pre-Decision Checklist 실행** (필수)
+2. **Decision Log 기록** (즉시)
+3. **Calendar 등록:** 1개월/6개월 재검토 일정
+
+### 분기 단위:
+1. **Quarterly Review 실행**
+2. **프레임워크 개선사항 적용**
+3. **다음 분기 집중 영역 설정**
+
+---
+
 **보고서는 반드시 history 디렉토리 하위에 REPORT_{date}.md 형태로 저장해라**
 
-**철학 (개정판):**
+**철학 (최종판):**
 
 > "Logic은 WHAT을 알려주고, Valuation은 HOW MUCH를, Catalyst는 WHEN을 알려준다.
 > 이 세 가지가 모두 정렬될 때만 최대 공격하라.
 > 하나라도 어긋나면 보수적으로 접근하라.
+>
 > 시장을 이기는 것은 옳은 종목을 고르는 것이 아니라,
-> 옳은 종목을 옳은 가격에 옳은 타이밍에 사는 것이다."
+> 옳은 종목을 옳은 가격에 옳은 타이밍에 사는 것이다.
+>
+> 그리고 가장 중요한 것은:
+> 모든 결정을 기록하고, 모든 실패에서 배우고, 지속적으로 개선하는 것이다."
