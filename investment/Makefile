@@ -4,11 +4,18 @@
 # 1. Macro report generation
 # 2. Portfolio checklist analysis
 # 3. Final combined report
+# 4. Decision Quality Framework (Pre-Decision Checklist)
+# 5. Continuous Learning System (Decision Log & Quarterly Review)
 
 .PHONY: help macro-report checklist final-report all clean
+.PHONY: new-decision log-decision update-returns show-log check-reviews
+.PHONY: quarterly-review analyze-decisions calibration-check pattern-analysis
+.PHONY: setup-learning list-decisions
 
 # Variables
 TODAY := $(shell date +%Y-%m-%d)
+CURRENT_TIME := $(shell date +%H:%M)
+CURRENT_QUARTER := $(shell date +%Y_Q$$(((10\#$$(date +%m)-1)/3+1)))
 PORTFOLIO_FILE := PORTFOLIO.csv
 STOCKS := $(shell tail -n +2 $(PORTFOLIO_FILE) | cut -d',' -f1 | tr '\n' ',' | sed 's/,$$//')
 MACRO_SCRIPT := macro/MACRO_RESEARCH_SCRIPT.md
@@ -19,6 +26,16 @@ CHECKLIST_HISTORY_DIR := checklist/history
 CHECKLIST_REPORT := $(CHECKLIST_HISTORY_DIR)/REPORT_$(TODAY).md
 FINAL_REPORT := $(CHECKLIST_HISTORY_DIR)/FINAL_REPORT_$(TODAY).md
 
+# Decision Quality & Learning System Variables
+PRE_DECISION_TEMPLATE := checklist/PRE_DECISION_CHECKLIST.md
+PRE_DECISION_DIR := decisions/pre_decision
+DECISION_LOG := decisions/decision_log.jsonl
+DECISION_LOG_MD := decisions/DECISION_LOG.md
+LEARNING_DIR := learning
+QUARTERLY_REVIEW_TEMPLATE := $(LEARNING_DIR)/QUARTERLY_REVIEW_TEMPLATE.md
+QUARTERLY_REVIEW := $(LEARNING_DIR)/QUARTERLY_REVIEW_$(CURRENT_QUARTER).md
+USAGE_GUIDE := USAGE_GUIDE.md
+
 # Colors for output
 GREEN := \033[0;32m
 YELLOW := \033[0;33m
@@ -27,28 +44,79 @@ RED := \033[0;31m
 NC := \033[0m # No Color
 
 help:
-	@echo "$(BLUE)Investment Analysis Makefile$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(BLUE)         Investment Analysis & Learning System Makefile$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
-	@echo "$(GREEN)Available targets:$(NC)"
-	@echo "  $(YELLOW)make macro-report$(NC)     - Generate macro economic report"
-	@echo "  $(YELLOW)make checklist$(NC)         - Run investment portfolio checklist analysis"
-	@echo "  $(YELLOW)make final-report$(NC)      - Generate final combined report (requires macro + checklist)"
-	@echo "  $(YELLOW)make all$(NC)               - Run macro, checklist, and final report"
-	@echo "  $(YELLOW)make setup$(NC)             - Create necessary directories"
-	@echo "  $(YELLOW)make clean$(NC)             - Clean up temporary files"
+	@echo "$(GREEN)📊 Portfolio Analysis:$(NC)"
+	@echo "  $(YELLOW)make macro-report$(NC)         - Generate macro economic report"
+	@echo "  $(YELLOW)make checklist$(NC)             - Run investment portfolio checklist analysis"
+	@echo "  $(YELLOW)make final-report$(NC)          - Generate final combined report"
+	@echo "  $(YELLOW)make all$(NC)                   - Run all three reports in sequence"
 	@echo ""
-	@echo "$(GREEN)Examples:$(NC)"
-	@echo "  make macro-report"
-	@echo "  make checklist"
-	@echo "  make final-report"
-	@echo "  make all"
+	@echo "$(GREEN)🎯 Decision Quality (Pre-Decision Checklist):$(NC)"
+	@echo "  $(YELLOW)make new-decision$(NC)          - Create new pre-decision checklist (interactive)"
+	@echo "  $(YELLOW)make list-decisions$(NC)        - List all pre-decision checklists"
+	@echo ""
+	@echo "$(GREEN)📝 Decision Tracking:$(NC)"
+	@echo "  $(YELLOW)make log-decision$(NC)          - Record a decision to decision log (interactive)"
+	@echo "  $(YELLOW)make show-log$(NC)              - Display decision log summary"
+	@echo "  $(YELLOW)make update-returns$(NC)        - Update 1mo/6mo returns for all decisions"
+	@echo "  $(YELLOW)make check-reviews$(NC)         - Check which decisions need review"
+	@echo ""
+	@echo "$(GREEN)📈 Learning & Analysis:$(NC)"
+	@echo "  $(YELLOW)make quarterly-review$(NC)      - Generate quarterly review for learning"
+	@echo "  $(YELLOW)make analyze-decisions$(NC)     - Run Python analysis on decision log"
+	@echo "  $(YELLOW)make calibration-check$(NC)     - Check Expected Return accuracy"
+	@echo "  $(YELLOW)make pattern-analysis$(NC)      - Find patterns in decision history"
+	@echo ""
+	@echo "$(GREEN)🔧 Setup & Utilities:$(NC)"
+	@echo "  $(YELLOW)make setup$(NC)                 - Create necessary directories"
+	@echo "  $(YELLOW)make setup-learning$(NC)        - Setup learning system directories"
+	@echo "  $(YELLOW)make check$(NC)                 - Check if required files exist"
+	@echo "  $(YELLOW)make info$(NC)                  - Display current configuration"
+	@echo "  $(YELLOW)make guide$(NC)                 - Show quick start guide"
+	@echo "  $(YELLOW)make clean$(NC)                 - Clean up temporary files"
+	@echo ""
+	@echo "$(GREEN)💡 Quick Examples:$(NC)"
+	@echo "  make all                          # Generate all portfolio reports"
+	@echo "  make new-decision                 # Start pre-decision checklist"
+	@echo "  make log-decision                 # Log a completed decision"
+	@echo "  make quarterly-review             # Run quarterly learning review"
+	@echo ""
+	@echo "$(YELLOW)📚 For detailed usage: make guide or see USAGE_GUIDE.md$(NC)"
+	@echo ""
 
 # Create necessary directory structure
 setup:
 	@echo "$(GREEN)Creating directory structure...$(NC)"
 	@mkdir -p $(MACRO_REPORTS_DIR)
 	@mkdir -p $(CHECKLIST_HISTORY_DIR)
+	@mkdir -p $(PRE_DECISION_DIR)
+	@mkdir -p decisions
+	@mkdir -p $(LEARNING_DIR)
 	@echo "$(GREEN)✓ Directories created$(NC)"
+
+# Setup learning system directories and initialize files
+setup-learning: setup
+	@echo "$(GREEN)Setting up Decision Quality & Learning System...$(NC)"
+	@mkdir -p $(PRE_DECISION_DIR)
+	@mkdir -p decisions/analysis
+	@mkdir -p $(LEARNING_DIR)
+	@test -f $(DECISION_LOG) || touch $(DECISION_LOG)
+	@test -f $(DECISION_LOG_MD) || cp decisions/DECISION_LOG.md $(DECISION_LOG_MD) 2>/dev/null || echo "# Decision Log\n\nNo decisions recorded yet." > $(DECISION_LOG_MD)
+	@echo "$(GREEN)✓ Learning system initialized$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Created:$(NC)"
+	@echo "  - $(PRE_DECISION_DIR)/ (for pre-decision checklists)"
+	@echo "  - $(DECISION_LOG) (decision tracking)"
+	@echo "  - $(LEARNING_DIR)/ (quarterly reviews)"
+	@echo ""
+	@echo "$(GREEN)Next steps:$(NC)"
+	@echo "  1. Read $(USAGE_GUIDE) for detailed instructions"
+	@echo "  2. Use 'make new-decision' when making important decisions"
+	@echo "  3. Use 'make log-decision' after executing decisions"
+	@echo "  4. Run 'make quarterly-review' at end of each quarter"
 
 # Generate macro economic report
 macro-report: setup
@@ -279,3 +347,394 @@ guide:
 	@echo "  make all                 # Run all three steps"
 	@echo ""
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Decision Quality Framework Commands
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Create a new pre-decision checklist (interactive with Claude)
+new-decision:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Creating New Pre-Decision Checklist (Interactive)$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@read -p "$(YELLOW)Enter ticker symbol (e.g., GEV): $(NC)" ticker; \
+	read -p "$(YELLOW)Enter action (INCREASE/DECREASE/NEW_ENTRY/EXIT): $(NC)" action; \
+	filename="PRE_DECISION_$(TODAY)_$${ticker}_$${action}.md"; \
+	filepath="$(PRE_DECISION_DIR)/$${filename}"; \
+	echo "$(GREEN)Starting interactive pre-decision checklist for $${ticker} ($${action})$(NC)"; \
+	echo ""; \
+	claude "You are helping me complete a Pre-Decision Investment Checklist for $${ticker} ($${action}). \
+	\
+	## Your Task \
+	Guide me through the checklist by: \
+	1. Asking me questions one section at a time \
+	2. Researching market data automatically (VIX, stock prices, analyst ratings, insider trading, recent news) \
+	3. Helping me check for cognitive biases \
+	4. Playing devil's advocate (Contrarian Agent) \
+	5. Generating the final filled-out checklist file \
+	\
+	## Process \
+	\
+	### PART 1: Basic Info (Research + Ask) \
+	- Research current $${ticker} stock price, 7-day performance \
+	- Research VIX level \
+	- Research S&P 500 7-day performance \
+	- Ask me: Current weight in portfolio (%)? Target weight (%)? Amount in USD? \
+	- Ask me: Current psychological state? (calm/excited/anxious/rushed) \
+	\
+	### PART 2: Cognitive Bias Checks (Interactive) \
+	For each bias, ask me the relevant questions and help me identify if I'm affected: \
+	- Anchoring: Am I fixating on a recent price/news? \
+	- Confirmation: Am I only seeking supporting information? \
+	- FOMO: Am I feeling urgency because others are profiting? \
+	- Loss Aversion: Am I avoiding realizing a loss? \
+	- Overconfidence: Do I think I know better than the market? \
+	- Herding: Am I following the crowd? \
+	\
+	### PART 3: Information Quality (Research) \
+	- Search for recent company filings (8-K, 10-Q) \
+	- Search for recent analyst ratings and price targets \
+	- Search for insider trading activity (SEC Form 4) \
+	- Search for recent news from Tier 1 sources (Reuters, Bloomberg, WSJ, FT) \
+	\
+	### PART 4: Investment Logic (Ask) \
+	- Ask me: What is your core thesis in one sentence? \
+	- Ask me: What is the structural moat/bottleneck? \
+	- Ask me: How does this convert to earnings? \
+	- Ask me: Logic status? (STRONGER/INTACT/WEAKENING/BROKEN) \
+	\
+	### PART 5: Valuation (Research + Ask) \
+	- Research Forward PE, PEG ratio \
+	- Ask me: Bear/Base/Bull case scenarios and probabilities \
+	- Calculate probability-weighted Expected Return \
+	\
+	### PART 6: Pre-Mortem (Ask) \
+	- Ask me: What could make this decision fail in 6 months? \
+	- Ask me: What are your exit triggers? \
+	- Ask me: Can you sleep well with this position size? \
+	\
+	### PART 7: Portfolio Impact (Calculate) \
+	- Read PORTFOLIO.csv to understand current holdings \
+	- Calculate post-decision concentration risks \
+	\
+	### PART 8: Contrarian Agent (You Do This) \
+	- Present the 3 strongest arguments AGAINST this decision \
+	- Ask me to rebut each one \
+	\
+	### PART 9: Final Score (Calculate) \
+	- Score each of the 7 required criteria \
+	- Determine: Execute / Conditional / Hold \
+	\
+	## Output \
+	After completing all sections interactively, generate the filled checklist and save to: \
+	$(PRE_DECISION_DIR)/$${filename} \
+	\
+	The file should follow the exact format of checklist/PRE_DECISION_CHECKLIST.md template but with all fields filled in based on our conversation and your research. \
+	\
+	## Language \
+	- Conduct the conversation in Korean (한국어) \
+	- The output file should also be in Korean \
+	\
+	Start by greeting me and asking the first questions for PART 1."; \
+	echo ""; \
+	echo "$(GREEN)✓ Pre-Decision Checklist session complete$(NC)"; \
+	echo "$(YELLOW)Check: $(PRE_DECISION_DIR)/$${filename}$(NC)"
+
+# List all pre-decision checklists
+list-decisions:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Recent Pre-Decision Checklists$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@if [ -d "$(PRE_DECISION_DIR)" ] && [ "$$(ls -A $(PRE_DECISION_DIR) 2>/dev/null)" ]; then \
+		ls -lt $(PRE_DECISION_DIR)/*.md 2>/dev/null | head -10 | awk '{print "  " $$9 " (" $$6 " " $$7 ")"}' || echo "$(YELLOW)No decisions found$(NC)"; \
+	else \
+		echo "$(YELLOW)No pre-decision checklists yet. Create one with: make new-decision$(NC)"; \
+	fi
+	@echo ""
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Decision Log Commands
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Log a decision (interactive)
+log-decision:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Recording Decision to Log$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@echo "$(YELLOW)This will create a Python script to help you log decisions.$(NC)"
+	@echo "$(YELLOW)Please provide the following information:$(NC)"
+	@echo ""
+	@read -p "Ticker: " ticker; \
+	read -p "Action (INCREASE/DECREASE/NEW_ENTRY/EXIT): " action; \
+	read -p "From weight (%): " from_weight; \
+	read -p "To weight (%): " to_weight; \
+	read -p "Amount (USD): " amount; \
+	read -p "Logic Status (STRONGER/INTACT/WEAKENING/BROKEN): " logic_status; \
+	read -p "Valuation (UNDERVALUED/FAIR/OVERVALUED/EXPENSIVE): " valuation; \
+	read -p "Expected Return (%): " expected_return; \
+	read -p "Core Thesis (one line): " core_thesis; \
+	read -p "Pre-Decision Score (e.g., 7/7): " pre_score; \
+	read -p "Psychological State (calm/excited/anxious/rushed): " psych_state; \
+	read -p "VIX level: " vix; \
+	echo ""; \
+	echo "$(GREEN)Logging decision...$(NC)"; \
+	python3 -c "import json; from datetime import datetime, timedelta; \
+	d = { \
+		'decision_id': '$(TODAY)-$${ticker}-$${action}', \
+		'date': '$(TODAY)', \
+		'time': '$(CURRENT_TIME)', \
+		'ticker': '$${ticker}', \
+		'action': '$${action}', \
+		'from_weight': float($${from_weight}), \
+		'to_weight': float($${to_weight}), \
+		'change_pct': float($${to_weight}) - float($${from_weight}), \
+		'amount_usd': int($${amount}), \
+		'execution_method': 'DCA', \
+		'logic_status': '$${logic_status}', \
+		'valuation': '$${valuation}', \
+		'expected_return_pct': int($${expected_return}), \
+		'core_thesis': '$${core_thesis}', \
+		'evidence_tier1_count': 2, \
+		'pre_decision_score': '$${pre_score}', \
+		'psychological_state': '$${psych_state}', \
+		'vix': float($${vix}), \
+		'actual_return_1mo': None, \
+		'actual_return_6mo': None, \
+		'was_correct': None, \
+		'lessons_learned': None, \
+		'review_date_1mo': (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d'), \
+		'review_date_6mo': (datetime.now() + timedelta(days=180)).strftime('%Y-%m-%d') \
+	}; \
+	with open('$(DECISION_LOG)', 'a') as f: f.write(json.dumps(d) + '\n'); \
+	print('✓ Decision logged: ' + d['decision_id'])"; \
+	echo ""; \
+	echo "$(GREEN)✓ Decision logged to $(DECISION_LOG)$(NC)"; \
+	echo ""; \
+	echo "$(YELLOW)Next steps:$(NC)"; \
+	echo "  1. Review in 1 month: $$(date -v+30d +%Y-%m-%d 2>/dev/null || date -d '+30 days' +%Y-%m-%d 2>/dev/null || echo '30 days from now')"; \
+	echo "  2. Final review in 6 months: $$(date -v+180d +%Y-%m-%d 2>/dev/null || date -d '+180 days' +%Y-%m-%d 2>/dev/null || echo '180 days from now')"; \
+	echo "  3. Run 'make show-log' to see summary"
+
+# Show decision log summary
+show-log:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Decision Log Summary$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@if [ -f "$(DECISION_LOG)" ] && [ -s "$(DECISION_LOG)" ]; then \
+		python3 -c "import json; \
+		decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+		print(f'Total decisions: {len(decisions)}'); \
+		print(f'Completed (6mo+): {sum(1 for d in decisions if d.get(\"actual_return_6mo\") is not None)}'); \
+		print(f'Pending: {sum(1 for d in decisions if d.get(\"actual_return_6mo\") is None)}'); \
+		print(''); \
+		print('Recent decisions:'); \
+		for d in decisions[-5:]: \
+			status = '⏳' if d.get('actual_return_6mo') is None else ('✅' if d.get('was_correct') else '❌'); \
+			print(f\"  {status} {d['date']} {d['ticker']} {d['action']} (ER: {d['expected_return_pct']}%)\")"; \
+	else \
+		echo "$(YELLOW)No decisions logged yet. Use 'make log-decision' to start.$(NC)"; \
+	fi
+	@echo ""
+
+# Update returns for all decisions (requires yfinance)
+update-returns:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Updating Decision Returns$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Checking for yfinance...$(NC)"
+	@python3 -c "import yfinance" 2>/dev/null || (echo "$(RED)yfinance not installed. Install with: pip3 install yfinance$(NC)" && exit 1)
+	@echo "$(GREEN)✓ yfinance found$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Updating returns...$(NC)"
+	@python3 -c "import json; import yfinance as yf; from datetime import datetime, timedelta; \
+	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	today = datetime.now(); \
+	updated = 0; \
+	for d in decisions: \
+		decision_date = datetime.strptime(d['date'], '%Y-%m-%d'); \
+		days_passed = (today - decision_date).days; \
+		if 25 <= days_passed <= 35 and d['actual_return_1mo'] is None: \
+			try: \
+				ticker = yf.Ticker(d['ticker']); \
+				hist = ticker.history(start=d['date'], period='1mo'); \
+				if len(hist) > 0: \
+					ret = (hist['Close'].iloc[-1] / hist['Close'].iloc[0] - 1) * 100; \
+					d['actual_return_1mo'] = round(ret, 2); \
+					updated += 1; \
+					print(f\"✓ Updated 1mo: {d['decision_id']} = {ret:.1f}%\"); \
+			except: pass; \
+		if 175 <= days_passed <= 185 and d['actual_return_6mo'] is None: \
+			try: \
+				ticker = yf.Ticker(d['ticker']); \
+				hist = ticker.history(start=d['date'], period='6mo'); \
+				if len(hist) > 0: \
+					ret = (hist['Close'].iloc[-1] / hist['Close'].iloc[0] - 1) * 100; \
+					d['actual_return_6mo'] = round(ret, 2); \
+					if ret >= d['expected_return_pct'] * 0.8: d['outcome_6mo'] = 'SUCCESS'; \
+					elif ret >= d['expected_return_pct'] * 0.5: d['outcome_6mo'] = 'PARTIAL'; \
+					else: d['outcome_6mo'] = 'FAILURE'; \
+					updated += 1; \
+					print(f\"✓ Updated 6mo: {d['decision_id']} = {ret:.1f}% → {d['outcome_6mo']}\"); \
+			except: pass; \
+	with open('$(DECISION_LOG)', 'w') as f: \
+		for d in decisions: f.write(json.dumps(d) + '\n'); \
+	print(f'\n📊 Updated {updated} decisions')"
+	@echo ""
+	@echo "$(GREEN)✓ Returns updated$(NC)"
+
+# Check which decisions need review
+check-reviews:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Decisions Needing Review$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@if [ -f "$(DECISION_LOG)" ] && [ -s "$(DECISION_LOG)" ]; then \
+		python3 -c "import json; from datetime import datetime; \
+		decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+		today = datetime.now(); \
+		need_1mo = [d for d in decisions if d.get('outcome_1mo') is None and datetime.strptime(d['review_date_1mo'], '%Y-%m-%d') <= today]; \
+		need_6mo = [d for d in decisions if d.get('outcome_6mo') is None and datetime.strptime(d['review_date_6mo'], '%Y-%m-%d') <= today]; \
+		if need_1mo: \
+			print(f'⚠️  {len(need_1mo)} decisions need 1-month review:'); \
+			for d in need_1mo: print(f\"  - {d['decision_id']} (Expected: {d['expected_return_pct']}%)\"); \
+		if need_6mo: \
+			print(f'\n⚠️  {len(need_6mo)} decisions need 6-month FINAL review:'); \
+			for d in need_6mo: print(f\"  - {d['decision_id']} (Expected: {d['expected_return_pct']}%)\"); \
+			print('\n📝 Add lessons_learned to each decision!'); \
+		if not need_1mo and not need_6mo: print('$(GREEN)✓ All decisions up to date!$(NC)')"; \
+	else \
+		echo "$(YELLOW)No decisions to review yet.$(NC)"; \
+	fi
+	@echo ""
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Learning & Analysis Commands
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Generate quarterly review
+quarterly-review:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Generating Quarterly Review - $(CURRENT_QUARTER)$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@if [ ! -f "$(DECISION_LOG)" ] || [ ! -s "$(DECISION_LOG)" ]; then \
+		echo "$(RED)No decisions in log. Cannot generate quarterly review yet.$(NC)"; \
+		echo "$(YELLOW)You need at least 5 completed decisions (6 months old) to run a meaningful review.$(NC)"; \
+		exit 1; \
+	fi
+	@echo "$(YELLOW)Copying template...$(NC)"
+	@cp $(QUARTERLY_REVIEW_TEMPLATE) $(QUARTERLY_REVIEW)
+	@echo "$(GREEN)✓ Template copied to $(QUARTERLY_REVIEW)$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Running basic analysis...$(NC)"
+	@python3 -c "import json; \
+	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	completed = [d for d in decisions if d.get('actual_return_6mo') is not None]; \
+	print(f'Total decisions: {len(decisions)}'); \
+	print(f'Completed (6mo+): {len(completed)}'); \
+	if completed: \
+		success = sum(1 for d in completed if d.get('outcome_6mo') == 'SUCCESS'); \
+		print(f'Success rate: {success/len(completed)*100:.1f}%'); \
+		stronger = [d for d in completed if d.get('logic_status') == 'STRONGER']; \
+		if stronger: \
+			stronger_success = sum(1 for d in stronger if d.get('was_correct')); \
+			print(f'LOGIC STRONGER success: {stronger_success}/{len(stronger)}');"
+	@echo ""
+	@echo "$(GREEN)✓ Quarterly review template ready!$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Next steps:$(NC)"
+	@echo "  1. Open: $(QUARTERLY_REVIEW)"
+	@echo "  2. Run 'make analyze-decisions' for detailed Python analysis"
+	@echo "  3. Fill out all sections based on the data"
+	@echo "  4. Identify patterns and create framework improvements"
+	@echo "  5. Apply improvements to investment_checklist.md"
+	@echo ""
+	@echo "$(BLUE)Opening template...$(NC)"
+	@open $(QUARTERLY_REVIEW) || echo "Please open: $(QUARTERLY_REVIEW)"
+
+# Run Python analysis on decision log
+analyze-decisions:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Decision Log Analysis$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@python3 -c "import json; import pandas as pd; \
+	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	df = pd.DataFrame(decisions); \
+	print('=== Overall Stats ==='); \
+	print(f\"Total decisions: {len(df)}\"); \
+	completed = df[df['actual_return_6mo'].notna()]; \
+	print(f\"Completed (6mo+): {len(completed)}\"); \
+	if len(completed) > 0: \
+		print(f\"Success rate: {(completed['outcome_6mo'] == 'SUCCESS').mean() * 100:.1f}%\"); \
+		print(f\"Mean ER error: {(completed['actual_return_6mo'] - completed['expected_return_pct']).mean():.1f}%\"); \
+		print(''); \
+		print('=== By Logic Status ==='); \
+		print(df.groupby('logic_status')['expected_return_pct'].agg(['count', 'mean'])); \
+		print(''); \
+		print('=== By Valuation ==='); \
+		print(df.groupby('valuation')['expected_return_pct'].agg(['count', 'mean'])); \
+		print(''); \
+		print('=== By Psychological State ==='); \
+		print(df.groupby('psychological_state')['expected_return_pct'].agg(['count', 'mean'])); \
+	else: \
+		print('Not enough completed decisions for analysis.');"
+	@echo ""
+
+# Check calibration of Expected Return predictions
+calibration-check:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Expected Return Calibration Check$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@python3 -c "import json; import pandas as pd; \
+	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	df = pd.DataFrame(decisions); \
+	completed = df[df['actual_return_6mo'].notna()]; \
+	if len(completed) >= 5: \
+		df['er_error'] = df['actual_return_6mo'] - df['expected_return_pct']; \
+		mean_error = df['er_error'].mean(); \
+		print(f'Mean ER Error: {mean_error:.1f}%'); \
+		if mean_error < -5: print('⚠️  OVERCONFIDENT - You consistently predict higher returns than reality'); \
+		elif mean_error > 5: print('⚠️  UNDERCONFIDENT - You consistently predict lower returns than reality'); \
+		else: print('✅ WELL CALIBRATED - Your predictions are accurate on average'); \
+		print(''); \
+		print('By ER Range:'); \
+		df['er_range'] = pd.cut(df['expected_return_pct'], bins=[-100, 0, 15, 30, 100], labels=['<0%', '0-15%', '15-30%', '>30%']); \
+		print(df.groupby('er_range')['er_error'].agg(['count', 'mean'])); \
+	else: \
+		print('Need at least 5 completed decisions (6 months old) for calibration check.');"
+	@echo ""
+
+# Find patterns in decision history
+pattern-analysis:
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo "$(GREEN)Pattern Analysis$(NC)"
+	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
+	@echo ""
+	@python3 -c "import json; import pandas as pd; \
+	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	df = pd.DataFrame(decisions); \
+	completed = df[df['actual_return_6mo'].notna()]; \
+	if len(completed) >= 5: \
+		print('=== Pattern 1: Logic + Valuation ==='); \
+		df['combo'] = df['logic_status'] + ' + ' + df['valuation']; \
+		combos = df.groupby('combo')['expected_return_pct'].agg(['count', 'mean']); \
+		print(combos[combos['count'] >= 2].sort_values('mean', ascending=False)); \
+		print(''); \
+		print('=== Pattern 2: Psychological State ==='); \
+		psych = completed.groupby('psychological_state')['actual_return_6mo'].agg(['count', 'mean']); \
+		print(psych.sort_values('mean', ascending=False)); \
+		print(''); \
+		print('=== Pattern 3: Pre-Decision Score ==='); \
+		score = completed.groupby('pre_decision_score')['outcome_6mo'].apply(lambda x: (x == 'SUCCESS').mean() * 100); \
+		print('Success rate by score:'); \
+		print(score.sort_index(ascending=False)); \
+	else: \
+		print('Need at least 5 completed decisions for pattern analysis.');"
+	@echo ""
