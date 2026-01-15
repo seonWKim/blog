@@ -100,11 +100,9 @@ setup:
 # Setup learning system directories and initialize files
 setup-learning: setup
 	@echo "$(GREEN)Setting up Decision Quality & Learning System...$(NC)"
-	@mkdir -p $(PRE_DECISION_DIR)
 	@mkdir -p decisions/analysis
-	@mkdir -p $(LEARNING_DIR)
 	@test -f $(DECISION_LOG) || touch $(DECISION_LOG)
-	@test -f $(DECISION_LOG_MD) || cp decisions/DECISION_LOG.md $(DECISION_LOG_MD) 2>/dev/null || echo "# Decision Log\n\nNo decisions recorded yet." > $(DECISION_LOG_MD)
+	@test -f $(DECISION_LOG_MD) || echo "# Decision Log\n\nNo decisions recorded yet." > $(DECISION_LOG_MD)
 	@echo "$(GREEN)✓ Learning system initialized$(NC)"
 	@echo ""
 	@echo "$(YELLOW)Created:$(NC)"
@@ -202,14 +200,15 @@ checklist: setup
 	@echo "$(GREEN)✓ Checklist report generated at $(CHECKLIST_REPORT)$(NC)"
 
 # Generate final combined report (requires both macro and checklist reports)
-final-report:
+# Note: Use 'make all' to run macro-report and checklist first if they don't exist
+final-report: setup
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Generating Final Combined Report for $(TODAY)$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
 	@echo "$(YELLOW)Checking required files...$(NC)"
-	@test -f $(MACRO_REPORT) && echo "$(GREEN)✓$(NC) Macro report found" || (echo "$(RED)✗$(NC) Macro report not found. Run 'make macro-report' first" && exit 1)
-	@test -f $(CHECKLIST_REPORT) && echo "$(GREEN)✓$(NC) Checklist report found" || (echo "$(RED)✗$(NC) Checklist report not found. Run 'make checklist' first" && exit 1)
+	@test -f $(MACRO_REPORT) && echo "$(GREEN)✓$(NC) Macro report found" || (echo "$(RED)✗$(NC) Macro report not found. Run 'make macro-report' first or 'make all' for full workflow" && exit 1)
+	@test -f $(CHECKLIST_REPORT) && echo "$(GREEN)✓$(NC) Checklist report found" || (echo "$(RED)✗$(NC) Checklist report not found. Run 'make checklist' first or 'make all' for full workflow" && exit 1)
 	@echo ""
 	@claude "Please generate a comprehensive final investment report by synthesizing the macro and checklist reports. \
 	\
@@ -541,6 +540,7 @@ show-log:
 	@echo ""
 
 # Update returns for all decisions (requires yfinance)
+# Checks decisions at 1-month (25-45 days) and 6-month (170-200 days) marks
 update-returns:
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Updating Decision Returns$(NC)"
@@ -550,6 +550,10 @@ update-returns:
 	@python3 -c "import yfinance" 2>/dev/null || (echo "$(RED)yfinance not installed. Install with: pip3 install yfinance$(NC)" && exit 1)
 	@echo "$(GREEN)✓ yfinance found$(NC)"
 	@echo ""
+	@if [ ! -f "$(DECISION_LOG)" ] || [ ! -s "$(DECISION_LOG)" ]; then \
+		echo "$(YELLOW)No decisions in log yet. Use 'make log-decision' first.$(NC)"; \
+		exit 0; \
+	fi
 	@echo "$(YELLOW)Updating returns...$(NC)"
 	@python3 -c "import json; import yfinance as yf; from datetime import datetime, timedelta; \
 	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
@@ -558,29 +562,34 @@ update-returns:
 	for d in decisions: \
 		decision_date = datetime.strptime(d['date'], '%Y-%m-%d'); \
 		days_passed = (today - decision_date).days; \
-		if 25 <= days_passed <= 35 and d['actual_return_1mo'] is None: \
+		if 25 <= days_passed <= 45 and d.get('actual_return_1mo') is None: \
 			try: \
 				ticker = yf.Ticker(d['ticker']); \
 				hist = ticker.history(start=d['date'], period='1mo'); \
 				if len(hist) > 0: \
 					ret = (hist['Close'].iloc[-1] / hist['Close'].iloc[0] - 1) * 100; \
 					d['actual_return_1mo'] = round(ret, 2); \
+					if ret >= d.get('expected_return_pct', 0) * 0.8: d['outcome_1mo'] = 'BETTER'; \
+					elif ret >= d.get('expected_return_pct', 0) * 0.5: d['outcome_1mo'] = 'AS_EXPECTED'; \
+					else: d['outcome_1mo'] = 'WORSE'; \
 					updated += 1; \
-					print(f\"✓ Updated 1mo: {d['decision_id']} = {ret:.1f}%\"); \
-			except: pass; \
-		if 175 <= days_passed <= 185 and d['actual_return_6mo'] is None: \
+					print(f\"✓ Updated 1mo: {d['decision_id']} = {ret:.1f}% → {d['outcome_1mo']}\"); \
+			except Exception as e: print(f\"⚠ Error for {d['decision_id']}: {e}\"); \
+		if 170 <= days_passed <= 200 and d.get('actual_return_6mo') is None: \
 			try: \
 				ticker = yf.Ticker(d['ticker']); \
 				hist = ticker.history(start=d['date'], period='6mo'); \
 				if len(hist) > 0: \
 					ret = (hist['Close'].iloc[-1] / hist['Close'].iloc[0] - 1) * 100; \
 					d['actual_return_6mo'] = round(ret, 2); \
-					if ret >= d['expected_return_pct'] * 0.8: d['outcome_6mo'] = 'SUCCESS'; \
-					elif ret >= d['expected_return_pct'] * 0.5: d['outcome_6mo'] = 'PARTIAL'; \
+					exp_ret = d.get('expected_return_pct', 0); \
+					if ret >= exp_ret * 0.8: d['outcome_6mo'] = 'SUCCESS'; \
+					elif ret >= exp_ret * 0.5: d['outcome_6mo'] = 'PARTIAL'; \
 					else: d['outcome_6mo'] = 'FAILURE'; \
+					d['was_correct'] = d['outcome_6mo'] in ['SUCCESS', 'PARTIAL']; \
 					updated += 1; \
 					print(f\"✓ Updated 6mo: {d['decision_id']} = {ret:.1f}% → {d['outcome_6mo']}\"); \
-			except: pass; \
+			except Exception as e: print(f\"⚠ Error for {d['decision_id']}: {e}\"); \
 	with open('$(DECISION_LOG)', 'w') as f: \
 		for d in decisions: f.write(json.dumps(d) + '\n'); \
 	print(f'\n📊 Updated {updated} decisions')"
@@ -588,6 +597,7 @@ update-returns:
 	@echo "$(GREEN)✓ Returns updated$(NC)"
 
 # Check which decisions need review
+# Shows decisions due for 1-month and 6-month reviews based on review_date fields
 check-reviews:
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Decisions Needing Review$(NC)"
@@ -597,16 +607,27 @@ check-reviews:
 		python3 -c "import json; from datetime import datetime; \
 		decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
 		today = datetime.now(); \
-		need_1mo = [d for d in decisions if d.get('outcome_1mo') is None and datetime.strptime(d['review_date_1mo'], '%Y-%m-%d') <= today]; \
-		need_6mo = [d for d in decisions if d.get('outcome_6mo') is None and datetime.strptime(d['review_date_6mo'], '%Y-%m-%d') <= today]; \
+		need_1mo = []; need_6mo = []; \
+		for d in decisions: \
+			if d.get('outcome_1mo') is None and d.get('review_date_1mo'): \
+				try: \
+					if datetime.strptime(d['review_date_1mo'], '%Y-%m-%d') <= today: need_1mo.append(d); \
+				except: pass; \
+			if d.get('outcome_6mo') is None and d.get('review_date_6mo'): \
+				try: \
+					if datetime.strptime(d['review_date_6mo'], '%Y-%m-%d') <= today: need_6mo.append(d); \
+				except: pass; \
 		if need_1mo: \
 			print(f'⚠️  {len(need_1mo)} decisions need 1-month review:'); \
-			for d in need_1mo: print(f\"  - {d['decision_id']} (Expected: {d['expected_return_pct']}%)\"); \
+			for d in need_1mo: print(f\"  - {d['decision_id']} (Expected: {d.get('expected_return_pct', 'N/A')}%)\"); \
+			print('  → Run: make update-returns'); \
 		if need_6mo: \
 			print(f'\n⚠️  {len(need_6mo)} decisions need 6-month FINAL review:'); \
-			for d in need_6mo: print(f\"  - {d['decision_id']} (Expected: {d['expected_return_pct']}%)\"); \
-			print('\n📝 Add lessons_learned to each decision!'); \
-		if not need_1mo and not need_6mo: print('$(GREEN)✓ All decisions up to date!$(NC)')"; \
+			for d in need_6mo: print(f\"  - {d['decision_id']} (Expected: {d.get('expected_return_pct', 'N/A')}%)\"); \
+			print('\n📝 Actions needed:'); \
+			print('  1. Run: make update-returns'); \
+			print('  2. Add lessons_learned to each decision manually'); \
+		if not need_1mo and not need_6mo: print('✅ All decisions up to date!')"; \
 	else \
 		echo "$(YELLOW)No decisions to review yet.$(NC)"; \
 	fi
@@ -658,83 +679,115 @@ quarterly-review:
 	@open $(QUARTERLY_REVIEW) || echo "Please open: $(QUARTERLY_REVIEW)"
 
 # Run Python analysis on decision log
+# Requires: pandas (pip3 install pandas)
 analyze-decisions:
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Decision Log Analysis$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
+	@python3 -c "import pandas" 2>/dev/null || (echo "$(RED)pandas not installed. Install with: pip3 install pandas$(NC)" && exit 1)
+	@if [ ! -f "$(DECISION_LOG)" ] || [ ! -s "$(DECISION_LOG)" ]; then \
+		echo "$(YELLOW)No decisions in log yet. Use 'make log-decision' first.$(NC)"; \
+		exit 0; \
+	fi
 	@python3 -c "import json; import pandas as pd; \
 	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	if not decisions: print('No decisions to analyze'); exit(); \
 	df = pd.DataFrame(decisions); \
 	print('=== Overall Stats ==='); \
 	print(f\"Total decisions: {len(df)}\"); \
-	completed = df[df['actual_return_6mo'].notna()]; \
+	completed = df[df['actual_return_6mo'].notna()] if 'actual_return_6mo' in df.columns else pd.DataFrame(); \
 	print(f\"Completed (6mo+): {len(completed)}\"); \
 	if len(completed) > 0: \
-		print(f\"Success rate: {(completed['outcome_6mo'] == 'SUCCESS').mean() * 100:.1f}%\"); \
-		print(f\"Mean ER error: {(completed['actual_return_6mo'] - completed['expected_return_pct']).mean():.1f}%\"); \
-		print(''); \
-		print('=== By Logic Status ==='); \
-		print(df.groupby('logic_status')['expected_return_pct'].agg(['count', 'mean'])); \
-		print(''); \
-		print('=== By Valuation ==='); \
-		print(df.groupby('valuation')['expected_return_pct'].agg(['count', 'mean'])); \
-		print(''); \
-		print('=== By Psychological State ==='); \
-		print(df.groupby('psychological_state')['expected_return_pct'].agg(['count', 'mean'])); \
-	else: \
-		print('Not enough completed decisions for analysis.');"
+		success_rate = (completed['outcome_6mo'] == 'SUCCESS').mean() * 100 if 'outcome_6mo' in completed.columns else 0; \
+		print(f\"Success rate: {success_rate:.1f}%\"); \
+		er_error = (completed['actual_return_6mo'] - completed['expected_return_pct']).mean(); \
+		print(f\"Mean ER error: {er_error:.1f}%\"); \
+	print(''); \
+	print('=== By Logic Status ==='); \
+	if 'logic_status' in df.columns: print(df.groupby('logic_status')['expected_return_pct'].agg(['count', 'mean']).to_string()); \
+	print(''); \
+	print('=== By Valuation ==='); \
+	if 'valuation' in df.columns: print(df.groupby('valuation')['expected_return_pct'].agg(['count', 'mean']).to_string()); \
+	print(''); \
+	print('=== By Psychological State ==='); \
+	if 'psychological_state' in df.columns: print(df.groupby('psychological_state')['expected_return_pct'].agg(['count', 'mean']).to_string()); \
+	if len(completed) == 0: print('\n⚠️  No completed decisions yet. Need 6+ months of data.');"
 	@echo ""
 
 # Check calibration of Expected Return predictions
+# Compares predicted vs actual returns to identify overconfidence/underconfidence
+# Requires: pandas, 5+ completed decisions (6 months old)
 calibration-check:
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Expected Return Calibration Check$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
+	@python3 -c "import pandas" 2>/dev/null || (echo "$(RED)pandas not installed. Install with: pip3 install pandas$(NC)" && exit 1)
+	@if [ ! -f "$(DECISION_LOG)" ] || [ ! -s "$(DECISION_LOG)" ]; then \
+		echo "$(YELLOW)No decisions in log yet.$(NC)"; \
+		exit 0; \
+	fi
 	@python3 -c "import json; import pandas as pd; \
 	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	if not decisions: print('No decisions to analyze'); exit(); \
 	df = pd.DataFrame(decisions); \
-	completed = df[df['actual_return_6mo'].notna()]; \
+	if 'actual_return_6mo' not in df.columns: \
+		print('No completed decisions yet. Need 6+ months of data.'); exit(); \
+	completed = df[df['actual_return_6mo'].notna()].copy(); \
 	if len(completed) >= 5: \
-		df['er_error'] = df['actual_return_6mo'] - df['expected_return_pct']; \
-		mean_error = df['er_error'].mean(); \
+		completed['er_error'] = completed['actual_return_6mo'] - completed['expected_return_pct']; \
+		mean_error = completed['er_error'].mean(); \
 		print(f'Mean ER Error: {mean_error:.1f}%'); \
-		if mean_error < -5: print('⚠️  OVERCONFIDENT - You consistently predict higher returns than reality'); \
-		elif mean_error > 5: print('⚠️  UNDERCONFIDENT - You consistently predict lower returns than reality'); \
+		if mean_error < -5: print('⚠️  OVERCONFIDENT - You predict higher returns than reality'); \
+		elif mean_error > 5: print('⚠️  UNDERCONFIDENT - You predict lower returns than reality'); \
 		else: print('✅ WELL CALIBRATED - Your predictions are accurate on average'); \
 		print(''); \
 		print('By ER Range:'); \
-		df['er_range'] = pd.cut(df['expected_return_pct'], bins=[-100, 0, 15, 30, 100], labels=['<0%', '0-15%', '15-30%', '>30%']); \
-		print(df.groupby('er_range')['er_error'].agg(['count', 'mean'])); \
+		completed['er_range'] = pd.cut(completed['expected_return_pct'], bins=[-100, 0, 15, 30, 100], labels=['<0%', '0-15%', '15-30%', '>30%']); \
+		print(completed.groupby('er_range')['er_error'].agg(['count', 'mean']).to_string()); \
 	else: \
-		print('Need at least 5 completed decisions (6 months old) for calibration check.');"
+		print(f'Need at least 5 completed decisions. Currently have: {len(completed)}');"
 	@echo ""
 
 # Find patterns in decision history
+# Analyzes correlations between decision attributes and outcomes
+# Requires: pandas, 5+ completed decisions (6 months old)
 pattern-analysis:
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo "$(GREEN)Pattern Analysis$(NC)"
 	@echo "$(BLUE)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$(NC)"
 	@echo ""
+	@python3 -c "import pandas" 2>/dev/null || (echo "$(RED)pandas not installed. Install with: pip3 install pandas$(NC)" && exit 1)
+	@if [ ! -f "$(DECISION_LOG)" ] || [ ! -s "$(DECISION_LOG)" ]; then \
+		echo "$(YELLOW)No decisions in log yet.$(NC)"; \
+		exit 0; \
+	fi
 	@python3 -c "import json; import pandas as pd; \
 	decisions = [json.loads(line) for line in open('$(DECISION_LOG)')]; \
+	if not decisions: print('No decisions to analyze'); exit(); \
 	df = pd.DataFrame(decisions); \
-	completed = df[df['actual_return_6mo'].notna()]; \
+	if 'actual_return_6mo' not in df.columns: \
+		print('No completed decisions yet. Need 6+ months of data.'); exit(); \
+	completed = df[df['actual_return_6mo'].notna()].copy(); \
 	if len(completed) >= 5: \
-		print('=== Pattern 1: Logic + Valuation ==='); \
-		df['combo'] = df['logic_status'] + ' + ' + df['valuation']; \
-		combos = df.groupby('combo')['expected_return_pct'].agg(['count', 'mean']); \
-		print(combos[combos['count'] >= 2].sort_values('mean', ascending=False)); \
+		print('=== Pattern 1: Logic + Valuation Combo ==='); \
+		if 'logic_status' in df.columns and 'valuation' in df.columns: \
+			df['combo'] = df['logic_status'].astype(str) + ' + ' + df['valuation'].astype(str); \
+			combos = df.groupby('combo')['expected_return_pct'].agg(['count', 'mean']); \
+			filtered = combos[combos['count'] >= 2].sort_values('mean', ascending=False); \
+			print(filtered.to_string() if len(filtered) > 0 else 'Not enough data'); \
 		print(''); \
-		print('=== Pattern 2: Psychological State ==='); \
-		psych = completed.groupby('psychological_state')['actual_return_6mo'].agg(['count', 'mean']); \
-		print(psych.sort_values('mean', ascending=False)); \
+		print('=== Pattern 2: Psychological State vs Actual Return ==='); \
+		if 'psychological_state' in completed.columns: \
+			psych = completed.groupby('psychological_state')['actual_return_6mo'].agg(['count', 'mean']); \
+			print(psych.sort_values('mean', ascending=False).to_string()); \
 		print(''); \
-		print('=== Pattern 3: Pre-Decision Score ==='); \
-		score = completed.groupby('pre_decision_score')['outcome_6mo'].apply(lambda x: (x == 'SUCCESS').mean() * 100); \
-		print('Success rate by score:'); \
-		print(score.sort_index(ascending=False)); \
+		print('=== Pattern 3: Pre-Decision Score vs Success ==='); \
+		if 'pre_decision_score' in completed.columns and 'outcome_6mo' in completed.columns: \
+			score = completed.groupby('pre_decision_score')['outcome_6mo'].apply(lambda x: (x == 'SUCCESS').mean() * 100); \
+			print('Success rate by score:'); \
+			print(score.sort_index(ascending=False).to_string()); \
 	else: \
-		print('Need at least 5 completed decisions for pattern analysis.');"
+		print(f'Need at least 5 completed decisions. Currently have: {len(completed)}');"
 	@echo ""
