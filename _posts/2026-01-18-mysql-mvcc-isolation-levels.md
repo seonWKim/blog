@@ -160,3 +160,71 @@ When debugging "low CPU, slow database" situations, check:
 3. Idle-in-transaction connections (queries finished fast but transaction uncommitted)
 
 The answer is usually: find the incomplete work and finish it.
+
+## Appendix: InnoDB Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              InnoDB Engine                                  │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │                         Buffer Pool (Memory)                        │    │
+│  │                                                                     │    │
+│  │   ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      │    │
+│  │   │   Data Page  │      │   Data Page  │      │  Undo Page   │      │    │
+│  │   │  ┌────────┐  │      │  ┌────────┐  │      │              │      │    │
+│  │   │  │  Row   │──┼──────┼──│ DB_TRX │  │      │  Old row     │      │    │
+│  │   │  │        │  │      │  │  _ID   │  │      │  versions    │      │    │
+│  │   │  └────────┘  │      │  │DB_ROLL │──┼──────│─────────────►│      │    │
+│  │   │              │      │  │  _PTR  │  │      │              │      │    │
+│  │   └──────────────┘      │  └────────┘  │      └──────────────┘      │    │
+│  │                         └──────────────┘                            │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+│         │                         │                      │                  │
+│         │ flush                   │                      │                  │
+│         ▼                         │                      │                  │
+│  ┌──────────────┐                 │               ┌──────────────┐          │
+│  │  Tablespace  │                 │               │   Undo Log   │          │
+│  │   (.ibd)     │                 │               │  Tablespace  │          │
+│  │              │                 │               │              │          │
+│  │  Data file   │                 │               │ Version      │          │
+│  │  on disk     │                 │               │ chains for   │          │
+│  └──────────────┘                 │               │ MVCC         │          │
+│                                   │               └──────────────┘          │
+│                                   │                      ▲                  │
+│                                   │                      │                  │
+│  ┌────────────────────────────────┼──────────────────────┼──────────────┐   │
+│  │                          Transaction                  │              │   │
+│  │  ┌──────────────┐        ┌──────────────┐        ┌────┴───────┐      │   │
+│  │  │  Read View   │        │    Locks     │        │  Undo Ptr  │      │   │
+│  │  │              │        │              │        │            │      │   │
+│  │  │ m_up_limit   │        │ Row locks    │        │ Points to  │      │   │
+│  │  │ m_low_limit  │        │ Gap locks    │        │ rollback   │      │   │
+│  │  │ m_ids[]      │        │ (REPEATABLE  │        │ segment    │      │   │
+│  │  │              │        │  READ only)  │        │            │      │   │
+│  │  │ Determines   │        │              │        │            │      │   │
+│  │  │ visibility   │        │ Acquired by  │        │            │      │   │
+│  │  │ for SELECT   │        │ writes and   │        │            │      │   │
+│  │  │              │        │ SELECT FOR   │        │            │      │   │
+│  │  │              │        │ UPDATE       │        │            │      │   │
+│  │  └──────────────┘        └──────────────┘        └────────────┘      │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                   │                                         │
+│                                   │ write-ahead                             │
+│                                   ▼                                         │
+│                          ┌──────────────┐                                   │
+│                          │  Redo Log    │                                   │
+│                          │  (WAL)       │                                   │
+│                          │              │                                   │
+│                          │ For crash    │                                   │
+│                          │ recovery &   │                                   │
+│                          │ durability   │                                   │
+│                          └──────────────┘                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Key relationships:
+• Row → Undo Log: DB_ROLL_PTR links to previous versions for MVCC
+• Read View → Undo Log: Determines which versions are visible to a transaction
+• Transaction → Redo Log: All changes logged before commit (write-ahead logging)
+• Locks: Prevent concurrent modifications, not used for plain SELECT (MVCC handles it)
+```
