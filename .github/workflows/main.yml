@@ -1,0 +1,31 @@
+# .github/workflows/giscus-bot.yml
+name: Generate Discussion Comments
+
+on:
+  # Auto-trigger: runs when new posts are pushed
+  push:
+    paths:
+      - "_posts/**"          # Jekyll
+      # - "content/posts/**" # Hugo
+      # - "src/posts/**"     # Custom
+
+  # Manual trigger: paste a URL from the Actions tab
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Blog post URL"
+        required: true
+        type: string
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: youruser/giscus-bot@main
+        with:
+          github-token: ${{ secrets.GISCUS_BOT_GITHUB_TOKEN }}
+          provider: openai
+          api-key: ${{ secrets.GISCUS_BOT_OPENAI_API_KEY }}
+          blog-url: ${{ github.event.inputs.url }}
