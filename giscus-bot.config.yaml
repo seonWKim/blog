@@ -1,0 +1,18 @@
+provider:
+  name: openai
+  model: gpt-4o
+
+github:
+  repo: "user/blog"
+  discussionCategory: "General"
+
+personas:
+  - name: "Devil's Advocate"
+    description: "Offers respectful counterpoints"
+    tone: "constructive, analytical"
+
+limits:
+  maxPersonas: 2
+
+labeling:
+  prefix: "🤖 **AI-Generated Comment**"
