@@ -3,7 +3,7 @@ provider:
   model: gpt-4o
 
 github:
-  repo: "user/blog"
+  repo: "seonWKim/blog"
   discussionCategory: "General"
 
 personas:
