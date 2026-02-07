@@ -11,10 +11,6 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: read
-  discussions: write
-
 jobs:
   comment:
     runs-on: ubuntu-latest
