@@ -15,4 +15,4 @@ limits:
   maxPersonas: 2
 
 labeling:
-  prefix: "🤖 **AI-Generated Comment**"
+  prefix: "(AI Generated)"
