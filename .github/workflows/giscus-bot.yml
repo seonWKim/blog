@@ -22,6 +22,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: seonWKim/giscus-bot@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GISCUS_BOT_GITHUB_TOKEN }}
           api-key: ${{ secrets.GISCUS_BOT_OPENAI_API_KEY }}
           blog-url: ${{ github.event.inputs.url }}
